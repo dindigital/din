@@ -14,7 +14,7 @@ abstract class BaseController
 
   protected $_model;
   protected $_view;
-  protected $_data;
+  protected $_data = array();
 
   public function __construct ()
   {

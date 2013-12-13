@@ -83,7 +83,7 @@ class Router implements iRouter
     } else {
       //_ CONTROLLER NÃO ENCONTRADO, E NÃO HÁ UM ERRO 404 PADRÃO
       header('HTTP/1.0 404 Not Found');
-      echo '<h1>Página não encontrada</h1>';
+      echo '<h1>Página não encontrada, por favor sete uma página 404</h1>';
       exit;
     }
   }
