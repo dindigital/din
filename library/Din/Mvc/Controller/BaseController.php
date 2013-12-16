@@ -12,7 +12,6 @@ use Din\Mvc\View\View;
 abstract class BaseController
 {
 
-  protected $_model;
   protected $_view;
   protected $_data = array();
 

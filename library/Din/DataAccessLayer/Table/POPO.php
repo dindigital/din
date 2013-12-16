@@ -53,33 +53,6 @@ abstract class POPO
     return $strpos !== false;
   }
 
-  protected function getPropertyLogin ( $k )
-  {
-    $dc = $this->getDocComent($k);
-
-    $strpos = stripos($dc, ' login');
-
-    return $strpos !== false;
-  }
-
-  protected function getPropertyPass ( $k )
-  {
-    $dc = $this->getDocComent($k);
-
-    $strpos = stripos($dc, ' pass');
-
-    return $strpos !== false;
-  }
-
-  protected function getPropertyActive ( $k )
-  {
-    $dc = $this->getDocComent($k);
-
-    $strpos = stripos($dc, ' active');
-
-    return $strpos !== false;
-  }
-
   protected function getPropertyNotNull ( $k )
   {
     $dc = $this->getDocComent($k);

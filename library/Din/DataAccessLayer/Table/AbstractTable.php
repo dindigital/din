@@ -5,13 +5,7 @@ namespace Din\DataAccessLayer\Table;
 abstract class AbstractTable extends POPO
 {
 
-  //public $array = array();
-
-  public function clear ()
-  {
-    foreach ( $this as $k => $v )
-      $this->$k = null;
-  }
+  public $setted_values = array();
 
   public function getName ( $object = false )
   {
@@ -68,23 +62,11 @@ abstract class AbstractTable extends POPO
     return $retorno;
   }
 
-  public function getPkValue ()
-  {
-    $arrPk = $this->getPk();
-    $value = array();
-    foreach ( $arrPk as $pk )
-      $value[] = $this->$pk;
-
-    $value = implode(',', $value);
-
-    return $value;
-  }
-
   public function getArray ()
   {
     $retorno = array();
 
-    foreach ( $this->array as $k => $v ) {
+    foreach ( $this->setted_values as $k => $v ) {
 
       $type = $this->getPropertyType($k);
 
@@ -170,93 +152,33 @@ abstract class AbstractTable extends POPO
     }
   }
 
-  public function getLogin ()
-  {
-    $properties = $this->getProperties();
-
-    $retorno = '';
-
-    foreach ( $properties as $propertie ) {
-      $k = $propertie->name;
-
-      if ( $this->getPropertyLogin($k) ) {
-        $retorno = $k;
-        break;
-      }
-    }
-
-    return $retorno;
-  }
-
-  public function getPass ()
-  {
-    $properties = $this->getProperties();
-
-    $retorno = '';
-
-    foreach ( $properties as $propertie ) {
-      $k = $propertie->name;
-
-      if ( $this->getPropertyPass($k) ) {
-        $retorno = $k;
-        break;
-      }
-    }
-
-    return $retorno;
-  }
-
-  public function getActive ()
-  {
-    $properties = $this->getProperties();
-
-    $retorno = '';
-
-    foreach ( $properties as $propertie ) {
-      $k = $propertie->name;
-
-      if ( $this->getPropertyActive($k) ) {
-        $retorno = $k;
-        break;
-      }
-    }
-
-    return $retorno;
-  }
-
   public function __set ( $k, $v )
   {
-    //if (property_exists($this, $k)){
-    if ( !property_exists($this, 'array') ) {
-      $this->array = array();
+    if ( !property_exists($this, 'setted_values') ) {
+      $this->setted_values = array();
     }
 
-    $this->array[$k] = $v;
-    //} else {
-    $this->{$k} = $v;
-    //}
+    $this->setted_values[$k] = $v;
   }
 
   public function __get ( $k )
   {
-    if ( isset($this->{$k}) )
-      return $this->{$k};
+    if ( isset($this->setted_values[$k]) )
+      return $this->setted_values[$k];
   }
 
-  public function getFields ()
-  {
-    $r = array();
-    foreach ( $this as $k => $v ) {
-      if ( is_array($v) ) {
-        $v = count($v);
-      }
-
-      $r[$k] = $v;
-    }
-    unset($r['array']);
-
-    return $r;
-  }
-
+//  public function getFields ()
+//  {
+//    $r = array();
+//    foreach ( $this as $k => $v ) {
+//      if ( is_array($v) ) {
+//        $v = count($v);
+//      }
+//
+//      $r[$k] = $v;
+//    }
+//    unset($r['setted_values']);
+//
+//    return $r;
+//  }
 }
-

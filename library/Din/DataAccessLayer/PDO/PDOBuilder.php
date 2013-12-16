@@ -19,12 +19,12 @@ use Din\DataAccessLayer\PDO\DSN\FactoryDSN;
 class PDOBuilder
 {
 
-  public static function build ()
+  public static function build ( $db_type, $db_host, $db_schema, $db_user, $db_pass )
   {
 
-    $DSN = FactoryDSN::build(DB_TYPE);
+    $DSN = FactoryDSN::build($db_type);
 
-    return new PDODriver($DSN, DB_HOST, DB_SCHEMA, DB_USER, DB_PASS);
+    return new PDODriver($DSN, $db_host, $db_schema, $db_user, $db_pass);
   }
 
 }

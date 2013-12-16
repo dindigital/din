@@ -2,6 +2,8 @@
 
 namespace Din\File;
 
+use \Exception;
+
 class Folder
 {
 
@@ -43,12 +45,12 @@ class Folder
   {
     if ( !is_dir($diretorio) ) {
       if ( !self::create($diretorio) ) {
-        throw new \Exception('Permissão negada ao criar pasta: ' . $diretorio);
+        throw new Exception('Permissão negada ao criar pasta: ' . $diretorio);
       }
     }
 
     if ( !is_writable($diretorio) )
-      throw new \Exception('A pasta deve possuir permissão de escrita: ' . $diretorio);
+      throw new Exception('A pasta deve possuir permissão de escrita: ' . $diretorio);
   }
 
 }

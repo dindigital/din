@@ -16,7 +16,7 @@ abstract class BaseModel
 
   public function __construct ()
   {
-    $this->_dao = new DAO(PDOBuilder::build());
+    $this->_dao = new DAO(PDOBuilder::build(DB_TYPE, DB_HOST, DB_SCHEMA, DB_USER, DB_PASS));
   }
 
 }
