@@ -2,6 +2,9 @@
 
 namespace Din\Image;
 
+use Din\File\Folder;
+use WideImage;
+
 /**
  *
  * @package lib.Image
@@ -18,8 +21,7 @@ class Image
 
   private function setWI ()
   {
-    require_once 'lib/vendor/wideimage/WideImage.php';
-    $this->_wi = \WideImage::load($this->_path);
+    $this->_wi = WideImage::load($this->_path);
   }
 
   public function __construct ( $path = null )
@@ -104,15 +106,15 @@ class Image
 
   public function save ( $path )
   {
-    $path = ds($path);
-    if ( strpos($path, WEBROOT) === false )
-      $path = WEBROOT . $path;
+    //$path = ds($path);
+//    if ( strpos($path, WEBROOT) === false )
+//      $path = WEBROOT . $path;
 
     $diretorio = dirname($path);
-    \lib\File\Folder::make_writable($diretorio);
+    Folder::make_writable($diretorio);
 
     // se houver uma barra no final, então concatene o nome do arquivo
-    if ( strrpos($path, DS) == (strlen($path) - 1) ) {
+    if ( strrpos($path, DIRECTORY_SEPARATOR) == (strlen($path) - 1) ) {
       $path .= basename($this->_path);
     }
 
