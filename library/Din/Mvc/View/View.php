@@ -28,15 +28,31 @@ class View
 
   private function makeReplaces ()
   {
+    $result = '';
+
+    foreach ( $this->_files as $i => $arr_file ) {
+      if ( !isset($arr_file['placeholder']) ) {
+        $result .= $arr_file['content'];
+      }
+    }
+
     foreach ( $this->_files as $i => $arr_file ) {
       if ( $arr_file['placeholder'] ) {
         foreach ( $this->_files as $i2 => $arr_file2 ) {
-          $this->_files[$i2]['content'] = str_replace($arr_file['placeholder'], $arr_file['content'], $this->_files[$i2]['content']);
+          $result = str_replace($arr_file['placeholder'], $arr_file['content'], $result);
         }
-
-        unset($this->_files[$i]);
       }
     }
+
+    foreach ( $this->_files as $i => $arr_file ) {
+      if ( $arr_file['placeholder'] ) {
+        foreach ( $this->_files as $i2 => $arr_file2 ) {
+          $result = str_replace($arr_file['placeholder'], $arr_file['content'], $result);
+        }
+      }
+    }
+
+    return $result;
   }
 
   private function readContents ()
@@ -55,13 +71,8 @@ class View
   public function getResult ()
   {
     $this->readContents();
-    $this->makeReplaces();
 
-    $r = '';
-
-    foreach ( $this->_files as $arr_file ) {
-      $r .= $arr_file['content'];
-    }
+    $r = $this->makeReplaces();
 
     return $r;
   }
