@@ -20,4 +20,9 @@ class Header
     return $_SERVER['HTTP_REFERER'];
   }
 
+  public static function set404 ()
+  {
+    header("HTTP/1.0 404 Not Found");
+  }
+
 }
