@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\Validation;
+namespace Din\ViewHelpers;
 
 class DateTransform
 {
@@ -144,4 +144,3 @@ class DateTransform
   }
 
 }
-
