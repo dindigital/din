@@ -87,6 +87,15 @@ class DAO
     return $this->_driver->select($select->getSQL(), $arrIN);
   }
 
+  public function select_count ( Select $select )
+  {
+    $arrIN = $select->getWhereValues();
+
+    $result = $this->_driver->select($select->getSQLCount(), $arrIN);
+
+    return intval($result[0]['total']);
+  }
+
   public function execute ( $SQL, $arrCriteria = array() )
   {
     $CriteriaMaker = new CriteriaMaker($arrCriteria, $SQL);
