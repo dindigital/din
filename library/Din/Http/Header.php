@@ -15,4 +15,9 @@ class Header
     exit;
   }
 
+  public static function getReferer ()
+  {
+    return $_SERVER['HTTP_REFERER'];
+  }
+
 }

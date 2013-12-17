@@ -66,12 +66,11 @@ class DAO
     return $PDOStatement->rowCount();
   }
 
-  public function delete ( iTable $Table, $arrCriteria )
+  public function delete ( $tablename, $arrCriteria )
   {
-    $tbl = $Table->getName();
-    $SQL = "DELETE FROM {$tbl} {\$strWhere}";
+    $SQL = "DELETE FROM {$tablename} {\$strWhere}";
 
-    $CriteriaMaker = new CriteriaMaker($arrCriteria, $SQL, $Table);
+    $CriteriaMaker = new CriteriaMaker($arrCriteria, $SQL);
     $arrIn = $CriteriaMaker->getArrIn();
     $SQL = $CriteriaMaker->getSQL();
 
