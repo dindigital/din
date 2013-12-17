@@ -36,7 +36,9 @@ class Post
    */
   public static function checkbox ( $fieldname )
   {
-    return array_key_exists($fieldname, $_POST) ? '1' : '0';
+    return array_key_exists($fieldname, $_POST) &&
+            ($_POST[$fieldname] == '1' || $_POST[$fieldname] == 'on') ?
+            '1' : '0';
   }
 
   /**
@@ -61,4 +63,3 @@ class Post
   }
 
 }
-

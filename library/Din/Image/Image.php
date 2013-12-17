@@ -3,10 +3,14 @@
 namespace Din\Image;
 
 use Din\File\Folder;
+<<<<<<< HEAD
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
 use \Exception;
+=======
+use WideImage;
+>>>>>>> fa2ba39f75a1e9553bab37c90a343d27a84e0ca4
 
 /**
  *
@@ -66,9 +70,13 @@ class Image
    */
   public function __construct ( $path, $save_path, $fail_path = false )
   {
+<<<<<<< HEAD
     $this->setFailPath($fail_path);
     $this->setPath($path);
     $this->_save_path = rawurldecode($save_path);
+=======
+    $this->_wi = WideImage::load($this->_path);
+>>>>>>> fa2ba39f75a1e9553bab37c90a343d27a84e0ca4
   }
 
   private function setFailPath ( $path )
@@ -188,18 +196,28 @@ class Image
 
   private function calcHeight ()
   {
+<<<<<<< HEAD
     if ( $this->_height == 0 ) {
       $size = $this->_resizeImage->getSize();
       $ratio = $this->_width / $size->getWidth();
       $this->_height = $size->getHeight() * $ratio;
     }
   }
+=======
+    //$path = ds($path);
+//    if ( strpos($path, WEBROOT) === false )
+//      $path = WEBROOT . $path;
+>>>>>>> fa2ba39f75a1e9553bab37c90a343d27a84e0ca4
 
   public function save ( $path )
   {
     $diretorio = dirname($path);
     Folder::make_writable($diretorio);
 
+<<<<<<< HEAD
+=======
+    // se houver uma barra no final, então concatene o nome do arquivo
+>>>>>>> fa2ba39f75a1e9553bab37c90a343d27a84e0ca4
     if ( strrpos($path, DIRECTORY_SEPARATOR) == (strlen($path) - 1) ) {
       $path .= basename($this->_path);
     }

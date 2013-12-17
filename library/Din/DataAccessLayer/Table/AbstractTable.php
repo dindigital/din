@@ -167,6 +167,11 @@ abstract class AbstractTable extends POPO
       return $this->setted_values[$k];
   }
 
+  public function getNewId ()
+  {
+    return md5(uniqid());
+  }
+
 //  public function getFields ()
 //  {
 //    $r = array();

@@ -66,12 +66,11 @@ class DAO
     return $PDOStatement->rowCount();
   }
 
-  public function delete ( iTable $Table, $arrCriteria )
+  public function delete ( $tablename, $arrCriteria )
   {
-    $tbl = $Table->getName();
-    $SQL = "DELETE FROM {$tbl} {\$strWhere}";
+    $SQL = "DELETE FROM {$tablename} {\$strWhere}";
 
-    $CriteriaMaker = new CriteriaMaker($arrCriteria, $SQL, $Table);
+    $CriteriaMaker = new CriteriaMaker($arrCriteria, $SQL);
     $arrIn = $CriteriaMaker->getArrIn();
     $SQL = $CriteriaMaker->getSQL();
 
@@ -85,6 +84,15 @@ class DAO
     $arrIN = $select->getWhereValues();
 
     return $this->_driver->select($select->getSQL(), $arrIN);
+  }
+
+  public function select_count ( Select $select )
+  {
+    $arrIN = $select->getWhereValues();
+
+    $result = $this->_driver->select($select->getSQLCount(), $arrIN);
+
+    return intval($result[0]['total']);
   }
 
   public function execute ( $SQL, $arrCriteria = array() )

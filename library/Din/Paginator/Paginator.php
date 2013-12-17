@@ -40,66 +40,11 @@ class Paginator
     $this->_atual_pag = intval($_atual_pag) == 0 ? 1 : intval($_atual_pag);
   }
 
-  /**
-   *
-   * @param string $SQL
-   * @param array $arrIN
-   * @param PDO_Driver $PDO
-   * @param int $total
-   * @return string $SQL
-   * @throws Exception
-   */
-  public function getSQL ( $SQL, $arrIN, PDODriver $PDO = null, $total = null )
-  {
-    if ( !is_null($total) ) {
-      $this->_total = $total;
-    } else {
-      //_# GET TOTAL
-      if ( strpos($SQL, 'GROUP') ) {
-        $result = $PDO->select($SQLT, $arrIN);
-        $this->_total = count($result);
-      } else {
-        $SELECT = strpos($SQL, 'SELECT') + 6;
-        $FROM = strpos($SQL, 'FROM');
-        $SQLT = substr_replace($SQL, ' COUNT(*) total ', $SELECT, $FROM - $SELECT);
-
-        $result = $PDO->select($SQLT, $arrIN);
-        if ( !count($result) )
-          throw new Exception('Houve um erro ao calcular paginação');
-
-        $this->_total = $result[0]->total;
-      }
-      //_#
-    }
-
-    //_# GET TOTAL PAGS
-    $this->_total_pags = intval(ceil($this->_total / $this->_itens_por_pag));
-    //_#
-    //_# SET LIMIT
-    $limit_1 = $this->_atual_pag * $this->_itens_por_pag - $this->_itens_por_pag;
-    $limit_2 = $this->_itens_por_pag;
-
-    $SQL .= " LIMIT {$limit_1},{$limit_2} ";
-
-    return $SQL;
-    //_#
-  }
-
-  public function setLimit ( \lib\DataAccessLayer\Select $select, $total )
-  {
-    list($limit, $offset) = $this->getLimitOffset($total);
-
-    $select->limit($limit, $offset);
-  }
-
   public function getLimitOffset ( $total )
   {
     $this->_total = $total;
 
-    //_# GET TOTAL PAGS
     $this->_total_pags = intval(ceil($this->_total / $this->_itens_por_pag));
-    //_#
-    //_# SET LIMIT
     $offset = $this->_atual_pag * $this->_itens_por_pag - $this->_itens_por_pag;
     $limit = $this->_itens_por_pag;
 
