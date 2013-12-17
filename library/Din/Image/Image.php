@@ -2,6 +2,12 @@
 
 namespace Din\Image;
 
+use Din\File\Folder;
+use Imagine\Gd\Imagine;
+use Imagine\Image\Box;
+use Imagine\Image\ImageInterface;
+use \Exception;
+
 /**
  *
  * @package lib.Image
@@ -9,70 +15,142 @@ namespace Din\Image;
 class Image
 {
 
-  private $_wi;
+  /**
+   * Iinstancia da classe Imagine
+   * @var Object
+   */
+  private $_imagine;
+
+  /**
+   * Instrancia da imagem após ser redimencionada
+   * @var String
+   */
+  private $_resizeImage;
+
+  /**
+   * Caminho completo da imagem
+   * @var String
+   */
   private $_path;
-  private $_autosave_path;
+  private $_failPath = false;
+
+  /**
+   * Caminho onde a imagem será salva
+   * @var type
+   */
+  private $_save_path;
+
+  /**
+   * Largura da imagem
+   * @var Int
+   */
   private $_width;
+
+  /**
+   * altura da imagem
+   * @var Int
+   */
   private $_height;
+
+  /**
+   * Properidade para definir se imagem será cortada ou apenas redimencionada
+   * @var Boolean
+   */
   private $_crop;
 
-  private function setWI ()
+  /**
+   * Construtor da classe Image Define o path da imagem que será redimecionada
+   * e o caminho onde a nova imagem será salva
+   * @param String $path Caminho completo da imagem que será redimecionada
+   * @param String $save_path Caminho completo onde a nova imagem será salva
+   */
+  public function __construct ( $path, $save_path, $fail_path = false )
   {
-    require_once 'lib/vendor/wideimage/WideImage.php';
-    $this->_wi = \WideImage::load($this->_path);
+    $this->setFailPath($fail_path);
+    $this->setPath($path);
+    $this->_save_path = rawurldecode($save_path);
   }
 
-  public function __construct ( $path = null )
+  private function setFailPath ( $path )
   {
-    if ( $path )
-      $this->setPath($path);
+    if ( is_file($path) )
+      $this->_failPath = $path;
   }
 
-  public function setPath ( $path )
+  private function getFailPath ()
   {
+    if ( !$this->_failPath )
+      throw new Exception('Arquivo inválido');
+
+    return $this->_failPath;
+  }
+
+  private function setPath ( $path )
+  {
+    if ( !is_file($path) )
+      $path = $this->getFailPath();
+
     $this->_path = rawurldecode($path);
-    return $this;
   }
 
-  public function setAutosavePath ( $autosave_path )
-  {
-    $this->_autosave_path = $autosave_path;
-  }
-
-  public function setWidth ( $width )
+  /**
+   * Define a largura da desejada
+   * Caso de valor 0, seta uma largura grande.
+   * @param Number $width
+   * @return \Din\Image\Image
+   */
+  public function setWidth ( $width = 0 )
   {
     $this->_width = $width;
-
     return $this;
   }
 
-  public function setHeight ( $height )
+  /**
+   * Define a altura da desejada
+   * Caso de valor 0, seta uma altura grande.
+   * @param Number $height
+   * @return \Din\Image\Image
+   */
+  public function setHeight ( $height = 0 )
   {
     $this->_height = $height;
-
     return $this;
   }
 
-  public function setCrop ( $crop )
+  /**
+   * Define se imagem será cortada ou apenas redimencionada
+   * @param Boolean $crop
+   * @return \Din\Image\Image
+   */
+  public function setCrop ( $crop = false )
   {
-    $this->_crop = $crop;
 
+    if ( $crop ) {
+      /**
+       * Caso utilize o método crop, valida se os os 2 tamanhos foram definidos
+       * No caso de não definidos, seta a Exception
+       */
+      if ( $this->_width == 0 || $this->_height == 0 )
+        throw new Exception('Para utilizar CROP as dimen precisa ser definida');
+    }
+
+    $this->_crop = $crop;
     return $this;
   }
 
-  public function getAutosavePath ()
+  public function getSavePath ()
   {
     $ext = strtolower(pathinfo($this->_path, PATHINFO_EXTENSION));
     $final_name = md5(filemtime($this->_path) . filesize($this->_path) . $this->_path . intval($this->_width) . intval($this->_height) . intval($this->_crop)) . '.' . $ext;
 
-    $path = $this->_autosave_path . $final_name;
+    $path = $this->_save_path . $final_name;
 
     return $path;
   }
 
-  public function is_autosave_file ()
+  public function is_saved_file ()
   {
-    return is_file($this->getAutosavePath());
+    return is_file($this->getSavePath());
   }
 
   public function is_file ()
@@ -82,61 +160,58 @@ class Image
 
   public function resize ()
   {
-    $this->setWI();
+    $this->_imagine = new Imagine();
+    $this->_resizeImage = $this->_imagine->open($this->_path);
 
     if ( $this->_crop ) {
-      $im = getimagesize($this->_path);
-      $lar = $im[0];
-      $alt = $im[1];
-
-      $x = round(($lar / $alt) * $this->_height);
-      $y = null;
-      if ( $x < $this->_width ) {
-        $y = round(($alt / $lar) * $this->_width);
-        $x = null;
-      }
-
-      $this->_wi = $this->_wi->resize($x, $y)->crop('center', 'center', $this->_width, $this->_height);
+      $mode = ImageInterface::THUMBNAIL_OUTBOUND;
     } else {
-      $this->_wi = $this->_wi->resizeDown($this->_width, $this->_height);
+      $mode = ImageInterface::THUMBNAIL_INSET;
+      $this->calcWidth();
+      $this->calcHeight();
+    }
+
+    $size = new Box($this->_width, $this->_height);
+    $this->_resizeImage = $this->_resizeImage->thumbnail($size, $mode);
+
+    return $this;
+  }
+
+  private function calcWidth ()
+  {
+    if ( $this->_width == 0 ) {
+      $size = $this->_resizeImage->getSize();
+      $ratio = $this->_height / $size->getHeight();
+      $this->_width = $size->getWidth() * $ratio;
+    }
+  }
+
+  private function calcHeight ()
+  {
+    if ( $this->_height == 0 ) {
+      $size = $this->_resizeImage->getSize();
+      $ratio = $this->_width / $size->getWidth();
+      $this->_height = $size->getHeight() * $ratio;
     }
   }
 
   public function save ( $path )
   {
-    $path = ds($path);
-    if ( strpos($path, WEBROOT) === false )
-      $path = WEBROOT . $path;
-
     $diretorio = dirname($path);
-    \lib\File\Folder::make_writable($diretorio);
+    Folder::make_writable($diretorio);
 
-    // se houver uma barra no final, então concatene o nome do arquivo
-    if ( strrpos($path, DS) == (strlen($path) - 1) ) {
+    if ( strrpos($path, DIRECTORY_SEPARATOR) == (strlen($path) - 1) ) {
       $path .= basename($this->_path);
     }
 
-    $this->_wi->saveToFile($path);
+    $this->_resizeImage->save($path);
 
     return $path;
   }
 
   public function autosave ()
   {
-    return $this->save($this->getAutosavePath());
-  }
-
-  public function getSize ()
-  {
-    $im = getimagesize($this->_path);
-    $lar = $im[0];
-    $alt = $im[1];
-
-    $std = new \stdClass();
-    $std->width = $lar;
-    $std->height = $alt;
-
-    return $std;
+    return $this->save($this->getSavePath());
   }
 
 }
