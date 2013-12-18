@@ -5,14 +5,31 @@ namespace Din\DataAccessLayer;
 class Criteria
 {
 
+  /**
+   * Array de valores inputados
+   * @var array
+   */
   private $_arr_in = array();
+
+  /**
+   * SQL final
+   * @var sring
+   */
   private $_sql;
 
-  public function __construct ( $arrCriteria )
+  /**
+   * Constrói utilizando setCriteria
+   * @param array $arrCriteria
+   */
+  public function __construct ( array $arrCriteria )
   {
     $this->setCriteria($arrCriteria);
   }
 
+  /**
+   * Seta o array de criterias que a classe deve trabalhar e armazena o resultado final.
+   * @param array $arrCriteria
+   */
   public function setCriteria ( array $arrCriteria )
   {
     $SQL = $this->make_replaces($this->recursive_read($arrCriteria));
@@ -23,11 +40,20 @@ class Criteria
     $this->_sql = $SQL;
   }
 
+  /**
+   * Retorna o SQL final Ee: "WHERE nome LIKE ? AND email = ?"
+   * @return string
+   */
   public function getSQL ()
   {
     return $this->_sql;
   }
 
+  /**
+   * Retorna o array dos parâmetros utilizados na ordem em que aparecem as
+   * interrogações. Utilizado para posterior Prepared Statement.
+   * @return type
+   */
   public function getArrIn ()
   {
     return $this->_arr_in;
@@ -173,7 +199,7 @@ class Criteria
   }
 
   /**
-   * Percorre o arrCriteria passado por parâmetro e chama funções para retornar
+   * Percorre o $arrCriteria passado por parâmetro e chama funções para retornar
    * o SQL
    * @param array $array
    * @return string
