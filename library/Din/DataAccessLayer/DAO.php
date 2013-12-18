@@ -105,6 +105,19 @@ class DAO
     return $PDOStatement->rowCount();
   }
 
+  public function select_debug ( Select $select )
+  {
+    $SQL = $select->getSQL();
+    $arrIN = $select->getWhereValues();
+
+    foreach ( $arrIN as $parameter ) {
+      $SQL = str_replace('?', '"' . $parameter . '"', $SQL);
+    }
+
+    var_dump($SQL);
+    exit;
+  }
+
   /**
    * Realiza select utilizando instancia da class Select como parametro
    * Retorna resultado em array
