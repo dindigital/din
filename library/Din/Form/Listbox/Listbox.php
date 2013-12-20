@@ -1,31 +1,31 @@
-<?
+<?php
 
-namespace lib\Form\Listbox;
+namespace Din\Form\Listbox;
 
-use lib\Form\Dropdown\Dropdown;
+use Din\Form\Dropdown\Dropdown;
 
 /**
  * @package Form.Listbox
- * @example examples.php 
+ * @example examples.php
  */
 class Listbox extends Dropdown
 {
 
   /**
    * Atributo multiple do elemento
-   * @var bool 
+   * @var bool
    */
   protected $_multiple = true;
 
   /**
    * Array contendo chaves de opções selecionadas
-   * @var string 
+   * @var string
    */
   protected $_selected = array();
 
   /**
    * Seta o atributo multiple do elemento
-   * @param bool $multiple 
+   * @param bool $multiple
    */
   public function setMultiple ( $multiple )
   {
@@ -34,7 +34,7 @@ class Listbox extends Dropdown
 
   /**
    * Seta as chaves de options selecionadas
-   * @param array $selected 
+   * @param array $selected
    */
   public function setSelected ( $selected )
   {
@@ -43,8 +43,8 @@ class Listbox extends Dropdown
 
   /**
    * Seta as chaves de options selecionadas, porém recebendo um array de objetos.
-   * 
-   * @param array $selected 
+   *
+   * @param array $selected
    * @param string $prop_id Nome da propriedade a ser extraida dos objetos
    */
   public function setSelectedObj ( $selected, $prop_id )
@@ -55,7 +55,7 @@ class Listbox extends Dropdown
   }
 
   /**
-   * Chamada interna para criação da tag <select> 
+   * Chamada interna para criação da tag <select>
    */
   protected function createOpenTag ()
   {
@@ -67,7 +67,7 @@ class Listbox extends Dropdown
   }
 
   /**
-   * Chamada interna para criação das tags <option> 
+   * Chamada interna para criação das tags <option>
    */
   protected function createOptions ()
   {

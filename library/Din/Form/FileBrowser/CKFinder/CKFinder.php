@@ -1,9 +1,9 @@
-<?
+<?php
 
-namespace lib\Form\Browser\CKFinder;
+namespace Din\Form\FileBrowser\CKFinder;
 
 /**
- * @example example.php 
+ * @example example.php
  */
 class CKFinder
 {
@@ -33,13 +33,13 @@ class CKFinder
   {
     $this->_buttonText = $text;
   }
-  
-  public function setClassTextfield($class)
+
+  public function setClassTextfield ( $class )
   {
     $this->_classTextfield = $class;
   }
 
-  public function setClassButton($class)
+  public function setClassButton ( $class )
   {
     $this->_classButton = $class;
   }
@@ -50,10 +50,10 @@ class CKFinder
       $this->setStartUpPath();
     if ( !$this->_buttonText )
       $this->setButtonText();
-    
-    $t_class = $this->_classTextfield ? 'class="'.$this->_classTextfield.'"' : '';
-    $b_class = $this->_classButton ? 'class="'.$this->_classButton.'"' : '';
-    
+
+    $t_class = $this->_classTextfield ? 'class="' . $this->_classTextfield . '"' : '';
+    $b_class = $this->_classButton ? 'class="' . $this->_classButton . '"' : '';
+
     $r = '<input id="' . $this->_name . '" name="' . $this->_name . '" type="text" ' . $t_class . ' />' . PHP_EOL;
     $r .= '<input type="button" value="' . $this->_buttonText . '"  ' . $b_class . ' ';
     $r .= 'onclick="BrowseServer( \'' . $this->_startUpPath . '\', \'' . $this->_name . '\' );" />' . PHP_EOL;
