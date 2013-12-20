@@ -11,7 +11,7 @@ class JsonViewHelper
   {
     $msg = implode('<br />', json_decode($e->getMessage()));
     die(json_encode(array(
-        'type' => 'error',
+        'type' => 'error_message',
         'message' => $msg
     )));
   }
@@ -19,8 +19,8 @@ class JsonViewHelper
   public static function display_error_object ( Exception $e )
   {
     die(json_encode(array(
-        'type' => 'error',
-        'errorDetails' => json_decode($e->getMessage())
+        'type' => 'error_object',
+        'objects' => json_decode($e->getMessage(), true)
     )));
   }
 
