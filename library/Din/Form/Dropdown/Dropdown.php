@@ -1,66 +1,66 @@
-<?
+<?php
 
-namespace lib\Form\Dropdown;
+namespace Din\Form\Dropdown;
 
 /**
- * @package Form.Dropdown 
+ * @package Form.Dropdown
  * @example examples.php
- * 
+ *
  */
 class Dropdown
 {
 
   /**
    * Atributo name do elemento
-   * @var strng 
+   * @var strng
    */
   protected $_name;
 
   /**
    * Atributo id do elemento
-   * @var string 
+   * @var string
    */
   protected $_id;
 
   /**
    * Atributo class do elemento
-   * @var string 
+   * @var string
    */
   protected $_class;
 
   /**
    * Atributo style do elemento
-   * @var string 
+   * @var string
    */
-  protected $_style = null;  
+  protected $_style = null;
 
   /**
    * Chave da opção selecionada
-   * @var string 
+   * @var string
    */
   protected $_selected;
 
   /**
    * Array de opções
-   * @var array 
+   * @var array
    */
   protected $_options = array();
 
   /**
    * Array contendo a primeira option
-   * @var array 
+   * @var array
    */
   protected $_firstOpt = array();
-  
+
   /**
    * Elemento resultante do método getElement
-   * @var string 
+   * @var string
    */
   protected $_element = '';
 
   /**
    * Constrói objeto Dropdown opcionalmente setando o nome do elemento
-   * @param string $name 
+   * @param string $name
    */
   public function __construct ( $name = '' )
   {
@@ -69,7 +69,7 @@ class Dropdown
 
   /**
    * Seta o atributo nome do elemento
-   * @param string $name 
+   * @param string $name
    */
   public function setName ( $name )
   {
@@ -78,7 +78,7 @@ class Dropdown
 
   /**
    * Seta o atributo id do elemento
-   * @param string $id 
+   * @param string $id
    */
   public function setId ( $id )
   {
@@ -87,25 +87,25 @@ class Dropdown
 
   /**
    * Seta o atributo class do elemento
-   * @param string $class 
+   * @param string $class
    */
   public function setClass ( $class )
   {
     $this->_class = $class;
   }
-  
+
   /**
    * Seta o atributo style do elemento
-   * @param string $style 
+   * @param string $style
    */
   public function setStyle ( $style )
   {
     $this->_style = $style;
-  }  
+  }
 
   /**
    * Seta a chave da option selecionada
-   * @param string $selected 
+   * @param string $selected
    */
   public function setSelected ( $selected )
   {
@@ -114,7 +114,7 @@ class Dropdown
 
   /**
    * Seta as opções com base num array simples
-   * @param array $_options 
+   * @param array $_options
    */
   public function setOptionsArray ( array $_options )
   {
@@ -143,32 +143,32 @@ class Dropdown
   {
     $this->_firstOpt[$key] = $text;
   }
-  
+
   /**
-   * Chamada interna para criação da tag <select> 
+   * Chamada interna para criação da tag <select>
    */
-  protected function createOpenTag()
+  protected function createOpenTag ()
   {
-    $style = $this->_style ? ' style="'.$this->_style.'"' : '';
-    
+    $style = $this->_style ? ' style="' . $this->_style . '"' : '';
+
     $this->_element .= '<select name="' . $this->_name . '" id="' . $this->_id . '" class="';
     $this->_element .= $this->_class . '"' . $style . '>' . PHP_EOL;
   }
-  
+
   /**
-   * Chamada interna para criação da primeira tag <option> 
+   * Chamada interna para criação da primeira tag <option>
    */
-  protected function createFirstOption()
+  protected function createFirstOption ()
   {
     foreach ( $this->_firstOpt as $k => $v ) {
       $this->_element .= '  <option value="' . $k . '">' . $v . '</option>' . PHP_EOL;
     }
   }
-  
+
   /**
-   * Chamada interna para criação das tags <option> 
+   * Chamada interna para criação das tags <option>
    */
-  protected function createOptions()
+  protected function createOptions ()
   {
     foreach ( $this->_options as $k => $v ) {
       $selected = (string) $this->_selected == (string) $k ? ' selected="selected"' : '';
@@ -176,18 +176,18 @@ class Dropdown
       $this->_element .= '  <option value="' . $k . '"' . $selected . '>' . $v . '</option>' . PHP_EOL;
     }
   }
-  
+
   /**
-   * Chamada interna para criação da tag </select> 
+   * Chamada interna para criação da tag </select>
    */
-  protected function createCloseTag()
+  protected function createCloseTag ()
   {
     $this->_element .= '</select>' . PHP_EOL;
   }
 
   /**
    * Retorna o elemento <select> montado com todas as opções
-   * @return string 
+   * @return string
    */
   public function getElement ()
   {
