@@ -3,15 +3,13 @@
 namespace Din\Filters\Date;
 
 use Respect\Validation\Validator as v;
-use \Exception;
 
 class DateFormat
 {
 
   public static function validate ( $date )
   {
-    if ( !v::date()->validate($date) )
-      throw new Exception('Data no formato inválido');
+    return v::date()->validate($date);
   }
 
   public static function filter_date ( $date, $format = 'd/m/Y' )
@@ -86,4 +84,3 @@ class DateFormat
   }
 
 }
-
