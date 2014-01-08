@@ -164,15 +164,16 @@ class Image
     $this->_resizeImage = $this->_imagine->open($this->_path);
 
     if ( $this->_crop ) {
-      $mode = ImageInterface::THUMBNAIL_OUTBOUND;
+      $imagine_resizer = new ImagineResizer($this->_resizeImage, new Box($this->_width, $this->_height));
+      $this->_resizeImage = $imagine_resizer->resize();
     } else {
       $mode = ImageInterface::THUMBNAIL_INSET;
       $this->calcWidth();
       $this->calcHeight();
-    }
 
-    $size = new Box($this->_width, $this->_height);
-    $this->_resizeImage = $this->_resizeImage->thumbnail($size, $mode);
+      $size = new Box($this->_width, $this->_height);
+      $this->_resizeImage = $this->_resizeImage->thumbnail($size, $mode);
+    }
 
     return $this;
   }
