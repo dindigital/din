@@ -36,4 +36,12 @@ class JsonViewHelper
     )));
   }
 
+  public static function display_success_message ( $msg )
+  {
+    die(json_encode(array(
+        'type' => 'success',
+        'message' => $msg
+    )));
+  }
+
 }
