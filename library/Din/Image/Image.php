@@ -60,6 +60,12 @@ class Image
   private $_crop;
 
   /**
+   * Define o tipo do crop, se é center ou top
+   * @var string
+   */
+  private $_cropType = 'center';
+
+  /**
    * Construtor da classe Image Define o path da imagem que será redimecionada
    * e o caminho onde a nova imagem será salva
    * @param String $path Caminho completo da imagem que será redimecionada
@@ -139,10 +145,15 @@ class Image
     return $this;
   }
 
+  public function setCropType ( $crop_type = 'center' )
+  {
+    $this->_cropType = $crop_type;
+  }
+
   public function getSavePath ()
   {
     $ext = strtolower(pathinfo($this->_path, PATHINFO_EXTENSION));
-    $final_name = md5(filemtime($this->_path) . filesize($this->_path) . $this->_path . intval($this->_width) . intval($this->_height) . intval($this->_crop)) . '.' . $ext;
+    $final_name = md5(filemtime($this->_path) . filesize($this->_path) . $this->_path . intval($this->_width) . intval($this->_height) . intval($this->_crop)) . $this->_cropType . '.' . $ext;
 
     $path = $this->_save_path . $final_name;
 
@@ -166,7 +177,7 @@ class Image
 
     if ( $this->_crop ) {
       $image_crop = new ImageCrop($this->_resizeImage, new Box($this->_width, $this->_height));
-      $this->_resizeImage = $image_crop->crop();
+      $this->_resizeImage = $image_crop->crop($this->_cropType);
     } else {
       $mode = ImageInterface::THUMBNAIL_INSET;
       $this->calcWidth();

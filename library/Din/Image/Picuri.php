@@ -26,6 +26,7 @@ class Picuri
   private $_newHeight;
   private $_newImage;
   private $_crop = false;
+  private $_cropType = '';
   private $_attributos = '';
   private $_typeReturn = 'tag';
   private $_imageReturn;
@@ -50,6 +51,11 @@ class Picuri
     $this->_crop = $crop;
   }
 
+  public function setCropType ( $crop_type )
+  {
+    $this->_cropType = $crop_type;
+  }
+
   public function setAtributos ( Array $atributos )
   {
     if ( count($atributos) ) {
@@ -68,7 +74,7 @@ class Picuri
 
   public function save ()
   {
-    $this->_image->setWidth($this->_width)->setHeight($this->_height)->setCrop($this->_crop);
+    $this->_image->setWidth($this->_width)->setHeight($this->_height)->setCrop($this->_crop)->setCropType($this->_cropType);
     if ( !$this->_image->is_saved_file() ) {
       $this->_image->resize()->autosave();
     }
@@ -127,9 +133,10 @@ class Picuri
    * @param type $crop
    * @param type $atributos
    * @param type $type
-   * @return type
+   * @param type $crop_type
+   * @return string
    */
-  public static function picUri ( $file, $width = false, $height = false, $crop = false, $atributos = array(), $type = 'tag' )
+  public static function picUri ( $file, $width = false, $height = false, $crop = false, $atributos = array(), $type = 'tag', $crop_type = 'center' )
   {
     $pic = new self($file);
 
@@ -139,8 +146,8 @@ class Picuri
     if ( $height )
       $pic->setHeight($height);
 
-    if ( $crop )
-      $pic->setCrop(true);
+    $pic->setCrop($crop);
+    $pic->setCropType($crop_type);
 
     if ( count($atributos) )
       $pic->setAtributos($atributos);

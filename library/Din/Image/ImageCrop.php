@@ -18,7 +18,7 @@ class ImageCrop
     $this->box = $box;
   }
 
-  public function crop ()
+  public function crop ( $type = 'center' )
   {
     $srcBox = $this->imagine->getSize();
 
@@ -32,11 +32,26 @@ class ImageCrop
 
     if ( $atual_w < $atual_h ) {
       $resize_h = ($atual_h / $atual_w) * $desejado_w;
+      if ( $resize_h < $desejado_h ) {
+        $resize_h = $desejado_h;
+        $resize_w = ($atual_w / $atual_h) * $desejado_h;
+      }
     } else {
       $resize_w = ($atual_w / $atual_h) * $desejado_h;
+      if ( $resize_w < $desejado_w ) {
+        $resize_w = $desejado_w;
+        $resize_h = ($atual_h / $atual_w) * $desejado_w;
+      }
     }
 
-    $image = $this->imagine->resize(new Box($resize_w, $resize_h))->thumbnail($this->box, \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND);
+    $image = $this->imagine->resize(new Box($resize_w, $resize_h));
+
+    if ( $type == 'center' ) {
+      $image = $image->thumbnail($this->box, \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND);
+    } else {
+      $x = $resize_w / 2 - $desejado_w / 2;
+      $image = $this->imagine->crop(new \Imagine\Image\Point($x, 0), $this->box);
+    }
 
     return $image;
   }
