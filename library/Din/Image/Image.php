@@ -6,6 +6,7 @@ use Din\File\Folder;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
+use Din\Image\ImageCrop;
 use \Exception;
 
 /**
@@ -164,8 +165,8 @@ class Image
     $this->_resizeImage = $this->_imagine->open($this->_path);
 
     if ( $this->_crop ) {
-      $imagine_resizer = new ImagineResizer($this->_resizeImage, new Box($this->_width, $this->_height));
-      $this->_resizeImage = $imagine_resizer->resize();
+      $image_crop = new ImageCrop($this->_resizeImage, new Box($this->_width, $this->_height));
+      $this->_resizeImage = $image_crop->crop();
     } else {
       $mode = ImageInterface::THUMBNAIL_INSET;
       $this->calcWidth();
