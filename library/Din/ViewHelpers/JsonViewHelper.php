@@ -12,6 +12,8 @@ class JsonViewHelper
     $msg = $e->getMessage();
     if ( is_array($msg) ) {
       $msg = implode('<br />', json_decode($msg));
+    } else {
+      $msg = json_decode($msg);
     }
 
     die(json_encode(array(
