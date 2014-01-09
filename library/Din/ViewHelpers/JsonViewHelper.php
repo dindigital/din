@@ -9,7 +9,11 @@ class JsonViewHelper
 
   public static function display_error_message ( Exception $e )
   {
-    $msg = implode('<br />', json_decode($e->getMessage()));
+    $msg = $e->getMessage();
+    if ( is_array($msg) ) {
+      $msg = implode('<br />', json_decode($msg));
+    }
+
     die(json_encode(array(
         'type' => 'error_message',
         'message' => $msg
