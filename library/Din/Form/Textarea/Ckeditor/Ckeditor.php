@@ -65,9 +65,10 @@ class Ckeditor
 
     $r = '<textarea id="' . $this->_field_name . '" name="' . $this->_field_name . '" class="' . $this->_class . '">' . $value . '</textarea>' . PHP_EOL;
     $r .= '<script type="text/javascript">' . PHP_EOL;
-    $r .= ' var editor = CKEDITOR.replace( \'' . $this->_field_name . '\' );' . PHP_EOL;
-    $r .= ' if (CKEDITOR.instances["' . $this->_field_name . '"]) delete CKEDITOR.instances["' . $this->_field_name . '"];' . PHP_EOL;
-    $r .= ' CKFinder.setupCKEditor( editor, \'/backend/plugins/ckfinder23/\' ) ;' . PHP_EOL;
+    $r .= ' $( \'#' . $this->_field_name . '\' ).ckeditor();' . PHP_EOL;
+    $r .= ' var editor = $( \'#' . $this->_field_name . '\' ).ckeditorGet();' . PHP_EOL;
+    //$r .= ' if (CKEDITOR.instances["' . $this->_field_name . '"]) delete CKEDITOR.instances["' . $this->_field_name . '"];' . PHP_EOL;
+    $r .= ' CKFinder.setupCKEditor( editor, \'/admin/js/ckfinder23/\' ) ;' . PHP_EOL;
     $r .= '</script>' . PHP_EOL;
 
     return $r;
