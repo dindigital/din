@@ -13,7 +13,8 @@ class JsonViewHelper
     if ( is_array($msg) ) {
       $msg = implode('<br />', json_decode($msg));
     } else {
-      $msg = json_decode($msg);
+      json_decode($msg);
+      $msg = (json_last_error() == JSON_ERROR_NONE) ? json_decode($msg) : $msg;
     }
 
     die(json_encode(array(
