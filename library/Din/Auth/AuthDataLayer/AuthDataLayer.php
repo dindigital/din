@@ -29,7 +29,7 @@ class AuthDataLayer implements iAuthDataLayer
 
   public function test_login ( $user, $pass )
   {
-    $SQL = "SELECT {$this->_pkField},{$this->_activatedField} FROM {$this->_tbl} WHERE {$this->_userField} = ? AND {$this->_passField} = ? ";
+    $SQL = "SELECT * FROM {$this->_tbl} WHERE {$this->_userField} = ? AND {$this->_passField} = ? ";
     $result = $this->_pdo->select($SQL, array($user, $pass));
 
     if ( count($result) ) {
@@ -37,7 +37,7 @@ class AuthDataLayer implements iAuthDataLayer
       $this->_activatedValue = $result[0][$this->_activatedField];
     }
 
-    return (bool) count($result);
+    return $result;
   }
 
   public function getId ()
