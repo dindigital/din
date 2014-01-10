@@ -29,15 +29,16 @@ abstract class Auth
       $crypted_pass = $this->_crypt->crypt($pass);
     }
 
-    $this->_session->set('is_crypted', $is_crypted);
+    $result = $this->_dao->test_login($user, $crypted_pass);
 
-    $bool = $this->_dao->test_login($user, $crypted_pass);
-
-    if ( $bool ) {
+    if ( count($result) ) {
+      $this->_session->set('user_table', $result[0]);
       $this->_session->set('user', $user);
-      $this->_session->set('pass', $pass);
+      $this->_session->set('pass', $crypted_pass);
+      $bool = true;
     } else {
       $this->_session->clear();
+      $bool = false;
     }
 
     return $bool;
@@ -53,16 +54,12 @@ abstract class Auth
   {
     try {
       $user = $this->_session->get('user');
-      if ( $this->_session->get('is_crypted') ) {
-        $crypted_pass = $this->_session->get('pass');
-      } else {
-        $crypted_pass = $this->_crypt->crypt($this->_session->get('pass'));
-      }
+      $crypted_pass = $this->_session->get('pass');
     } catch (\Exception $e) {
       return false;
     }
 
-    $bool = $this->_dao->test_login($user, $crypted_pass);
+    $bool = (bool) count($this->_dao->test_login($user, $crypted_pass));
 
     return $bool;
   }
