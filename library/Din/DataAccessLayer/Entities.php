@@ -34,20 +34,40 @@ class Entities
   {
     if ( array_key_exists($tbl, self::$entities) ) {
       return self::$entities[$tbl];
+    } else {
+      throw new Exception('Entidade não cadastrada: ' . $tbl);
     }
+  }
+
+  public static function getThis ( $model )
+  {
+    $namespace = get_class($model);
+    $model_name = substr($namespace, strrpos($namespace, '\\') + 1);
+
+    $r = '';
+    foreach ( self::$entities as $tbl ) {
+      if ( $tbl['model'] == $model_name ) {
+        $r = $tbl;
+        break;
+      }
+    }
+
+    if ( $r == '' )
+      throw new Exception('Model não cadastrado na entidade: ' . $model_name);
+
+
+    return $r;
   }
 
   public static function getFilhos ( $tbl )
   {
     $r = array();
 
-    if ( array_key_exists($tbl, self::$entities) ) {
-      $id_pai = self::$entities[$tbl]['id'];
-      if ( array_key_exists('filho', self::$entities[$tbl]) ) {
-        $filhos = self::$entities[$tbl]['filho'];
-        foreach ( $filhos as $filho ) {
-          $r[$filho] = self::$entities[$filho];
-        }
+    $atual = self::getEntity($tbl);
+    if ( array_key_exists('filho', $atual) ) {
+      $filhos = $atual['filho'];
+      foreach ( $filhos as $filho ) {
+        $r[$filho] = self::$entities[$filho];
       }
     }
 
@@ -56,10 +76,9 @@ class Entities
 
   public static function getPai ( $tbl )
   {
-    if ( array_key_exists($tbl, self::$entities) ) {
-      if ( array_key_exists('pai', self::$entities[$tbl]) ) {
-        return self::$entities[self::$entities[$tbl]['pai']];
-      }
+    $atual = self::getEntity($tbl);
+    if ( array_key_exists('pai', $atual) ) {
+      return self::$entities[$atual['pai']];
     }
   }
 
