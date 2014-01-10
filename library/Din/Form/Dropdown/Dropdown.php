@@ -122,15 +122,15 @@ class Dropdown
   }
 
   /**
-   * Seta as opções com base em um array de objetos
-   * @param array $arrayObj Aray de objetos
-   * @param string $prop_id Nome da propriedade que servirá de chave para a option
-   * @param string $prop_name Nome da propriedade que servirá de texto para a option
+   * Seta as opções com base em um array de result do banco
+   * @param array $result Aray de objetos
+   * @param string $prop_id Nome do índice que servirá de chave para a option
+   * @param string $prop_name Nome do índice que servirá de texto para a option
    */
-  public function setOptionsObj ( array $arrayObj, $prop_id, $prop_name )
+  public function setOptionsResult ( array $result, $prop_id, $prop_name )
   {
-    foreach ( $arrayObj as $obj ) {
-      $this->_options[$obj->{$prop_id}] = $obj->{$prop_name};
+    foreach ( $result as $row ) {
+      $this->_options[$row[$prop_id]] = $row[$prop_name];
     }
   }
 
