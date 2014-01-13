@@ -190,7 +190,7 @@ class Criteria
    */
   private function make_replaces ( $SQL )
   {
-    $SQL = substr($SQL, 5);
+    $SQL = substr($SQL, 4);
     $SQL = str_replace('OR  AND', 'OR', $SQL);
     $SQL = str_replace('AND  AND', 'AND', $SQL);
     $SQL = str_replace('  ', ' ', $SQL);
