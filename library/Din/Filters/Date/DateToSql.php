@@ -11,18 +11,17 @@ use \Exception;
 class DateToSql
 {
 
+  public static function validate ( $date )
+  {
+    return v::date('d/m/Y')->validate($date);
+  }
+
   public static function filter_date ( $date )
   {
-    if ( !v::date('d/m/Y')->validate($date) )
-      throw new Exception('Data no formato inválido para conversão');
-
-    $arrayDate = explode('/', $date);
-    $date_sql = "{$arrayDate[2]}-{$arrayDate[1]}-{$arrayDate[0]}";
-
-    if ( !v::date()->validate($date_sql) )
-      throw new Exception('Erro na conversão');
-
-    return $date_sql;
+    if ( self::validate($date) ) {
+      $arrayDate = explode('/', $date);
+      return "{$arrayDate[2]}-{$arrayDate[1]}-{$arrayDate[0]}";
+    }
   }
 
   public static function filter_datetime ( $datetime )
@@ -47,4 +46,3 @@ class DateToSql
   }
 
 }
-
