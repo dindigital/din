@@ -59,10 +59,10 @@ class Router implements iRouter
             //_ O CONTROLLER REQUISITADO PELA URI É UMA ACTION
             $router_action = new RouterAction();
             $router_action->setUri($uri);
-            $router_action->resolveRequest($route['app'], $this->_final_route);
+            $router_action->resolveRequest($route['path'], $this->_final_route);
           } else {
             //_ O CONTROLLER REQUISITADO PELA URI ESTÁ CONFIGURADO
-            $this->_final_route->setPath($route['app'], ucfirst($route['controller']), $route['method'], array_slice($matches, 1));
+            $this->_final_route->setPath($route['controller'], $route['method'], array_slice($matches, 1));
           }
 
           break;
@@ -79,18 +79,13 @@ class Router implements iRouter
     if ( !is_null($this->_erro404) ) {
       //_ O CONTROLER REQUISITADO PELA URI NÃO FOI ENCONTRADO
 
-      $this->_final_route->setPath($this->_erro404['app'], ucfirst($this->_erro404['controller']), 'get_' . $this->_erro404['method']);
+      $this->_final_route->setPath($this->_erro404['controller'], 'get_' . $this->_erro404['method']);
     } else {
       //_ CONTROLLER NÃO ENCONTRADO, E NÃO HÁ UM ERRO 404 PADRÃO
       header('HTTP/1.0 404 Not Found');
       echo '<h1>Página não encontrada, por favor sete uma página 404</h1>';
       exit;
     }
-  }
-
-  public function getAppName ()
-  {
-    return $this->_final_route->_app;
   }
 
   public function getControllerName ()

@@ -19,7 +19,7 @@ class RouterAction
     $this->_uri_parts = explode('/', $uri);
   }
 
-  public function resolveRequest ( $app, FinalRoute $final_route )
+  public function resolveRequest ( $path, FinalRoute $final_route )
   {
     $arrPath = array_slice($this->_uri_parts, 1, 3);
     if ( count($arrPath) >= 3 ) {
@@ -28,17 +28,19 @@ class RouterAction
       if ( count($args) && $args[count($args) - 1] == '' )
         unset($args[count($args) - 1]);
 
-      $controllername = $this->translate_controller_name($arrPath[1]);
+      $controllername = $this->translate_controller_name($path, $arrPath[1]);
 
-      $final_route->setPath($app, $controllername, $arrPath[2], $args);
+      $final_route->setPath($controllername, $arrPath[2], $args);
     }
   }
 
-  private function translate_controller_name ( $controllername )
+  private function translate_controller_name ( $path, $controllername )
   {
     $controllername = str_replace('_', ' ', $controllername);
     $controllername = ucwords($controllername);
     $controllername = str_replace(' ', '', $controllername);
+    $controllername .= 'Controller';
+    $controllername = $path . $controllername;
 
     return $controllername;
   }

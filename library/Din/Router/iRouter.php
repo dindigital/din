@@ -11,7 +11,5 @@ interface iRouter
 
   public function getArgs ();
 
-  public function getAppName ();
-
   public function set404 ();
 }
