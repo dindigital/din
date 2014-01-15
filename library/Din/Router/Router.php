@@ -4,6 +4,7 @@ namespace Din\Router;
 
 use Din\File\Files;
 use Din\Router\iRouter;
+use Exception;
 
 /**
  *
@@ -28,7 +29,7 @@ class Router implements iRouter
     $vars = Files::get_return($routes_file);
 
     if ( !is_array($vars) )
-      throw new \Exception('Arquivo de routes inválido');
+      throw new Exception('Arquivo de routes inválido');
 
     $this->_routes = $vars;
   }
