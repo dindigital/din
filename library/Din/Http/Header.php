@@ -25,6 +25,11 @@ class Header
     header("HTTP/1.0 404 Not Found");
   }
 
+  public static function set500 ()
+  {
+    header("HTTP/1.0 500 Internal Server Error");
+  }
+
   public static function setNoCache ()
   {
     header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");

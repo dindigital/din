@@ -38,6 +38,10 @@ class Listbox extends Dropdown
    */
   public function setSelected ( $selected )
   {
+    if ( !is_array($selected) ) {
+      $selected = array();
+    }
+
     $this->_selected = $selected;
   }
 
