@@ -9,12 +9,12 @@ class JsonViewHelper
 
   public static function display_error_message ( Exception $e )
   {
-    $msg = $e->getMessage();
+    $exceptionMsg = $e->getMessage();
+    json_decode($exceptionMsg);
+    $msg = (json_last_error() == JSON_ERROR_NONE) ? json_decode($exceptionMsg) : $exceptionMsg;
+
     if ( is_array($msg) ) {
-      $msg = implode('<br />', json_decode($msg));
-    } else {
-      json_decode($msg);
-      $msg = (json_last_error() == JSON_ERROR_NONE) ? json_decode($msg) : $msg;
+      $msg = implode('<br />', $msg);
     }
 
     die(json_encode(array(
