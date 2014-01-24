@@ -14,7 +14,7 @@ class Bitly
     $this->_bitly_key = $key;
   }
 
-  function shorten ( $longUrl )
+  public function shorten ( $longUrl )
   {
     $result = array();
     $url = "https://api-ssl.bit.ly/v3/shorten?access_token=" . $this->_bitly_key . "&longUrl=" . urlencode($longUrl);
@@ -32,6 +32,15 @@ class Bitly
     $this->_result = $result;
 
     return $result;
+  }
+
+  public function check ()
+  {
+    $r = false;
+    if ( is_array($this->_result) && $this->_result['status_code'] == 200 ) {
+      $r = true;
+    }
+    return $r;
   }
 
   private function bitly_get_curl ( $uri )
