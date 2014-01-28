@@ -14,7 +14,7 @@ class Paginator
   protected $_itens_por_pag;
   protected $_qtd_numeros;
   protected $_atual_pag;
-  protected $_total;
+  protected $_total = 0;
   protected $_total_pags;
   protected $_active_class = 'active';
   protected $_disabled_class = 'disabled';
@@ -40,9 +40,11 @@ class Paginator
     $this->_atual_pag = intval($_atual_pag) == 0 ? 1 : intval($_atual_pag);
   }
 
-  public function getOffset ( $total )
+  public function getOffset ( $total = null )
   {
-    $this->_total = $total;
+    if ( $total ) {
+      $this->_total = $total;
+    }
 
     $this->_total_pags = intval(ceil($this->_total / $this->_itens_por_pag));
     $offset = $this->_atual_pag * $this->_itens_por_pag - $this->_itens_por_pag;
@@ -199,6 +201,11 @@ class Paginator
   public function getTotal ()
   {
     return $this->_total;
+  }
+
+  public function getItensPerPage ()
+  {
+    return $this->_itens_por_pag;
   }
 
   /**
