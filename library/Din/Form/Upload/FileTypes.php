@@ -10,7 +10,7 @@ class FileTypes
    * @var array
    */
   private static $_types = array(
-      'imagem' => array(
+      'image' => array(
           'ext' => array(
               'jpg',
               'jpeg',
@@ -42,7 +42,7 @@ class FileTypes
           ),
           'desc' => 'Arquivos PDF'
       ),
-      'documentos' => array(
+      'document' => array(
           'ext' => array(
               'pdf',
               'doc',
