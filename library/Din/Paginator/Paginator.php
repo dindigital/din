@@ -40,15 +40,14 @@ class Paginator
     $this->_atual_pag = intval($_atual_pag) == 0 ? 1 : intval($_atual_pag);
   }
 
-  public function getLimitOffset ( $total )
+  public function getOffset ( $total )
   {
     $this->_total = $total;
 
     $this->_total_pags = intval(ceil($this->_total / $this->_itens_por_pag));
     $offset = $this->_atual_pag * $this->_itens_por_pag - $this->_itens_por_pag;
-    $limit = $this->_itens_por_pag;
 
-    return array($limit, $offset);
+    return $offset;
   }
 
   /**
