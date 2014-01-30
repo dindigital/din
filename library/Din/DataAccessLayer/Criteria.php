@@ -111,7 +111,7 @@ class Criteria
    */
   private function getSeparator ( $expression, $value )
   {
-    if ( (string) $expression == 'OR' || $value == 'OR' ) {
+    if ( $expression === 'OR' || $value === 'OR' ) {
       $r = ' OR ';
     } else {
       $r = ' AND ';
@@ -193,6 +193,7 @@ class Criteria
     $SQL = substr($SQL, 4);
     $SQL = str_replace('OR  AND', 'OR', $SQL);
     $SQL = str_replace('AND  AND', 'AND', $SQL);
+    $SQL = str_replace('AND ( AND', 'AND (', $SQL);
     $SQL = str_replace('  ', ' ', $SQL);
 
     return $SQL;
