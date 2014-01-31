@@ -2,7 +2,7 @@
 
 namespace Din\DataAccessLayer;
 
-use Din\DataAccessLayer\Criteria;
+use Din\DataAccessLayer\Criteria\Criteria;
 
 class Select
 {
@@ -215,8 +215,9 @@ class Select
   public function setWhere ( $arrCriteria )
   {
     $criteria = new Criteria($arrCriteria);
+    $criteria->buildSQL();
     $this->_where_fields = '  ' . $criteria->getSQL();
-    $this->_where_values = $criteria->getArrIn();
+    $this->_where_values = $criteria->getParams();
 
     return $this;
   }

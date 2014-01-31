@@ -5,8 +5,8 @@ namespace Din\DataAccessLayer\Criteria;
 class Looper
 {
 
-  private $_fields;
-  private $_params;
+  private $_fields = array();
+  private $_params = array();
 
   public function persistCriteria ( $arrCriteria, $separator = null )
   {
@@ -23,8 +23,8 @@ class Looper
         if ( is_array($value) ) {
           $interr = implode(',', array_fill(0, count($value), '?'));
           $expression = str_replace('?', $interr, $expression);
-          $this->_params[] = array_merge($this->_params, $value);
-        } else {
+          $this->_params = array_merge($this->_params, $value);
+        } else if ( strpos($expression, '?') !== false ) {
           $this->_params[] = $value;
         }
 

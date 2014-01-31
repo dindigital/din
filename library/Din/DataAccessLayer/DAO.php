@@ -4,7 +4,7 @@ namespace Din\DataAccessLayer;
 
 use Din\DataAccessLayer\PDO\PDODriver;
 use Din\DataAccessLayer\Table\iTable;
-use Din\DataAccessLayer\Criteria;
+use Din\DataAccessLayer\Criteria\Criteria;
 use Din\DataAccessLayer\Select;
 use \Exception;
 
@@ -73,10 +73,11 @@ class DAO
     $stmt = implode(', ', $arr_stmt);
 
     $criteria = new Criteria($arrCriteria);
+    $criteria->buildSQL();
 
     $SQL = "UPDATE {$tbl} SET {$stmt} " . $criteria->getSQL();
 
-    $arrParams = array_merge(array_values($row), $criteria->getArrIn());
+    $arrParams = array_merge(array_values($row), $criteria->getParams());
 
     $this->safe_operation($criteria->getSQL());
 
@@ -96,11 +97,12 @@ class DAO
   public function delete ( $tablename, array $arrCriteria )
   {
     $criteria = new Criteria($arrCriteria);
+    $criteria->buildSQL();
 
     $SQL = "DELETE FROM {$tablename} " . $criteria->getSQL();
 
     $this->safe_operation($SQL);
-    $PDOStatement = $this->_driver->execute($SQL, $criteria->getArrIn());
+    $PDOStatement = $this->_driver->execute($SQL, $criteria->getParams());
 
     return $PDOStatement->rowCount();
   }
@@ -156,9 +158,10 @@ class DAO
   public function execute ( $SQL, array $arrCriteria = array() )
   {
     $criteria = new Criteria($arrCriteria);
+    $criteria->buildSQL();
     $SQL .= ' ' . $criteria->getSQL();
 
-    $PDOStatement = $this->_driver->execute($SQL, $criteria->getArrIn());
+    $PDOStatement = $this->_driver->execute($SQL, $criteria->getParams());
 
     return $PDOStatement->rowCount();
   }
