@@ -23,8 +23,8 @@ use Din\File\Folder;
   );
   $excel = new \Din\Report\Excel\ExportExcel();
   $excel->setRow($row);
-  $excel->exportFile(); // exportar o arquivo na tela
-  $file = $excel->saveFile('/public/system/'); // salvar o arquivo em um diretorio;
+  $excel->export(); // exportar o arquivo na tela
+  $file = $excel->save('/public/system/'); // salvar o arquivo em um diretorio;
   echo $file; // nome do arquivo salvo
  *
  *
@@ -48,7 +48,7 @@ class ExportExcel
     $this->row = $row;
   }
 
-  public function exportFile ()
+  public function export ()
   {
 
     $this->export();
@@ -61,7 +61,7 @@ class ExportExcel
     $objWriter->save('php://output');
   }
 
-  public function saveFile ( $path )
+  public function save ( $path )
   {
     $this->export();
 
