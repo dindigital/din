@@ -155,7 +155,7 @@ class DAO
    * @param array $arrCriteria criterio no formato da class Criteria
    * @return int
    */
-  public function execute ( $SQL, array $arrCriteria = array() )
+  public function execute ( $SQL, array $arrCriteria = array(), $fetch = false )
   {
     $criteria = new Criteria($arrCriteria);
     $criteria->buildSQL();
@@ -163,7 +163,9 @@ class DAO
 
     $PDOStatement = $this->_driver->execute($SQL, $criteria->getParams());
 
-    return $PDOStatement->rowCount();
+    $r = $fetch ? $PDOStatement->fetchAll(PDODriver::FETCH_ASSOC) : $PDOStatement->rowCount();
+
+    return $r;
   }
 
   /**
