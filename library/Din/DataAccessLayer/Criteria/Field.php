@@ -10,6 +10,8 @@ class Field
 
   public function setExpression ( $expression )
   {
+    $field = substr($expression, 0, strpos($expression, ' '));
+    $expression = str_replace($field, "`{$field}`", $expression);
     $this->_expression = $expression;
   }
 
