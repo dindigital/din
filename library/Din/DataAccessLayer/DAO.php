@@ -6,7 +6,7 @@ use Din\DataAccessLayer\PDO\PDODriver;
 use Din\DataAccessLayer\Table\iTable;
 use Din\DataAccessLayer\Criteria\Criteria;
 use Din\DataAccessLayer\Select;
-use \Exception;
+use Exception;
 
 class DAO
 {
@@ -38,19 +38,17 @@ class DAO
     $tbl = $table->getName();
     $row = $table->getArray();
 
-    $stmt = implode(', ', array_fill(0, count($row), '?'));
-    $fields = implode(', ', array_keys($row));
-    $arrParams = array_values($row);
+    $insert = new Insert;
+    $insert->setTbl($tbl);
+    $insert->setRow($row);
+    $insert->setIgnore($ignore);
+    $insert->build();
+    $SQL = $insert->getSQL();
+    $arr_params = $insert->getParams();
 
-    $ignore = $ignore ? ' IGNORE ' : '';
+    $this->_driver->execute($SQL, $arr_params);
 
-    $SQL = "INSERT {$ignore}INTO {$tbl} ({$fields}) VALUES ({$stmt}) ";
-
-    $this->_driver->execute($SQL, $arrParams);
-
-    $last_insert_id = $this->_driver->lastInsertId();
-
-    return $last_insert_id;
+    return $this->_driver->lastInsertId();
   }
 
   /**
@@ -65,23 +63,15 @@ class DAO
     $tbl = $table->getName();
     $row = $table->getArray();
 
-    $arr_stmt = array();
-    foreach ( array_keys($row) as $k ) {
-      $arr_stmt[] = "{$k} = ?";
-    }
+    $update = new Update;
+    $update->setTbl($tbl);
+    $update->setRow($row);
+    $update->setCriteria($arrCriteria);
+    $update->build();
+    $SQL = $update->getSQL();
+    $arr_params = $update->getParams();
 
-    $stmt = implode(', ', $arr_stmt);
-
-    $criteria = new Criteria($arrCriteria);
-    $criteria->buildSQL();
-
-    $SQL = "UPDATE {$tbl} SET {$stmt} " . $criteria->getSQL();
-
-    $arrParams = array_merge(array_values($row), $criteria->getParams());
-
-    $this->safe_operation($criteria->getSQL());
-
-    $PDOStatement = $this->_driver->execute($SQL, $arrParams);
+    $PDOStatement = $this->_driver->execute($SQL, $arr_params);
 
     return $PDOStatement->rowCount();
   }
@@ -96,13 +86,14 @@ class DAO
    */
   public function delete ( $tablename, array $arrCriteria )
   {
-    $criteria = new Criteria($arrCriteria);
-    $criteria->buildSQL();
+    $delete = new Delete;
+    $delete->setTbl($tablename);
+    $delete->setCriteria($arrCriteria);
+    $delete->build();
+    $SQL = $delete->getSQL();
+    $arr_params = $delete->getParams();
 
-    $SQL = "DELETE FROM {$tablename} " . $criteria->getSQL();
-
-    $this->safe_operation($SQL);
-    $PDOStatement = $this->_driver->execute($SQL, $criteria->getParams());
+    $PDOStatement = $this->_driver->execute($SQL, $arr_params);
 
     return $PDOStatement->rowCount();
   }
@@ -128,9 +119,7 @@ class DAO
    */
   public function select ( Select $select )
   {
-    $arrIN = $select->getWhereValues();
-
-    return $this->_driver->select($select->getSQL(), $arrIN);
+    return $this->_driver->select($select->getSQL(), $select->getWhereValues());
   }
 
   /**
@@ -141,9 +130,7 @@ class DAO
    */
   public function select_count ( Select $select )
   {
-    $arrIN = $select->getWhereValues();
-
-    $result = $this->_driver->select($select->getSQLCount(), $arrIN);
+    $result = $this->_driver->select($select->getSQLCount(), $select->getWhereValues());
 
     return intval($result[0]['total']);
   }
@@ -157,26 +144,16 @@ class DAO
    */
   public function execute ( $SQL, array $arrCriteria = array(), $fetch = false )
   {
-    $criteria = new Criteria($arrCriteria);
-    $criteria->buildSQL();
-    $SQL .= ' ' . $criteria->getSQL();
+    $execute = new Execute;
+    $execute->setSQL($SQL);
+    $execute->setCriteria($arrCriteria);
+    $execute->build();
+    $SQL = $execute->getSQL();
+    $arr_params = $execute->getParams();
 
-    $PDOStatement = $this->_driver->execute($SQL, $criteria->getParams());
+    $PDOStatement = $this->_driver->execute($SQL, $arr_params);
 
-    $r = $fetch ? $PDOStatement->fetchAll(PDODriver::FETCH_ASSOC) : $PDOStatement->rowCount();
-
-    return $r;
-  }
-
-  /**
-   * Bloqueia execução em caso de execução de query com where nulo
-   * @param string $SQL
-   * @throws Exception
-   */
-  private function safe_operation ( $SQL )
-  {
-    if ( !strpos($SQL, '=') && !strpos($SQL, '<') && !strpos($SQL, '>') )
-      throw new Exception('Necessário operador de comparação na query: ' . $SQL);
+    return $fetch ? $PDOStatement->fetchAll(PDODriver::FETCH_ASSOC) : $PDOStatement->rowCount();
   }
 
 }
