@@ -47,4 +47,9 @@ class JsonViewHelper
     )));
   }
 
+  public static function display ( $mixed )
+  {
+    die(json_encode($mixed));
+  }
+
 }
