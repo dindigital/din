@@ -42,6 +42,13 @@ class FileTypes
           ),
           'desc' => 'Arquivos PDF'
       ),
+      'excel' => array(
+          'ext' => array(
+              'xls',
+              'xlsx',
+          ),
+          'desc' => 'Arquivos Excel'
+      ),
       'document' => array(
           'ext' => array(
               'pdf',
