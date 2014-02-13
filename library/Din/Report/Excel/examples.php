@@ -21,3 +21,23 @@ $xls->setTitles(array(
     'E-mail',
 ));
 $xls->export();
+
+/**
+ * IMPORTAÇÃO SIMPLES
+ */
+$i = new \Din\Report\Excel\ImportExcel;
+$i->setFile("path/to/my/excel/file.xlsx");
+$i->import();
+
+$contents = $i->getData();
+
+/**
+ * IMPORTAÇÃO PRECISA
+ */
+$i = new \Din\Report\Excel\ImportExcel;
+$i->setFile("path/to/my/excel/file.xlsx");
+$i->setCoordinateX(2, 3); //da coluna 3 à coluna 4 (C à D)
+$i->setCoordinateY(0, 15); //da linha 1 à linha 16
+$i->import();
+
+$contents = $i->getData();

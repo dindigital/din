@@ -7,84 +7,83 @@ use PHPExcel_IOFactory;
 use PHPExcel_Cell;
 use Exception;
 
-/**
- * EXEMPLO DE UTILIZAÇÂO
- *
-  $excel = new \Din\Report\Excel\ImportExcel();
-  $excel->setFile('/public/system/52f001d5de865.xlsx');
-  $excel->import();
-  $data = $excel->getData();
-  var_dump($data);
- *
- */
 class ImportExcel
 {
 
-  private $phpExcel;
-  private $data = array();
-  private $position;
-  private $file;
+  protected $_phpexcel;
+  protected $_data = array();
+  protected $_coordinates = array();
+  protected $_file;
 
   function __construct ()
   {
-    $this->phpExcel = new PHPExcel;
-    $this->position = array(
-        'x0' => 0,
-        'x1' => -1,
-        'y0' => 0,
-        'y1' => -1
-    );
+    $this->_phpexcel = new PHPExcel;
+    $this->setCoordinateX();
+    $this->setCoordinateY();
+  }
+
+  public function setCoordinateX ( $start = 0, $end = -1 )
+  {
+    $this->_coordinates['x0'] = intval($start);
+    $this->_coordinates['x1'] = intval($end);
+  }
+
+  public function setCoordinateY ( $start = 0, $end = -1 )
+  {
+    $this->_coordinates['y0'] = intval($start);
+    $this->_coordinates['y1'] = intval($end);
   }
 
   public function setFile ( $file )
   {
-    $file = $_SERVER['DOCUMENT_ROOT'] . $file;
     if ( !is_file($file) )
-      throw new Exception("Arquivo inválido");
+      throw new Exception("Arquivo não encontrado: " . $file);
 
-    $this->file = $file;
+    $this->_file = $file;
   }
 
-  public function getData ()
+  protected function validate ()
   {
-    return $this->data;
+    if ( is_null($this->_file) )
+      throw new Exception("O arquivo não foi declarado, utilize o método setFile");
   }
 
   public function import ()
   {
+    $this->validate();
 
-    if ( is_null($this->file) )
-      throw new Exception("O arquivo não foi declarado");
-
-
-    $inputFileType = PHPExcel_IOFactory::identify($this->file);
+    $inputFileType = PHPExcel_IOFactory::identify($this->_file);
     $objReader = PHPExcel_IOFactory::createReader($inputFileType);
     $objReader->setReadDataOnly(false);
 
-    $objPHPExcel = $objReader->load($this->file);
+    $objPHPExcel = $objReader->load($this->_file);
     $objWorksheet = $objPHPExcel->setActiveSheetIndex(0);
     $highestRow = $objWorksheet->getHighestRow();
     $highestColumn = $objWorksheet->getHighestColumn();
     $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
 
-    if ( $this->position['y1'] == -1 ) {
-      $this->position['y1'] = $highestRow;
+    if ( $this->_coordinates['y1'] == -1 ) {
+      $this->_coordinates['y1'] = $highestRow;
     }
 
-    if ( $this->position['x1'] == -1 ) {
-      $this->position['x1'] = $highestColumnIndex;
+    if ( $this->_coordinates['x1'] == -1 ) {
+      $this->_coordinates['x1'] = $highestColumnIndex;
     }
 
-    $this->position['y0']++;
+    $this->_coordinates['y0'] ++;
 
-    for ( $row = $this->position['y0']; $row <= $this->position['y1']; ++$row ) {
-      for ( $col = $this->position['x0']; $col <= $this->position['x1']; ++$col ) {
+    for ( $row = $this->_coordinates['y0']; $row <= $this->_coordinates['y1']; ++$row ) {
+      for ( $col = $this->_coordinates['x0']; $col <= $this->_coordinates['x1']; ++$col ) {
         $value = $objWorksheet->getCellByColumnAndRow($col, $row)->getValue();
 
-        $this->data[$row - 1][$col] = $value;
+        $this->_data[$row - 1][$col] = $value;
       }
     }
   }
 
-}
+  public function getData ()
+  {
+    return $this->_data;
+  }
 
+}
