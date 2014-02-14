@@ -114,10 +114,10 @@ class Select
 
   public function addField ( $field, $alias = null )
   {
-    $str_field = "{{$this->getTable()}}.{$field}";
+    $str_field = "{{$this->getTable()}}.`{$field}`";
 
     if ( $alias ) {
-      $str_field .= ' as ' . $alias;
+      $str_field .= " as '{$alias}'";
     }
     $this->_fields[$field] = $str_field;
 
@@ -154,10 +154,10 @@ class Select
       $field2 = $field;
     }
 
-    $on = "{{$joined_table}}.{$field} = {{$master_table}}.{$field2}";
+    $on = "{{$joined_table}}.`{$field}` = {{$master_table}}.`{$field2}`";
 
     $str_join = "{$type} JOIN
-        {$joined_table} {{$joined_table}}
+        `{$joined_table}` {{$joined_table}}
       ON
         {$on}
     ";
@@ -358,7 +358,7 @@ class Select
       SELECT
         {$str_fields}
       FROM
-        {$obj->_table} {$obj->_table_alias}
+        `{$obj->_table}` {$obj->_table_alias}
       {$str_joins}{$str_where}{$str_union}{$obj->_group_by}{$obj->_order_by}{$obj->_limit}
     ";
 
@@ -384,7 +384,7 @@ class Select
       SELECT
         {$count_expr} conta
       FROM
-        {$obj->_table} {$obj->_table_alias}
+        `{$obj->_table}` {$obj->_table_alias}
       {$str_joins}{$str_where}{$str_union}{$obj->_group_by}
      ";
 
@@ -395,7 +395,7 @@ class Select
         SELECT
           {$count_expr} conta
         FROM
-          {$obj->_table} {$obj->_table_alias}
+          `{$obj->_table}` {$obj->_table_alias}
         {$str_joins}{$str_where}{$str_union}{$obj->_group_by}
       ) tabela
       ";
