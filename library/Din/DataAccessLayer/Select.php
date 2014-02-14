@@ -112,6 +112,14 @@ class Select
     return $str_fields;
   }
 
+  public function addAllFields ()
+  {
+    $str_field = "{{$this->getTable()}}.*";
+    $this->_fields['*'] = $str_field;
+
+    return $this;
+  }
+
   public function addField ( $field, $alias = null )
   {
     $str_field = "{{$this->getTable()}}.`{$field}`";
