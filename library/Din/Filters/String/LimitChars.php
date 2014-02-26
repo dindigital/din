@@ -27,7 +27,12 @@ class LimitChars
     if ( strlen($str) > $max ) {
       $max = $max - strlen($delimiter);
       $r = substr($str, 0, $max);
-      $r = substr($r, 0, strrpos($r, " "));
+
+      $pos_space = strrpos($r, " ");
+      if ( $pos_space !== false ) {
+        $r = substr($r, 0, $pos_space);
+      }
+
       if ( substr($r, -1) == '-' ) {
         $r = substr($r, 0, strrpos($r, "-"));
       }
@@ -44,4 +49,3 @@ class LimitChars
   }
 
 }
-
