@@ -34,12 +34,17 @@ class SaveAssets
     $this->_type = $type;
   }
 
-  public function save ()
+  public function save ( $compress )
   {
     if ( !Files::exists($this->_file_path) ) {
-      $compress_assets = new CompressAssets($this->_type, $this->_file_contents);
+      $contents = $this->_file_contents;
 
-      file_put_contents($this->_file_path, $compress_assets->getResult());
+      if ( $compress ) {
+        $compress_assets = new CompressAssets($this->_type, $contents);
+        $contents = $compress_assets->getResult();
+      }
+
+      file_put_contents($this->_file_path, $contents);
     }
   }
 

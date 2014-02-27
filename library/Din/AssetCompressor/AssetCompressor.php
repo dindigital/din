@@ -43,7 +43,7 @@ class AssetCompressor
     }
   }
 
-  public function compress ( $type )
+  public function compress ( $type, $compress = true )
   {
     if ( !isset($this->_assets[$type]) )
       return;
@@ -59,7 +59,7 @@ class AssetCompressor
       $file_path = $this->_destiny_path . $file_name . '.' . $type;
 
       $save_assets = new SaveAssets($type, $file_path, $file_contents);
-      $save_assets->save();
+      $save_assets->save($compress);
 
       $html_path = str_replace($this->_html_replace_path, '', $file_path);
 

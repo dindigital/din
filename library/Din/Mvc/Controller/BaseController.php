@@ -20,15 +20,6 @@ abstract class BaseController
     $this->_view = new View();
   }
 
-  protected function getAssets ()
-  {
-    $assets = new AssetCompressor('config/assets.php', PATH_ASSETS, PATH_REPLACE);
-    $assets->compress('js');
-    $assets->compress('css');
-
-    return $assets->getAllArray();
-  }
-
   protected function display_html ()
   {
     $this->_view->setData($this->_data);
