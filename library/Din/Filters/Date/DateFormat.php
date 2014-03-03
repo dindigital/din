@@ -75,10 +75,10 @@ class DateFormat
     return "{$day} de {$month} de {$year}";
   }
 
-  public static function filter_dateTimeExtensive ( $date )
+  public static function filter_dateTimeExtensive ( $datetime )
   {
-    $date = self::filter_dateExtensive($date);
-    $time = date('H:i', strtotime($date));
+    $date = self::filter_dateExtensive($datetime);
+    $time = date('H:i', strtotime($datetime));
 
     return "{$date} às {$time}";
   }
