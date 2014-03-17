@@ -2,7 +2,7 @@
 
 namespace Din\Image;
 
-use Imagine\Gd\Image;
+use Imagine\Gd\Image as GdImage;
 use Imagine\Image\BoxInterface;
 use Imagine\Image\Box;
 
@@ -12,7 +12,7 @@ class ImageCrop
   protected $imagine;
   protected $box;
 
-  public function __construct ( Image $imagine, BoxInterface $box )
+  public function __construct ( GdImage $imagine, BoxInterface $box )
   {
     $this->imagine = $imagine;
     $this->box = $box;
@@ -30,15 +30,15 @@ class ImageCrop
     $resize_w = $desejado_w;
     $resize_h = $desejado_h;
 
-    if ( $atual_w < $atual_h ) {
+    if ($atual_w < $atual_h) {
       $resize_h = ($atual_h / $atual_w) * $desejado_w;
-      if ( $resize_h < $desejado_h ) {
+      if ($resize_h < $desejado_h) {
         $resize_h = $desejado_h;
         $resize_w = ($atual_w / $atual_h) * $desejado_h;
       }
     } else {
       $resize_w = ($atual_w / $atual_h) * $desejado_h;
-      if ( $resize_w < $desejado_w ) {
+      if ($resize_w < $desejado_w) {
         $resize_w = $desejado_w;
         $resize_h = ($atual_h / $atual_w) * $desejado_w;
       }
@@ -46,7 +46,7 @@ class ImageCrop
 
     $image = $this->imagine->resize(new Box($resize_w, $resize_h));
 
-    if ( $type == 'center' ) {
+    if ($type == 'center') {
       $image = $image->thumbnail($this->box, \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND);
     } else {
       $x = $resize_w / 2 - $desejado_w / 2;
