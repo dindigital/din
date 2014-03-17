@@ -46,6 +46,35 @@ class Issuu
     return $return;
   }
 
+  public function document_embed_add ( $document_id, $width, $height )
+  {
+    $this->_action = 'issuu.document_embed.add';
+    $this->_fields['documentId'] = $document_id;
+    $this->_fields['width'] = $width;
+    $this->_fields['height'] = $height;
+    $this->_fields['readerStartPage'] = '1';
+
+    $response_json = $this->call();
+
+    $document_embed = $response_json->rsp->_content->documentEmbed;
+
+    $return = array();
+    $return['id'] = $document_embed->id;
+    $return['dataConfigId'] = $document_embed->dataConfigId;
+
+    return $return;
+  }
+
+  public function document_embed_get_html_code ( $embed_id )
+  {
+    $this->_action = 'issuu.document_embed.get_html_code';
+    $this->_fields['embedId'] = $embed_id;
+
+    $response_html = $this->call(false);
+
+    return $response_html;
+  }
+
   public function document_delete ( $name )
   {
     $this->_action = 'issuu.document.delete';
@@ -68,7 +97,7 @@ class Issuu
     $this->_fields['signature'] = md5($this->_api_secret . $serialized);
   }
 
-  protected function call ()
+  protected function call ( $return_json = true )
   {
     $this->_fields['action'] = $this->_action;
     $this->_fields['format'] = 'json';
@@ -90,14 +119,18 @@ class Issuu
 
     curl_close($ch);
 
-    $response_json = json_decode($response_text);
-    if ( json_last_error() )
-      throw new Exception('Invalid JSON: ' . print_r($response_text), 1);
+    if ( $return_json ) {
+      $response_json = json_decode($response_text);
+      if ( json_last_error() )
+        throw new Exception('Invalid JSON: ' . print_r($response_text), 1);
 
-    if ( $error = @$response_json->rsp->_content->error )
-      throw new Exception($error->message);
+      if ( $error = @$response_json->rsp->_content->error )
+        throw new Exception($error->message);
 
-    return $response_json;
+      return $response_json;
+    }
+
+    return $response_text;
   }
 
 }
