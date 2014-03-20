@@ -4,9 +4,7 @@ namespace Din\AssetMin;
 
 use Assetic\Asset\AssetCollection;
 use Assetic\Asset\FileAsset;
-use Assetic\Filter\CssMinFilter;
 use Assetic\Filter\Yui;
-use Assetic\Filter\JSMinPlusFilter;
 use Assetic\AssetWriter;
 use Assetic\AssetManager;
 use Din\File\Files;
@@ -35,6 +33,8 @@ class AssetMin
 
     $this->_assetsFile = $assets_file;
     $this->_assets = $vars;
+    
+    // Para usar o yui compressor, instalar no servidor: $ sudo apt-get install default-jdk
     $this->_yuicompressor = __DIR__ . '/yuicompressor-2.4.7.jar';
   }
 
