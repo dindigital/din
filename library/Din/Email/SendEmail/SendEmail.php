@@ -81,8 +81,9 @@ class SendEmail
 
   private function setFrom ()
   {
-    $this->_sender->From = $this->_email->getFrom()['email'];
-    $this->_sender->FromName = $this->_email->getFrom()['name'];
+    $from = $this->_email->getFrom();
+    $this->_sender->From = $from['email'];
+    $this->_sender->FromName = $from['name'];
   }
 
   private function setTo ()
