@@ -27,7 +27,7 @@ class Issuu
 
   public function document_url_upload ( $url, $name, $title )
   {
-    if ( 'pdf' != strtolower(pathinfo($url, PATHINFO_EXTENSION)) )
+    if ( !in_array(strtolower(pathinfo($url, PATHINFO_EXTENSION)), array('pdf', 'doc', 'docx')) )
       throw new Exception('Upload no Issuu é restringido a arquivos PDF');
 
     $this->_action = 'issuu.document.url_upload';
