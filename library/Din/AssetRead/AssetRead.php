@@ -12,6 +12,7 @@ class AssetRead
   protected $_js = array();
   protected $_css = array();
   protected $_mode = 'production';
+  protected $_replace = 'public';
   protected $_group;
   protected $_type;
 
@@ -31,6 +32,10 @@ class AssetRead
   
   public function setMode($mode) {
       $this->_mode = $mode;
+  }
+  
+  public function setReplace($replace) {
+      $this->_replace = $replace;
   }
 
   public function setGroup ( $type, Array $group )
@@ -75,14 +80,14 @@ class AssetRead
       if ( $this->_type == 'js' ) {
         $files = '';
         foreach ($this->_assets['js'][$gp]['src'] as $src) {
-            $file = str_replace('public', '', $src);
+            $file = str_replace($this->_replace, '', $src);
             $files .= '<script src="' . $file . '"></script>' . "\n";
         }
         $this->_js[$gp] = $files;
       } else {
         $files = '';
         foreach ($this->_assets['css'][$gp]['src'] as $src) {
-          $file = str_replace('public', '', $src);
+          $file = str_replace($this->_replace, '', $src);
           $files .= '<link href="' . $file . '" rel="stylesheet"/>' . "\n";
         }
         $this->_css[$gp] = $files;
