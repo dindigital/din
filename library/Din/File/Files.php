@@ -26,4 +26,9 @@ class Files
     }
   }
 
+  public static function delete ( $path )
+  {
+    return @unlink($path);
+  }
+
 }
