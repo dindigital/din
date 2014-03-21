@@ -21,4 +21,9 @@ class JsonException
       throw new Exception(json_encode(self::$_exceptions));
   }
 
+  public static function clearExceptions ()
+  {
+    self::$_exceptions = array();
+  }
+
 }
