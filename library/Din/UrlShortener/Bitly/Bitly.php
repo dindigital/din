@@ -2,12 +2,14 @@
 
 namespace Din\UrlShortener\Bitly;
 
+use Exception;
+
 class Bitly
 {
 
   private $_bitly_key;
   private $_domain = 'din.la';
-  private $_result = null;
+  private $_short_url;
 
   public function __construct ( $key )
   {
@@ -20,53 +22,40 @@ class Bitly
     $url = "https://api-ssl.bit.ly/v3/shorten?access_token=" . $this->_bitly_key . "&longUrl=" . urlencode($longUrl);
     $url .= "&domain=" . $this->_domain;
 
-    $output = json_decode($this->bitly_get_curl($url));
-    if ( isset($output->{'data'}->{'hash'}) ) {
-      $result['url'] = $output->{'data'}->{'url'};
-      $result['hash'] = $output->{'data'}->{'hash'};
-      $result['global_hash'] = $output->{'data'}->{'global_hash'};
-      $result['long_url'] = $output->{'data'}->{'long_url'};
-      $result['new_hash'] = $output->{'data'}->{'new_hash'};
-    }
-    $result['status_code'] = $output->status_code;
-    $this->_result = $result;
+    $output_text = $this->bitly_get_curl($url);
 
-    return $result;
-  }
+    $output_json = json_decode($output_text);
+    if ( json_last_error() )
+      throw new Exception('Falha ao converter JSON: ' . $output_text);
 
-  public function check ()
-  {
-    $r = false;
-    if ( is_array($this->_result) && $this->_result['status_code'] == 200 ) {
-      $r = true;
-    }
-    return $r;
+    if ( $output_json->status_code != 200 )
+      throw new Exception('Erro ao criar link curto: ' . $output_json->status_txt);
+
+    $this->_short_url = $output_json->data->url;
   }
 
   private function bitly_get_curl ( $uri )
   {
-    $output = "";
-    try {
-      $ch = curl_init($uri);
-      curl_setopt($ch, CURLOPT_HEADER, 0);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 4);
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
-      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-      $output = curl_exec($ch);
-    } catch (Exception $e) {
+    $ch = curl_init($uri);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 4);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    $output = curl_exec($ch);
 
-    }
     return $output;
+  }
+
+  public function getShortUrl ()
+  {
+    return $this->_short_url;
   }
 
   public function __toString ()
   {
-    if ( is_array($this->_result) && $this->_result['url'] ) {
-      return $this->_result['url'];
-    }
+    return $this->getShortUrl();
   }
 
 }
-
