@@ -13,14 +13,13 @@ use Exception;
 class Router implements iRouter
 {
 
+  private $_arrRoutes = array();
   private $_routes;
   private $_final_route;
   private $_erro404;
 
-  public function __construct ( $routes_file )
+  public function __construct ()
   {
-    $this->setRoutesFile($routes_file);
-
     $this->_final_route = new FinalRoute;
   }
 
@@ -31,11 +30,25 @@ class Router implements iRouter
     if ( !is_array($vars) )
       throw new Exception('Arquivo de routes inválido');
 
-    $this->_routes = $vars;
+    $this->_arrRoutes[] = $vars;
+  }
+  
+  protected function groupRoute() {
+      $routers = array();
+      foreach ($this->_arrRoutes as $route) {
+          $routers = array_merge($routers, $route['']);
+      }
+      
+     $this->_routes = array(
+         '' => $routers
+     );
   }
 
   public function route ()
   {
+      
+    $this->groupRoute();
+      
     // _# Pega a uri limpa, livre de query string
     $uri = implode('', array_slice(array_values(parse_url($_SERVER['REQUEST_URI'])), 0, 1));
 
