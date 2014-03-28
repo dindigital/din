@@ -31,5 +31,10 @@ abstract class BaseController
     $this->_view->setData($this->_data);
     $this->_view->display_json();
   }
+  
+  protected function return_html() {
+    $this->_view->setData($this->_data);
+    return $this->_view->getResult();
+  }
 
 }

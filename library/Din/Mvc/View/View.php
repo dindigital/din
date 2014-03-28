@@ -88,5 +88,11 @@ class View
     header('Content-Type: application/json');
     die(json_encode($this->getResult()));
   }
+  
+  public function display_html_result ($html)
+  {
+    header("Content-Type: text/html");
+    echo $html;
+  }
 
 }

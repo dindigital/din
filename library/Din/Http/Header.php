@@ -19,6 +19,10 @@ class Header
   {
     return $_SERVER['HTTP_REFERER'];
   }
+  
+  public static function getUri() {
+      return $_SERVER ['REQUEST_URI'];
+  }
 
   public static function set404 ()
   {

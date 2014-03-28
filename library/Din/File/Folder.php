@@ -42,7 +42,7 @@ class Folder
   }
 
   public static function make_writable ( $diretorio )
-  {
+  {   
     if ( !is_dir($diretorio) ) {
       if ( !self::create($diretorio) ) {
         throw new Exception('Permissão negada ao criar pasta: ' . $diretorio);
