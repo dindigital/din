@@ -2,88 +2,57 @@
 
 namespace Din\TableFilter;
 
-use Exception;
 use Din\DataAccessLayer\Table\Table;
+use ReflectionClass;
+use Din\TableFilter\FilterInterface;
+use Imagine\Exception\InvalidArgumentException;
 
 /**
- * @method setCrypted($field)
- * @method setDate($field)
- * @method setIntval($field)
- * @method setJson($field)
- * @method setNewId($field)
- * @method setNull($field)
- * @method setString($field)
- * @method setTimestamp($field)
+ * @method \Din\TableFilter\FilterInterface crypted()
+ * @method \Din\TableFilter\FilterInterface date()
+ * @method \Din\TableFilter\FilterInterface intval()
+ * @method \Din\TableFilter\FilterInterface json()
+ * @method \Din\TableFilter\FilterInterface newId()
+ * @method \Din\TableFilter\FilterInterface null()
+ * @method \Din\TableFilter\FilterInterface string()
+ * @method \Din\TableFilter\FilterInterface timestamp()
  */
 class TableFilter
 {
 
-  protected $_required;
-  protected $_fqn;
+  protected $_filter;
 
   public function __construct ( Table $table, array $input )
   {
-    $this->setTable($table);
-    $this->setInput($input);
+    $this->_table = $table;
+    $this->_input = $input;
   }
 
-  protected function setTable ( Table $table )
+  protected function instanciateFilter ( $namespace, $classname, $arguments )
   {
-    $this->_required['table'] = $table;
-  }
-
-  protected function setInput ( array $input )
-  {
-    $this->_required['input'] = $input;
-  }
-
-  public function classExists ()
-  {
-    try {
-
-      if ( !class_exists($this->_fqn) ) {
-        return false;
-      }
-    } catch (Exception $ex) {
-      return false;
-    }
-
-    return true;
+    $ref = new ReflectionClass($namespace . $classname);
+    $this->_filter = $ref->newInstanceArgs($arguments);
   }
 
   public function __call ( $name, $arguments )
   {
-    $classname = str_replace('set', '', $name);
-    $this->_fqn = __NAMESPACE__ . '\Filters\\' . $classname;
+    $classname = ucfirst($name);
+    $namespace = __NAMESPACE__ . '\Filters\\';
 
-    if ( !$this->classExists() ) {
-      if ( !$this->getCustomFilter($classname) ) {
-        throw new Exception('Filter não encontrado: ' . $this->_fqn);
-      } else if ( !$this->classExists() ) {
-        throw new Exception('Filter não encontrado: ' . $this->_fqn);
-      }
-    }
+    $this->instanciateFilter($namespace, $classname, $arguments);
 
-    $fqn = $this->_fqn;
-    $obj = new $fqn($this->_required);
+    if ( !$this->_filter instanceof FilterInterface )
+      throw new InvalidArgumentException("Filter {$classname} should implement FilterInterface");
 
-    if ( !$obj instanceof FilterInterface )
-      throw new Exception('Filter deve implementar a interface FilterInterface: ' . $FQN);
+    $this->_filter->setTable($this->_table);
+    $this->_filter->setInput($this->_input);
 
-    if ( count($arguments) > 1 ) {
-      $options = array_slice($arguments, 1);
-
-      call_user_func_array(array($obj, 'setOptions'), $options);
-
-      $arguments = array_slice($arguments, 0, 1);
-    }
-
-    call_user_func_array(array($obj, 'filter'), $arguments);
+    return $this;
   }
 
-  protected function getCustomFilter ( $classname )
+  public function filter ( $input )
   {
-    return false;
+    return $this->_filter->filter($input);
   }
 
 }

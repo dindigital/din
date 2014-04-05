@@ -2,8 +2,9 @@
 
 namespace Din\TableFilter;
 
-use Din\Exception\JsonException;
 use Din\TableFilter\FilterInterface;
+use Din\DataAccessLayer\Table\Table;
+use InvalidArgumentException;
 
 abstract class AbstractFilter implements FilterInterface
 {
@@ -11,24 +12,29 @@ abstract class AbstractFilter implements FilterInterface
   protected $_table;
   protected $_input;
 
-  public function __construct ( $required )
+  public function __construct ()
   {
-    $this->_table = $required['table'];
-    $this->_input = $required['input'];
+    ; // needed to isntanciate through ReflectionClass
+    // possibility to add params for the filters
+  }
+
+  public function setTable ( Table $table )
+  {
+    $this->_table = $table;
+  }
+
+  public function setInput ( array $input )
+  {
+    $this->_input = $input;
   }
 
   protected function getValue ( $field )
   {
     if ( !array_key_exists($field, $this->_input) )
-      return JsonException::addException("Índice {$field} não existe no array de input do filter");
+      throw new InvalidArgumentException("Índice {$field} não existe no array de input do filter");
 
     return $this->_input[$field];
   }
 
-//  protected function setOptions ()
-//  {
-//    //
-//  }
-
-  abstract public function filter ( $input );
+  abstract public function filter ( $field );
 }
