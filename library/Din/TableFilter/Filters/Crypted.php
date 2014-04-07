@@ -3,6 +3,7 @@
 namespace Din\TableFilter\Filters;
 
 use Din\TableFilter\AbstractFilter;
+use Din\Crypt\Crypt;
 
 class Crypted extends AbstractFilter
 {
