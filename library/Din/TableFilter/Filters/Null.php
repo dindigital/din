@@ -4,7 +4,7 @@ namespace Din\TableFilter\Filters;
 
 use Din\TableFilter\AbstractFilter;
 
-class Crypted extends AbstractFilter
+class Null extends AbstractFilter
 {
 
   public function filter ( $field )
