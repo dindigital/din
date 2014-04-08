@@ -9,7 +9,7 @@ use Din\Mvc\View\View;
  *
  * @package MVC.Controller
  */
-abstract class BaseController
+abstract class BaseController implements \Respect\Rest\Routable
 {
 
   protected $_view;
@@ -31,8 +31,9 @@ abstract class BaseController
     $this->_view->setData($this->_data);
     $this->_view->display_json();
   }
-  
-  protected function return_html() {
+
+  protected function return_html ()
+  {
     $this->_view->setData($this->_data);
     return $this->_view->getResult();
   }
