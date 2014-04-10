@@ -5,7 +5,7 @@ namespace Din\InputValidator\Validators;
 use Din\InputValidator\AbstractValidator;
 use Respect\Validation\Validator as v;
 
-class DateRequired extends AbstractValidator
+class Date extends AbstractValidator
 {
     
   protected $_format;

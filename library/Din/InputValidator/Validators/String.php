@@ -5,7 +5,7 @@ namespace Din\InputValidator\Validators;
 use Din\InputValidator\AbstractValidator;
 use Respect\Validation\Validator as v;
 
-class StringRequired extends AbstractValidator
+class String extends AbstractValidator
 {
 
   public function validate ( $prop, $label )

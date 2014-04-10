@@ -6,19 +6,15 @@ use Din\InputValidator\AbstractValidator;
 use Din\DataAccessLayer\DAO;
 use Din\DataAccessLayer\Select;
 
-class DbUniqueValue extends AbstractValidator
+class DbRecord extends AbstractValidator
 {
     
   protected $_dao;
   protected $_tablename;
-  protected $_id_field;
-  protected $_id;
     
-  public function __construct ( DAO $dao, $tablename, $id_field = null, $id = null ) {
+  public function __construct ( DAO $dao, $tablename ) {
     $this->_dao = $dao;
     $this->_tablename = $tablename;
-    $this->_id_field = $id_field;
-    $this->_id = $id;
   }
 
   public function validate ( $prop, $label )
@@ -29,16 +25,12 @@ class DbUniqueValue extends AbstractValidator
         "{$prop} = ?" => $value
     );
 
-    if ( $this->_id_field ) {
-      $arrCriteria["{$this->_id_field} <> ?"] = $this->_id;
-    }
-
     $select = new Select($this->_tablename);
     $select->where($arrCriteria);
     $count = $this->_dao->select_count($select);
 
-    if ( $count )
-      $this->addException("Já existe um registro com este {$label}: {$value}");
+    if ( !$count )
+      $this->addException("{$label} não encontrado");
   }
 
 }

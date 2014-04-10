@@ -6,7 +6,7 @@ use Din\InputValidator\AbstractValidator;
 use finfo;
 use Exception;
 
-class UploadRequired extends AbstractValidator
+class Upload extends AbstractValidator
 {
     
   protected $_extensions;
