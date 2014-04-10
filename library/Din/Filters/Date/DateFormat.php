@@ -39,7 +39,7 @@ class DateFormat
         '09' => 'Setembro',
         '10' => 'Outubro',
         '11' => 'Novembro',
-        '12' => 'Deze,brp',
+        '12' => 'Dezembro',
     );
 
     return $arryMonth[$month];
