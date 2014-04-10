@@ -10,7 +10,7 @@ abstract class AbstractValidator implements ValidatorInterface
 {
 
   protected $_input = array();
-  public $jsonException;
+  public $exception;
 
   public function __construct ()
   {
@@ -23,8 +23,8 @@ abstract class AbstractValidator implements ValidatorInterface
     $this->_input = $input;
   }
   
-  public function setJsonException() {
-      $this->jsonException = JsonExceptionContainer::getInstance();
+  public function setException( $exception ) {
+      $this->exception = $exception;
   }
 
   protected function getValue ( $field )
@@ -36,7 +36,7 @@ abstract class AbstractValidator implements ValidatorInterface
   }
   
   public function addException($msg) {
-    $this->jsonException->addException($msg);
+    $this->exception->addException($msg);
   }
 
   abstract public function validate ( $prop, $label );

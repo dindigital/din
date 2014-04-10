@@ -24,10 +24,13 @@ class InputValidator
 {
 
   protected $_validator;
+  protected $_input;
+  protected $_exception;
 
   public function __construct ( array $input )
   {
     $this->_input = $input;
+    $this->_exception = new \Din\Exception\JsonExceptionContainer();
   }
 
   protected function instanciateFilter ( $namespace, $classname, $arguments )
@@ -47,7 +50,7 @@ class InputValidator
       throw new InvalidArgumentException("Validator {$classname} should implement ValidatorInterface");
 
     $this->_validator->setInput($this->_input);
-    $this->_validator->setJsonException();
+    $this->_validator->setException($this->_exception);
     
     return $this;
   }
@@ -59,7 +62,7 @@ class InputValidator
   
   public function throwException ()
   {
-    $this->_validator->jsonException->throwException();
+    $this->_exception->throwException();
   }
 
 }
