@@ -3,14 +3,13 @@
 namespace Din\InputValidator;
 
 use Din\InputValidator\ValidatorInterface;
-use Din\Exception\JsonExceptionContainer;
 use InvalidArgumentException;
 
 abstract class AbstractValidator implements ValidatorInterface
 {
 
   protected $_input = array();
-  public $exception;
+  protected $exception;
 
   public function __construct ()
   {

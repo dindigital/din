@@ -64,5 +64,9 @@ class InputValidator
   {
     $this->_exception->throwException();
   }
+  
+  public function addException ($msg) {
+    $this->_exception->addException($msg);
+  }
 
 }
