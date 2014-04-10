@@ -15,10 +15,10 @@ use InvalidArgumentException;
  * @method \Din\InputValidator\ValidatorInterface stringEqual()
  * @method \Din\InputValidator\ValidatorInterface stringLenght()
  * @method \Din\InputValidator\ValidatorInterface date()
- * @method \Din\InputValidator\ValidatorInterface Upload()
- * @method \Din\InputValidator\ValidatorInterface DbFk()
- * @method \Din\InputValidator\ValidatorInterface DbRecord()
- * @method \Din\InputValidator\ValidatorInterface DbUnique()
+ * @method \Din\InputValidator\ValidatorInterface upload()
+ * @method \Din\InputValidator\ValidatorInterface dbFk()
+ * @method \Din\InputValidator\ValidatorInterface dbRecord()
+ * @method \Din\InputValidator\ValidatorInterface dbUnique()
  */
 class InputValidator
 {
