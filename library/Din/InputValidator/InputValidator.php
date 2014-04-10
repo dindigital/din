@@ -16,6 +16,9 @@ use InvalidArgumentException;
  * @method \Din\InputValidator\ValidatorInterface stringLenght()
  * @method \Din\InputValidator\ValidatorInterface dateRequired()
  * @method \Din\InputValidator\ValidatorInterface UploadRequired()
+ * @method \Din\InputValidator\ValidatorInterface DbFk()
+ * @method \Din\InputValidator\ValidatorInterface DbRequireRecord()
+ * @method \Din\InputValidator\ValidatorInterface DbUniqueValue()
  */
 class InputValidator
 {
