@@ -5,5 +5,5 @@ namespace Din\Assets\Compressor;
 interface iAsset
 {
 
-  function provideAsset ( $assets, $file, $group );
+  function provideAsset ( $config, $group );
 }

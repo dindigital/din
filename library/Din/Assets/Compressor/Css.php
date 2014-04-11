@@ -7,12 +7,13 @@ use Assetic\Filter\Yui;
 class Css extends Assets implements iAsset
 {
 
-  public function provideAsset ( $assets, $file, $group )
+  public function provideAsset ( $config, $group )
   {
+    $assets = $config->getAssets();
     $this->setAssets($assets);
     $this->setCompressor(new Yui\CssCompressorFilter($this->getCompressorFile()));
     $this->setType('css');
-    $this->setFile($file);
+    $this->setFile($config->getAssetsFile());
 
     if ( count($group) ) {
       foreach ( $group as $g ) {

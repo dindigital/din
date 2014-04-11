@@ -2,37 +2,25 @@
 
 namespace Din\Assets\Compressor;
 
-use Din\File\Files;
-use Exception;
+use Din\Assets\AssetsConfig;
 
 class CompressorCreator extends Creator
 {
 
-  protected $_assetsFile;
-  protected $_assets;
+  protected $_assetsConfig;
+  protected $_assetsGroup;
 
-  public function __construct ( $config, $group = array() )
+  public function __construct ( AssetsConfig $config, $group = array() )
   {
-
-    if ( !Files::exists($config) ) {
-      throw new Exception('Arquivo de assets não encontrado.');
-    }
-
-    $vars = Files::get_return($config);
-    if ( !is_array($vars) ) {
-      throw new Exception('Arquivo de assets inválido.');
-    }
-
-    $this->_assets = $vars;
-    $this->_assetsFile = $config;
-    $this->_assetGroup = $group;
+    $this->_assetsConfig = $config;
+    $this->_assetsGroup = $group;
   }
 
   public function factoryMethod ( iAsset $asset )
   {
     $this->create = new $asset();
 
-    return($this->create->provideAsset($this->_assets, $this->_assetsFile, $this->_assetGroup));
+    return($this->create->provideAsset($this->_assetsConfig, $this->_assetsGroup));
   }
 
 }
