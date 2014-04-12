@@ -19,6 +19,6 @@ $campo1 = $ckfinder1->getElement();
     <script type="text/javascript" src="/backend/scripts/ckfinder.js"></script>
   </head>
   <body>
-    <?=$campo1?>
+    <?= $campo1 ?>
   </body>
 </html>

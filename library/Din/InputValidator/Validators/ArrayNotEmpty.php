@@ -13,6 +13,7 @@ class ArrayNotEmpty extends AbstractValidator
 
     if ( count($value) == 0 )
       $this->addException("É necessáio pelo menos 1 {$label}");
+
   }
 
 }

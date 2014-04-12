@@ -34,17 +34,20 @@ class Select
       throw new \Exception('Maximo de alias atingido.');
 
     return $this->_aliases[$this->_actual_alias];
+
   }
 
   public function __construct ( $table, $fields = array() )
   {
     $this->setTable($table);
     $this->setFields($fields);
+
   }
 
   public static function construct ( $table, $fields = array() )
   {
     return new self($table, $fields);
+
   }
 
   public function setTable ( $table )
@@ -58,26 +61,31 @@ class Select
     }
 
     $this->_tables[$this->_table] = '';
+
   }
 
   public function getTable ()
   {
     return $this->_table;
+
   }
 
   public function getTableObj ()
   {
     return $this->_table_obj;
+
   }
 
   public function setAlias ( $alias )
   {
     $this->_table_alias = $alias;
+
   }
 
   public function getAlias ()
   {
     return $this->_table_alias;
+
   }
 
   public function setFields ( $fields )
@@ -88,6 +96,7 @@ class Select
     }
 
     return $this;
+
   }
 
   public function getFields ()
@@ -110,6 +119,7 @@ class Select
     $str_fields = implode(',' . PHP_EOL . '        ', $fields);
 
     return $str_fields;
+
   }
 
   public function addAllFields ()
@@ -118,6 +128,7 @@ class Select
     $this->_fields['*'] = $str_field;
 
     return $this;
+
   }
 
   public function addField ( $field, $alias = null )
@@ -130,6 +141,7 @@ class Select
     $this->_fields[$field] = $str_field;
 
     return $this;
+
   }
 
   public function addSField ( $alias, $value )
@@ -137,6 +149,7 @@ class Select
     $this->_fields[$alias] = "'{$value}' as {$alias}";
 
     return $this;
+
   }
 
   public function addFField ( $alias, $function )
@@ -144,6 +157,7 @@ class Select
     $this->_fields[$alias] = "{$function} as {$alias}";
 
     return $this;
+
   }
 
   public function delField ( $field )
@@ -151,6 +165,7 @@ class Select
     unset($this->_fields[$field]);
 
     return $this;
+
   }
 
   public function setJoin ( $type, $join, $field, $field2 = null )
@@ -179,6 +194,7 @@ class Select
     $this->_join[$joined_table] = $std;
 
     return $this;
+
   }
 
   public function delJoin ( $table )
@@ -186,11 +202,13 @@ class Select
     unset($this->_join[$table]);
 
     return $this;
+
   }
 
   public function getTables ()
   {
     return $this->_tables;
+
   }
 
   public function getJoins ()
@@ -203,21 +221,25 @@ class Select
     $str_joins = implode('', $joins);
 
     return $str_joins;
+
   }
 
   public function getJoin ()
   {
     return $this->_join;
+
   }
 
   public function inner_join ( $field, $join, $field2 = null )
   {
     return $this->setJoin('INNER', $join, $field, $field2);
+
   }
 
   public function left_join ( $field, $join, $field2 = null )
   {
     return $this->setJoin('LEFT', $join, $field, $field2);
+
   }
 
   public function setWhere ( $arrCriteria )
@@ -228,16 +250,19 @@ class Select
     $this->_where_values = $criteria->getParams();
 
     return $this;
+
   }
 
   public function getWhereValues ()
   {
     return $this->_where_values;
+
   }
 
   public function where ( $arrCriteria )
   {
     return $this->setWhere($arrCriteria);
+
   }
 
   public function setUnion ( $obj, $type = '' )
@@ -249,6 +274,7 @@ class Select
     $this->_where_values = array_merge($this->_where_values, $obj->getWhereValues());
 
     return $this;
+
   }
 
   public function getUnion ( $count = false )
@@ -265,6 +291,7 @@ class Select
     }
 
     return $str_union;
+
   }
 
   public function setOrderBy ( $order_by )
@@ -274,21 +301,25 @@ class Select
         {$order_by}";
 
     return $this;
+
   }
 
   public function union ( $obj )
   {
     return $this->setUnion($obj);
+
   }
 
   public function union_all ( $obj )
   {
     return $this->setUnion($obj, 'ALL');
+
   }
 
   public function order_by ( $order_by )
   {
     return $this->setOrderBy($order_by);
+
   }
 
   public function setLimit ( $limit, $offset )
@@ -301,11 +332,13 @@ class Select
         {$offset},{$limit}";
 
     return $this;
+
   }
 
   public function limit ( $limit, $offset = 0 )
   {
     return $this->setLimit($limit, $offset);
+
   }
 
   public function setGroupBy ( $field )
@@ -315,11 +348,13 @@ class Select
         {$field}";
 
     return $this;
+
   }
 
   public function group_by ( $field )
   {
     return $this->setGroupBy($field);
+
   }
 
   private function setAliases ()
@@ -338,6 +373,7 @@ class Select
     foreach ( $this->_fields as $i => $field ) {
       $this->_fields[$i] = str_replace("{{$this->_table}}", $this->_table_alias, $field);
     }
+
   }
 
   private function replace_alias ( $s )
@@ -347,6 +383,7 @@ class Select
     }
 
     return $s;
+
   }
 
   public function getSQL ()
@@ -371,6 +408,7 @@ class Select
     ";
 
     return $r;
+
   }
 
   public function getSQLCount ( $union = false )
@@ -410,6 +448,7 @@ class Select
 
       return $r;
     }
+
   }
 
   public function setCount ( $count )
@@ -417,11 +456,13 @@ class Select
     $this->_count = (bool) $count;
 
     return $this;
+
   }
 
   public function __toString ()
   {
     return $this->getSQL();
+
   }
 
 }

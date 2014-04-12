@@ -10,6 +10,7 @@ class Folder
   public static function create ( $diretorio )
   {
     return @mkdir($diretorio, 0777, true);
+
   }
 
   public static function delete ( $directory, $empty = FALSE )
@@ -39,10 +40,11 @@ class Folder
       }
     }
     return TRUE;
+
   }
 
   public static function make_writable ( $diretorio )
-  {   
+  {
     if ( !is_dir($diretorio) ) {
       if ( !self::create($diretorio) ) {
         throw new Exception('Permissão negada ao criar pasta: ' . $diretorio);
@@ -51,6 +53,7 @@ class Folder
 
     if ( !is_writable($diretorio) )
       throw new Exception('A pasta deve possuir permissão de escrita: ' . $diretorio);
+
   }
 
 }

@@ -11,7 +11,7 @@ $dropdown->setStyle('width:150px; height:50px');
 $dropdown->setFirstOpt('Texto opcional','index_opcional');
 $dropdown->setSelected('selecionado_opcional');
 $dropdown->setOptionsArray(array(
-    'Foo','Bar','Baz','Qux'
+'Foo','Bar','Baz','Qux'
 ));
 
 echo $dropdown->getElement();
@@ -32,7 +32,7 @@ $obj3->id = '64';
 $obj3->name = 'Baz';
 
 $arrayObj = array(
-    $obj1, $obj2, $obj3
+$obj1, $obj2, $obj3
 );
 
 $dropdown->setOptionsObj($arrayObj, 'id', 'name');

@@ -12,6 +12,7 @@ class Intval extends AbstractFilter
     $value = intval($this->getValue($field));
 
     $this->_table->{$field} = $value;
+
   }
 
 }

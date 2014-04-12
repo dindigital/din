@@ -65,6 +65,7 @@ class Dropdown
   public function __construct ( $name = '' )
   {
     $this->setName($name);
+
   }
 
   /**
@@ -74,6 +75,7 @@ class Dropdown
   public function setName ( $name )
   {
     $this->_name = $name;
+
   }
 
   /**
@@ -83,6 +85,7 @@ class Dropdown
   public function setId ( $id )
   {
     $this->_id = $id;
+
   }
 
   /**
@@ -92,6 +95,7 @@ class Dropdown
   public function setClass ( $class )
   {
     $this->_class = $class;
+
   }
 
   /**
@@ -101,6 +105,7 @@ class Dropdown
   public function setStyle ( $style )
   {
     $this->_style = $style;
+
   }
 
   /**
@@ -110,6 +115,7 @@ class Dropdown
   public function setSelected ( $selected )
   {
     $this->_selected = $selected;
+
   }
 
   /**
@@ -119,6 +125,7 @@ class Dropdown
   public function setOptionsArray ( array $_options )
   {
     $this->_options = $_options;
+
   }
 
   /**
@@ -132,6 +139,7 @@ class Dropdown
     foreach ( $result as $row ) {
       $this->_options[$row[$prop_id]] = $row[$prop_name];
     }
+
   }
 
   /**
@@ -142,6 +150,7 @@ class Dropdown
   public function setFirstOpt ( $text, $key = '0' )
   {
     $this->_firstOpt[$key] = $text;
+
   }
 
   /**
@@ -153,6 +162,7 @@ class Dropdown
 
     $this->_element .= '<select name="' . $this->_name . '" id="' . $this->_id . '" class="';
     $this->_element .= $this->_class . '"' . $style . '>' . PHP_EOL;
+
   }
 
   /**
@@ -163,6 +173,7 @@ class Dropdown
     foreach ( $this->_firstOpt as $k => $v ) {
       $this->_element .= '  <option value="' . $k . '">' . $v . '</option>' . PHP_EOL;
     }
+
   }
 
   /**
@@ -175,6 +186,7 @@ class Dropdown
 
       $this->_element .= '  <option value="' . $k . '"' . $selected . '>' . $v . '</option>' . PHP_EOL;
     }
+
   }
 
   /**
@@ -183,6 +195,7 @@ class Dropdown
   protected function createCloseTag ()
   {
     $this->_element .= '</select>' . PHP_EOL;
+
   }
 
   /**
@@ -197,6 +210,7 @@ class Dropdown
     $this->createCloseTag();
 
     return $this->_element;
+
   }
 
 }

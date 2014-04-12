@@ -8,6 +8,7 @@ class Files
   public static function exists ( $path )
   {
     return is_file($path);
+
   }
 
   public static function get_contents ( $path )
@@ -15,6 +16,7 @@ class Files
     if ( self::exists($path) ) {
       return file_get_contents($path);
     }
+
   }
 
   public static function get_return ( $path )
@@ -24,11 +26,13 @@ class Files
     } else {
       return '';
     }
+
   }
 
   public static function delete ( $path )
   {
     return @unlink($path);
+
   }
 
 }

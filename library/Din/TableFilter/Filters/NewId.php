@@ -10,6 +10,7 @@ class NewId extends AbstractFilter
   public function filter ( $field )
   {
     return $this->_table->{$field} = md5(uniqid());
+
   }
 
 }

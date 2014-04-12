@@ -16,6 +16,7 @@ class FrontController
   public function __construct ( iRouter $_router )
   {
     $this->_router = $_router;
+
   }
 
   public function dispatch ()
@@ -45,6 +46,7 @@ class FrontController
     } else {
       call_user_func(array($controller, $method_name));
     }
+
   }
 
 }

@@ -106,6 +106,7 @@ class FileTypes
     $r->desc = self::$_types[$name]['desc'];
 
     return $r;
+
   }
 
 }

@@ -8,6 +8,6 @@ interface iAuthDataLayer
   public function test_login ( $user, $pass );
 
   public function getId ();
-  
-  public function is_active();
+
+  public function is_active ();
 }

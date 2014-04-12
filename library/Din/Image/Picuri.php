@@ -34,26 +34,31 @@ class Picuri
   public function __construct ( $file )
   {
     $this->_image = new Image(PATH_REPLACE . $file, PATH_IMAGE, PATH_REPLACE . IMAGEM_PADRAO);
+
   }
 
   public function setWidth ( $width )
   {
     $this->_width = $width;
+
   }
 
   public function setHeight ( $height )
   {
     $this->_height = $height;
+
   }
 
   public function setCrop ( $crop )
   {
     $this->_crop = $crop;
+
   }
 
   public function setCropType ( $crop_type )
   {
     $this->_cropType = $crop_type;
+
   }
 
   public function setAtributos ( Array $atributos )
@@ -65,11 +70,13 @@ class Picuri
 
       $this->_attributos = implode(' ', $attr);
     }
+
   }
 
   public function setTypeReturn ( $typeReturn )
   {
     $this->_typeReturn = $typeReturn;
+
   }
 
   public function save ()
@@ -86,6 +93,7 @@ class Picuri
     if ( defined('IMG_SUBDOMAIN') && getenv('DOMAIN_NAME') ) {
       $this->_newImage = 'http://' . IMG_SUBDOMAIN . '.' . getenv('DOMAIN_NAME') . $this->_newImage;
     }
+
   }
 
   public function getImage ()
@@ -103,11 +111,13 @@ class Picuri
     }
 
     return $this->_imageReturn;
+
   }
 
   private function getImageTag ()
   {
     $this->_imageReturn = '<img src="' . $this->_newImage . '" width="' . $this->_newWidth . '" height="' . $this->_newHeight . '" ' . $this->_attributos . ' />';
+
   }
 
   private function getImageStd ()
@@ -118,11 +128,13 @@ class Picuri
     $std->src = $this->_newImage;
 
     $this->_imageReturn = $std;
+
   }
 
   public function __toString ()
   {
     return $this->getImage();
+
   }
 
   /**
@@ -157,6 +169,7 @@ class Picuri
     $pic->save();
 
     return $pic->getImage();
+
   }
 
 }

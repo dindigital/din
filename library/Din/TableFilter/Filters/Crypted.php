@@ -16,6 +16,7 @@ class Crypted extends AbstractFilter
       $crypt = new Crypt();
       $this->_table->{$field} = $crypt->crypt($value);
     }
+
   }
 
 }

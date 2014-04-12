@@ -17,21 +17,25 @@ class Field
     }
     $expression = str_replace($field, "`{$field}`", $expression);
     $this->_expression = $expression;
+
   }
 
   public function setSeparator ( $separator )
   {
     $this->_separator = $separator;
+
   }
 
   public function getExpression ()
   {
     return $this->_expression;
+
   }
 
   public function getSeparator ()
   {
     return $this->_separator;
+
   }
 
 }

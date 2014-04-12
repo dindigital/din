@@ -14,12 +14,14 @@ class CompressorCreator extends Creator
   {
     $this->_assetsConfig = $config;
     $this->_assetsGroup = $group;
+
   }
 
   public function factoryMethod ( iAsset $asset )
   {
     $this->create = $asset;
     return($this->create->provideAsset($this->_assetsConfig, $this->_assetsGroup));
+
   }
 
 }

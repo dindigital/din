@@ -15,15 +15,19 @@ abstract class AbstractValidator implements ValidatorInterface
   {
     ; // needed to instantiate through ReflectionClass
     // possibility to add params for the filters
+
   }
 
   public function setInput ( array $input )
   {
     $this->_input = $input;
+
   }
-  
-  public function setException( $exception ) {
-      $this->exception = $exception;
+
+  public function setException ( $exception )
+  {
+    $this->exception = $exception;
+
   }
 
   protected function getValue ( $field )
@@ -32,10 +36,13 @@ abstract class AbstractValidator implements ValidatorInterface
       throw new InvalidArgumentException("Índice {$field} não existe no array de input do validator");
 
     return $this->_input[$field];
+
   }
-  
-  public function addException($msg) {
+
+  public function addException ( $msg )
+  {
     $this->exception->addException($msg);
+
   }
 
   abstract public function validate ( $prop, $label );

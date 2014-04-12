@@ -15,6 +15,7 @@ class Money
   public static function filter_sql ( $str )
   {
     return preg_replace("/[^0-9]/", '', $str) / 100;
+
   }
 
   /**
@@ -32,7 +33,7 @@ class Money
       $r = 'R$ ' . $r;
 
     return $r;
+
   }
 
 }
-

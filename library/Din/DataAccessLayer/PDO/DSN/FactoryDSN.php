@@ -20,6 +20,7 @@ class FactoryDSN
     }
 
     return $DSN;
+
   }
 
 }

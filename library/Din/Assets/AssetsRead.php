@@ -21,16 +21,19 @@ class AssetsRead
   public function __construct ( AssetsConfigInterface $config )
   {
     $this->_config = $config->getAssets();
+
   }
 
   public function setMode ( $mode )
   {
     $this->_mode = $mode;
+
   }
 
   public function setReplace ( $replace )
   {
     $this->_replace = $replace;
+
   }
 
   public function setGroup ( $type, Array $group )
@@ -51,6 +54,7 @@ class AssetsRead
     } else {
       $this->readDevelopment();
     }
+
   }
 
   protected function readProdution ()
@@ -62,6 +66,7 @@ class AssetsRead
       $file = $this->getFilePath($this->_type, $this->_config[$this->_type][$gp]['uri']);
       $this->addContainer($this->_type, $gp, $file);
     }
+
   }
 
   protected function readDevelopment ()
@@ -79,6 +84,7 @@ class AssetsRead
 
       $this->addContainer($this->_type, $gp, $file);
     }
+
   }
 
   protected function getFilePath ( $type, $file )
@@ -93,16 +99,19 @@ class AssetsRead
     }
 
     return $asset;
+
   }
 
   protected function addContainer ( $type, $group, $file )
   {
     $this->_assets[$type][$group] = $file;
+
   }
 
   public function getAssets ()
   {
     return $this->_assets;
+
   }
 
 }

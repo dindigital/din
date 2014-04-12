@@ -15,6 +15,7 @@ class Insert
   public function setTbl ( $tbl )
   {
     $this->_tbl = "`{$tbl}`";
+
   }
 
   public function setRow ( array $row )
@@ -27,11 +28,13 @@ class Insert
       $fields[] = "`{$fieldname}`";
     }
     $this->_fields = implode(', ', $fields);
+
   }
 
   public function setIgnore ( $ignore )
   {
     $this->_ignore = $ignore;
+
   }
 
   public function build ()
@@ -39,16 +42,19 @@ class Insert
     $ignore = $this->_ignore ? ' IGNORE ' : '';
 
     $this->_sql = "INSERT {$ignore}INTO {$this->_tbl} ({$this->_fields}) VALUES ({$this->_interrogations})";
+
   }
 
   public function getSQL ()
   {
     return $this->_sql;
+
   }
 
   public function getParams ()
   {
     return $this->_params;
+
   }
 
 }

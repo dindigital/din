@@ -12,16 +12,19 @@ class Separator
   {
     $this->setExpression($expression);
     $this->setValue($value);
+
   }
 
   private function setExpression ( $expression )
   {
     $this->_expression = $expression;
+
   }
 
   private function setValue ( $value )
   {
     $this->_value = $value;
+
   }
 
   public function shouldLoopIn ()
@@ -33,6 +36,7 @@ class Separator
     }
 
     return $r;
+
   }
 
   public function getSeparator ()
@@ -44,6 +48,7 @@ class Separator
     }
 
     return $r;
+
   }
 
 }

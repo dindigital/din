@@ -26,12 +26,14 @@ class TableFilter
   {
     $this->_table = $table;
     $this->_input = $input;
+
   }
 
   protected function instanciateFilter ( $namespace, $classname, $arguments )
   {
     $ref = new ReflectionClass($namespace . $classname);
     $this->_filter = $ref->newInstanceArgs($arguments);
+
   }
 
   public function __call ( $name, $arguments )
@@ -48,11 +50,13 @@ class TableFilter
     $this->_filter->setInput($this->_input);
 
     return $this;
+
   }
 
   public function filter ( $input )
   {
     return $this->_filter->filter($input);
+
   }
 
 }

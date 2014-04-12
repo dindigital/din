@@ -24,6 +24,7 @@ class Js extends Assets implements iAsset
         $this->compress($group);
       }
     }
+
   }
 
 }

@@ -16,16 +16,19 @@ abstract class AbstractFilter implements FilterInterface
   {
     ; // needed to isntanciate through ReflectionClass
     // possibility to add params for the filters
+
   }
 
   public function setTable ( Table $table )
   {
     $this->_table = $table;
+
   }
 
   public function setInput ( array $input )
   {
     $this->_input = $input;
+
   }
 
   protected function getValue ( $field )
@@ -34,6 +37,7 @@ abstract class AbstractFilter implements FilterInterface
       throw new InvalidArgumentException("Índice {$field} não existe no array de input do filter");
 
     return $this->_input[$field];
+
   }
 
   abstract public function filter ( $field );

@@ -39,7 +39,7 @@ class Uri
     }
 
     return $string;
+
   }
 
 }
-

@@ -24,16 +24,19 @@ class AssetsConfig implements AssetsConfigInterface, AssetsConfigFileInterface
 
     $this->_assets = $vars;
     $this->_assetsFile = $config;
+
   }
 
   public function getAssets ()
   {
     return $this->_assets;
+
   }
 
   public function getAssetsFile ()
   {
     return $this->_assetsFile;
+
   }
 
 }

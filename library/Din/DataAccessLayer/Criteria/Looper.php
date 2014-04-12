@@ -35,16 +35,19 @@ class Looper
         $this->_fields[] = $f;
       }
     }
+
   }
 
   public function getFields ()
   {
     return $this->_fields;
+
   }
 
   public function getParams ()
   {
     return $this->_params;
+
   }
 
 }

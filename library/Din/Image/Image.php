@@ -76,12 +76,14 @@ class Image
     $this->setFailPath($fail_path);
     $this->setPath($path);
     $this->_save_path = rawurldecode($save_path);
+
   }
 
   private function setFailPath ( $path )
   {
     if ( is_file($path) )
       $this->_failPath = $path;
+
   }
 
   private function getFailPath ()
@@ -90,6 +92,7 @@ class Image
       throw new Exception('Arquivo inválido');
 
     return $this->_failPath;
+
   }
 
   private function setPath ( $path )
@@ -98,6 +101,7 @@ class Image
       $path = $this->getFailPath();
 
     $this->_path = rawurldecode($path);
+
   }
 
   /**
@@ -110,6 +114,7 @@ class Image
   {
     $this->_width = $width;
     return $this;
+
   }
 
   /**
@@ -122,6 +127,7 @@ class Image
   {
     $this->_height = $height;
     return $this;
+
   }
 
   /**
@@ -143,11 +149,13 @@ class Image
 
     $this->_crop = $crop;
     return $this;
+
   }
 
   public function setCropType ( $crop_type = 'center' )
   {
     $this->_cropType = $crop_type;
+
   }
 
   public function getSavePath ()
@@ -158,16 +166,19 @@ class Image
     $path = $this->_save_path . $final_name;
 
     return $path;
+
   }
 
   public function is_saved_file ()
   {
     return is_file($this->getSavePath());
+
   }
 
   public function is_file ()
   {
     return is_file($this->_path);
+
   }
 
   public function resize ()
@@ -188,6 +199,7 @@ class Image
     }
 
     return $this;
+
   }
 
   private function calcWidth ()
@@ -197,6 +209,7 @@ class Image
       $ratio = $this->_height / $size->getHeight();
       $this->_width = $size->getWidth() * $ratio;
     }
+
   }
 
   private function calcHeight ()
@@ -206,6 +219,7 @@ class Image
       $ratio = $this->_width / $size->getWidth();
       $this->_height = $size->getHeight() * $ratio;
     }
+
   }
 
   public function save ( $path )
@@ -220,11 +234,13 @@ class Image
     $this->_resizeImage->save($path);
 
     return $path;
+
   }
 
   public function autosave ()
   {
     return $this->save($this->getSavePath());
+
   }
 
 }

@@ -14,6 +14,7 @@ class Bitly
   public function __construct ( $key )
   {
     $this->_bitly_key = $key;
+
   }
 
   public function shorten ( $longUrl )
@@ -32,6 +33,7 @@ class Bitly
       throw new Exception('Erro ao criar link curto: ' . $output_json->status_txt);
 
     $this->_short_url = $output_json->data->url;
+
   }
 
   private function bitly_get_curl ( $uri )
@@ -46,16 +48,19 @@ class Bitly
     $output = curl_exec($ch);
 
     return $output;
+
   }
 
   public function getShortUrl ()
   {
     return $this->_short_url;
+
   }
 
   public function __toString ()
   {
     return $this->getShortUrl();
+
   }
 
 }

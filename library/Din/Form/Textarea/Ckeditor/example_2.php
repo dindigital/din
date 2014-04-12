@@ -23,7 +23,7 @@ $campo2 = $ck2->getElement();
     <script type="text/javascript" src="/backend/plugins/ckfinder23/ckfinder.js"></script>
   </head>
   <body>
-    <?=$campo1?>
-    <?=$campo2?>
+    <?= $campo1 ?>
+    <?= $campo2 ?>
   </body>
 </html>

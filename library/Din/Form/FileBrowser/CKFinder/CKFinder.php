@@ -17,31 +17,37 @@ class CKFinder
   public function __construct ( $name )
   {
     $this->setName($name);
+
   }
 
   public function setName ( $name )
   {
     $this->_name = $name;
+
   }
 
   public function setStartUpPath ( $path = 'Files:/' )
   {
     $this->_startUpPath = $path;
+
   }
 
   public function setButtonText ( $text = 'Selecionar Arquivo' )
   {
     $this->_buttonText = $text;
+
   }
 
   public function setClassTextfield ( $class )
   {
     $this->_classTextfield = $class;
+
   }
 
   public function setClassButton ( $class )
   {
     $this->_classButton = $class;
+
   }
 
   public function getElement ()
@@ -59,6 +65,7 @@ class CKFinder
     $r .= 'onclick="BrowseServer( \'' . $this->_startUpPath . '\', \'' . $this->_name . '\' );" />' . PHP_EOL;
 
     return $r;
+
   }
 
 }

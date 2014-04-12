@@ -50,6 +50,7 @@ class Plupload
   public function __construct ( $field_name )
   {
     $this->setName($field_name);
+
   }
 
   /**
@@ -59,6 +60,7 @@ class Plupload
   public function setName ( $field_name )
   {
     $this->_field_name = $field_name;
+
   }
 
   /**
@@ -68,6 +70,7 @@ class Plupload
   public function setClass ( $class )
   {
     $this->_class = $class;
+
   }
 
   /**
@@ -77,6 +80,7 @@ class Plupload
   public function setMultiple ( $bool )
   {
     $this->_multiple = $bool;
+
   }
 
   /**
@@ -90,6 +94,7 @@ class Plupload
     $r = '  {title : "' . $type->desc . '", extensions : "' . $extensions . '"}';
 
     $this->_type = $r;
+
   }
 
   /**
@@ -101,6 +106,7 @@ class Plupload
   public function setOpt ( $key, $value )
   {
     $this->_opt[$key] = $value;
+
   }
 
   /**
@@ -140,6 +146,7 @@ class Plupload
     $r .= '</script>' . PHP_EOL;
 
     return $r;
+
   }
 
 }

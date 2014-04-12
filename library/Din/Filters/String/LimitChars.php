@@ -46,6 +46,7 @@ class LimitChars
     }
 
     return $r;
+
   }
 
 }

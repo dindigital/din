@@ -20,26 +20,31 @@ abstract class Assets
   protected function setAssets ( $assets )
   {
     $this->_assets = $assets;
+
   }
 
   protected function setFile ( $file )
   {
     $this->_file = $file;
+
   }
 
   protected function setType ( $type )
   {
     $this->_type = $type;
+
   }
 
   protected function getCompressorFile ()
   {
     return __DIR__ . '/yuicompressor-2.4.7.jar';
+
   }
 
   protected function setCompressor ( $compressor )
   {
     $this->_yuiCompressor = $compressor;
+
   }
 
   protected function compress ( $group )
@@ -68,11 +73,13 @@ abstract class Assets
 
       $this->_am = null;
     }
+
   }
 
   protected function removeFile ( $uri )
   {
     @unlink('public' . $uri);
+
   }
 
   protected function defineUri ( $uri )
@@ -81,12 +88,14 @@ abstract class Assets
     $this->_name = array_pop($ex);
     $uri = implode('/', $ex);
     $this->_uri = $uri;
+
   }
 
   protected function writer ()
   {
     $writer = new AssetWriter('public' . $this->_uri);
     $writer->writeManagerAssets($this->_am);
+
   }
 
   protected function updateName ( $name )
@@ -94,6 +103,7 @@ abstract class Assets
     $file_contents = file_get_contents($this->_file);
     $file = str_replace($this->_name, $name, $file_contents);
     file_put_contents($this->_file, $file);
+
   }
 
 }

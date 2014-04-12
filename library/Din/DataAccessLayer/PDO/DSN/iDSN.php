@@ -6,8 +6,7 @@ interface iDSN
 {
 
   /**
-   * Recebe o schema e o host. Devolve a DSN formatada 
+   * Recebe o schema e o host. Devolve a DSN formatada
    */
   public function getDSN ( $schema, $host );
-  
 }

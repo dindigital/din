@@ -30,6 +30,7 @@ class Listbox extends Dropdown
   public function setMultiple ( $multiple )
   {
     $this->_multiple = $multiple;
+
   }
 
   /**
@@ -43,6 +44,7 @@ class Listbox extends Dropdown
     }
 
     $this->_selected = $selected;
+
   }
 
   /**
@@ -56,6 +58,7 @@ class Listbox extends Dropdown
     foreach ( $selected as $obj ) {
       $this->_selected[] = $obj->$prop_id;
     }
+
   }
 
   /**
@@ -68,6 +71,7 @@ class Listbox extends Dropdown
 
     $this->_element .= '<select name="' . $this->_name . '[]" id="' . $this->_id . '" class="';
     $this->_element .= $this->_class . '"' . $multiple . '' . $style . '>' . PHP_EOL;
+
   }
 
   /**
@@ -86,6 +90,7 @@ class Listbox extends Dropdown
         $this->_element .= '  <option value="' . $k . '">' . $v . '</option>' . PHP_EOL;
       }
     }
+
   }
 
 }

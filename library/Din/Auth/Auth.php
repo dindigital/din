@@ -19,6 +19,7 @@ abstract class Auth
     $this->_dao = $AuthDataLayer;
     $this->_crypt = $Crypt;
     $this->_session = $Session;
+
   }
 
   public function login ( $user, $pass, $is_crypted = false )
@@ -42,12 +43,14 @@ abstract class Auth
     }
 
     return $bool;
+
   }
 
   public function is_active ()
   {
     $this->getId();
     return $this->_dao->is_active();
+
   }
 
   public function is_logged ()
@@ -62,6 +65,7 @@ abstract class Auth
     $bool = (bool) count($this->_dao->test_login($user, $crypted_pass));
 
     return $bool;
+
   }
 
   public function getId ()
@@ -72,11 +76,13 @@ abstract class Auth
       throw new \Exception('Usuário não logado');
 
     return $id;
+
   }
 
   public function logout ()
   {
     $this->_session->clear();
+
   }
 
 }

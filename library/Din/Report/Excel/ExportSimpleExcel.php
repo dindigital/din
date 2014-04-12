@@ -14,21 +14,25 @@ class ExportSimpleExcel
   function __construct ( $file_name = null )
   {
     $this->setFileName($file_name);
+
   }
 
   public function setFileName ( $file_name )
   {
     $this->_file_name = is_null($file_name) ? uniqid() : $file_name;
+
   }
 
   public function setResult ( array $result )
   {
     $this->_result = $result;
+
   }
 
   public function setTitles ( array $titles )
   {
     $this->_titles = $titles;
+
   }
 
   protected function validate ()
@@ -38,6 +42,7 @@ class ExportSimpleExcel
 
     if ( count($this->_result[0]) != count($this->_titles) )
       throw new Exception('Quantidade de campos deve ser igual a quantidade de títulos');
+
   }
 
   public function export ()
@@ -74,6 +79,7 @@ class ExportSimpleExcel
     echo '</table>';
 
     exit;
+
   }
 
 }

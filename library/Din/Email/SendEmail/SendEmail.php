@@ -32,36 +32,43 @@ class SendEmail
     $this->setCc();
     $this->setCo();
     $this->setReplyTo();
+
   }
 
   public function setHost ( $host )
   {
     $this->_host = $host;
+
   }
 
   public function setPort ( $port )
   {
     $this->_port = $port;
+
   }
 
   public function setSmtpAuth ( $smtpAuth )
   {
     $this->_smtpAuth = $smtpAuth;
+
   }
 
   public function setSmtpSecure ( $smtpSecure )
   {
     $this->_smtpSecure = $smtpSecure;
+
   }
 
   public function setUser ( $user )
   {
     $this->_smtpUser = $user;
+
   }
 
   public function setPass ( $pass )
   {
     $this->_smtpPass = $pass;
+
   }
 
   public function send ()
@@ -77,6 +84,7 @@ class SendEmail
     if ( !$this->_sender->send() ) {
       throw new Exception($this->_sender->ErrorInfo);
     }
+
   }
 
   private function setFrom ()
@@ -84,6 +92,7 @@ class SendEmail
     $from = $this->_email->getFrom();
     $this->_sender->From = $from['email'];
     $this->_sender->FromName = $from['name'];
+
   }
 
   private function setTo ()
@@ -91,6 +100,7 @@ class SendEmail
     foreach ( $this->_email->getTo() as $row ) {
       $this->_sender->addAddress($row['email'], $row['name']);
     }
+
   }
 
   private function setCc ()
@@ -98,6 +108,7 @@ class SendEmail
     foreach ( $this->_email->getCc() as $row ) {
       $this->_sender->addCC($row['email'], $row['name']);
     }
+
   }
 
   private function setCo ()
@@ -105,6 +116,7 @@ class SendEmail
     foreach ( $this->_email->getCo() as $row ) {
       $this->_sender->addBCC($row['email'], $row['name']);
     }
+
   }
 
   private function setReplyTo ()
@@ -113,6 +125,7 @@ class SendEmail
     if ( count($replyTo) ) {
       $this->_sender->addReplyTo($replyTo['email'], $replyTo['email']);
     }
+
   }
 
 }

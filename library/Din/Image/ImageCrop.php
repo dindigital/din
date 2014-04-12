@@ -16,6 +16,7 @@ class ImageCrop
   {
     $this->imagine = $imagine;
     $this->box = $box;
+
   }
 
   public function crop ( $type = 'center' )
@@ -30,15 +31,15 @@ class ImageCrop
     $resize_w = $desejado_w;
     $resize_h = $desejado_h;
 
-    if ($atual_w < $atual_h) {
+    if ( $atual_w < $atual_h ) {
       $resize_h = ($atual_h / $atual_w) * $desejado_w;
-      if ($resize_h < $desejado_h) {
+      if ( $resize_h < $desejado_h ) {
         $resize_h = $desejado_h;
         $resize_w = ($atual_w / $atual_h) * $desejado_h;
       }
     } else {
       $resize_w = ($atual_w / $atual_h) * $desejado_h;
-      if ($resize_w < $desejado_w) {
+      if ( $resize_w < $desejado_w ) {
         $resize_w = $desejado_w;
         $resize_h = ($atual_h / $atual_w) * $desejado_w;
       }
@@ -46,7 +47,7 @@ class ImageCrop
 
     $image = $this->imagine->resize(new Box($resize_w, $resize_h));
 
-    if ($type == 'center') {
+    if ( $type == 'center' ) {
       $image = $image->thumbnail($this->box, \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND);
     } else {
       $x = $resize_w / 2 - $desejado_w / 2;
@@ -54,6 +55,7 @@ class ImageCrop
     }
 
     return $image;
+
   }
 
 }

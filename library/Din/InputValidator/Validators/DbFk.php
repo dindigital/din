@@ -8,13 +8,15 @@ use Din\DataAccessLayer\Select;
 
 class DbFk extends AbstractValidator
 {
-    
+
   protected $_dao;
   protected $_foreign_tablename;
-    
-  public function __construct ( DAO $dao, $foreign_tablename ) {
+
+  public function __construct ( DAO $dao, $foreign_tablename )
+  {
     $this->_dao = $dao;
     $this->_foreign_tablename = $foreign_tablename;
+
   }
 
   public function validate ( $prop, $label )
@@ -31,6 +33,7 @@ class DbFk extends AbstractValidator
 
     if ( !$count )
       $this->addException("{$label} não encontrado");
+
   }
 
 }

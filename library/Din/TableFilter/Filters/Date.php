@@ -13,6 +13,7 @@ class Date extends AbstractFilter
     $value = $this->getValue($field);
 
     $this->_table->{$field} = DateToSql::filter_date($value);
+
   }
 
 }

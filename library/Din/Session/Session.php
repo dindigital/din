@@ -13,26 +13,31 @@ class Session implements iSession
 
     if ( session_id() == '' )
       session_start();
+
   }
 
   public function clear ()
   {
     $_SESSION[$this->_name] = array();
+
   }
 
   public function is_set ( $k )
   {
     return isset($_SESSION[$this->_name][$k]);
+
   }
 
   public function set ( $k, $v )
   {
     $_SESSION[$this->_name][$k] = $v;
+
   }
 
   public function un_set ( $k )
   {
     unset($_SESSION[$this->_name][$k]);
+
   }
 
   public function get ( $k )
@@ -41,6 +46,7 @@ class Session implements iSession
       throw new \Exception('Session não existe: ' . $k);
 
     return $_SESSION[$this->_name][$k];
+
   }
 
 }

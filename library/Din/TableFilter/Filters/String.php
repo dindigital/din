@@ -12,6 +12,7 @@ class String extends AbstractFilter
     $value = (string) $this->getValue($field);
 
     $this->_table->{$field} = $value;
+
   }
 
 }

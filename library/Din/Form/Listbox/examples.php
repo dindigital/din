@@ -9,10 +9,10 @@ $listbox->setName('mylistbox');
 $listbox->setStyle('width:400px;height:300px');
 $listbox->setFirstOpt('Nenhum');
 $listbox->setSelected(array(
-    '2','1'
+'2','1'
 ));
 $listbox->setOptionsArray(array(
-    'Foo','Bar','Baz','Qux'
+'Foo','Bar','Baz','Qux'
 ));
 
 echo $listbox->getElement();
@@ -34,11 +34,11 @@ $obj3->id = '64';
 $obj3->name = 'Baz';
 
 $arrayObj = array(
-    $obj1, $obj2, $obj3
+$obj1, $obj2, $obj3
 );
 
 $listbox->setSelected(array(
-    '46'
+'46'
 ));
 
 $listbox->setOptionsObj($arrayObj, 'id', 'name');

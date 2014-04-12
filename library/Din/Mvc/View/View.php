@@ -19,11 +19,13 @@ class View
         'file' => $file,
         'placeholder' => $placeholder
     );
+
   }
 
   public function setData ( $data )
   {
     $this->_data = $data;
+
   }
 
   private function makeReplaces ()
@@ -53,6 +55,7 @@ class View
     }
 
     return $result;
+
   }
 
   private function readContents ()
@@ -66,6 +69,7 @@ class View
 
       $this->_files[$i]['content'] = ob_get_clean();
     }
+
   }
 
   public function getResult ()
@@ -75,24 +79,28 @@ class View
     $r = $this->makeReplaces();
 
     return $r;
+
   }
 
   public function display_html ()
   {
     header("Content-Type: text/html");
     echo($this->getResult());
+
   }
 
   public function display_json ()
   {
     header('Content-Type: application/json');
     die(json_encode($this->getResult()));
+
   }
-  
-  public function display_html_result ($html)
+
+  public function display_html_result ( $html )
   {
     header("Content-Type: text/html");
     echo $html;
+
   }
 
 }

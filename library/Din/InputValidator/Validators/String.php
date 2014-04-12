@@ -14,6 +14,7 @@ class String extends AbstractValidator
 
     if ( !v::string()->notEmpty()->validate($value) )
       $this->addException("O campo {$label} é de preenchimento obrigatório");
+
   }
 
 }

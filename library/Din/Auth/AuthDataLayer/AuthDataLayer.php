@@ -25,6 +25,7 @@ class AuthDataLayer implements iAuthDataLayer
     $this->_activatedField = $activatedField;
 
     $this->_pdo = $PDO;
+
   }
 
   public function test_login ( $user, $pass )
@@ -38,11 +39,13 @@ class AuthDataLayer implements iAuthDataLayer
     }
 
     return $result;
+
   }
 
   public function getId ()
   {
     return $this->_pkValue;
+
   }
 
   public function is_active ()
@@ -50,6 +53,7 @@ class AuthDataLayer implements iAuthDataLayer
     $bool = $this->_activatedValue == '1';
 
     return $bool;
+
   }
 
 }

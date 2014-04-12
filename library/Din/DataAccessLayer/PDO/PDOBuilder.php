@@ -25,6 +25,7 @@ class PDOBuilder
     $DSN = FactoryDSN::build($db_type);
 
     return new PDODriver($DSN, $db_host, $db_schema, $db_user, $db_pass);
+
   }
 
 }

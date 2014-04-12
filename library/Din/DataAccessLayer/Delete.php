@@ -15,6 +15,7 @@ class Delete
   public function setTbl ( $tbl )
   {
     $this->_tbl = "`{$tbl}`";
+
   }
 
   public function setCriteria ( array $arrCriteria )
@@ -23,22 +24,26 @@ class Delete
     $criteria->buildSQL();
 
     $this->_criteria = $criteria;
+
   }
 
   public function build ()
   {
     $this->_sql = "DELETE FROM {$this->_tbl} " . $this->_criteria->getSQL();
     $this->_params = $this->_criteria->getParams();
+
   }
 
   public function getSQL ()
   {
     return $this->_sql;
+
   }
 
   public function getParams ()
   {
     return $this->_params;
+
   }
 
 }

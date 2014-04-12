@@ -14,6 +14,7 @@ class DateToSql
   public static function validate ( $date )
   {
     return v::date('d/m/Y')->validate($date);
+
   }
 
   public static function filter_date ( $date )
@@ -22,6 +23,7 @@ class DateToSql
       $arrayDate = explode('/', $date);
       return "{$arrayDate[2]}-{$arrayDate[1]}-{$arrayDate[0]}";
     }
+
   }
 
   public static function filter_datetime ( $datetime )
@@ -43,6 +45,7 @@ class DateToSql
       throw new Exception('Erro na conversão');
 
     return $datetime_sql;
+
   }
 
 }

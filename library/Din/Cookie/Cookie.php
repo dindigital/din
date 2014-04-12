@@ -15,16 +15,19 @@ class Cookie implements iCookie
       $expiration_time = time() + 60 * 60 * 24 * 30;
 
     $this->_time = $expiration_time;
+
   }
 
   public function is_set ()
   {
     return isset($_COOKIE[$this->_name]);
+
   }
 
   public function set ( $v )
   {
     setcookie($this->_name, $v, $this->_time, '/');
+
   }
 
   public function get ()
@@ -33,12 +36,14 @@ class Cookie implements iCookie
       throw new \Exception('Cookie não existe: ' . $this->_name);
 
     return $_COOKIE[$this->_name];
+
   }
 
   public function clear ()
   {
     if ( $this->is_set() )
       unset($_COOKIE[$this->_name]);
+
   }
 
 }

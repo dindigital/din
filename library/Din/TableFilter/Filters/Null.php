@@ -10,6 +10,7 @@ class Null extends AbstractFilter
   public function filter ( $field )
   {
     $this->_table->{$field} = null;
+
   }
 
 }

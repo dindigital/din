@@ -27,6 +27,7 @@ class Post
     }
 
     return $r;
+
   }
 
   /**
@@ -39,6 +40,7 @@ class Post
     return array_key_exists($fieldname, $_POST) &&
             ($_POST[$fieldname] == '1' || $_POST[$fieldname] == 'on') ?
             '1' : '0';
+
   }
 
   /**
@@ -50,16 +52,19 @@ class Post
   public static function aray ( $fieldname )
   {
     return (isset($_POST[$fieldname])) ? $_POST[$fieldname] : array();
+
   }
 
   public static function text ( $fieldname )
   {
     return (isset($_POST[$fieldname])) ? trim($_POST[$fieldname]) : '';
+
   }
 
   public static function file ( $fieldname )
   {
     return (isset($_FILES[$fieldname])) ? $_FILES[$fieldname] : array();
+
   }
 
 }

@@ -29,6 +29,7 @@ class PDODriver extends \PDO
 
     //$this->exec("set names utf8");
     $this->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
   }
 
   /**
@@ -48,6 +49,7 @@ class PDODriver extends \PDO
     $result = $stmt->fetchAll();
 
     return $result;
+
   }
 
   /**
@@ -63,6 +65,7 @@ class PDODriver extends \PDO
     $PDOStatement->execute($arrParams);
 
     return $PDOStatement;
+
   }
 
 }

@@ -12,6 +12,7 @@ class Json extends AbstractFilter
     $value = (array) $this->getValue($field);
 
     $this->_table->{$field} = json_encode($value);
+
   }
 
 }

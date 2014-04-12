@@ -14,6 +14,7 @@ class StringEmail extends AbstractValidator
 
     if ( !v::email()->validate($value) )
       $this->addException("O campo {$label} não contém um e-mail válido");
+
   }
 
 }

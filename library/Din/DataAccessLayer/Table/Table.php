@@ -13,21 +13,25 @@ class Table implements iTable
   public function __construct ( $name )
   {
     $this->setName($name);
+
   }
 
   public function setName ( $name )
   {
     $this->_name = $name;
+
   }
 
   public function getName ()
   {
     return $this->_name;
+
   }
 
   public function getArray ()
   {
     return $this->setted_values;
+
   }
 
   public function __set ( $k, $v )
@@ -37,12 +41,14 @@ class Table implements iTable
     }
 
     $this->setted_values[$k] = $v;
+
   }
 
   public function __get ( $k )
   {
     if ( isset($this->setted_values[$k]) )
       return $this->setted_values[$k];
+
   }
 
 }

@@ -15,6 +15,7 @@ class ExportExcel extends ExportSimpleExcel
   {
     parent::__construct($name);
     $this->_phpexcel = new PHPExcel;
+
   }
 
   public function export ()
@@ -27,6 +28,7 @@ class ExportExcel extends ExportSimpleExcel
 
     $objWriter = PHPExcel_IOFactory::createWriter($this->_phpexcel, 'Excel2007');
     $objWriter->save('php://output');
+
   }
 
   public function save ( $folder_path )
@@ -39,6 +41,7 @@ class ExportExcel extends ExportSimpleExcel
     $objWriter->save($folder_path . $this->_file_name . '.xlsx');
 
     return $this->_file_name . '.xlsx';
+
   }
 
   protected function generate ()
@@ -70,6 +73,7 @@ class ExportExcel extends ExportSimpleExcel
     }
 
     $this->_phpexcel->setActiveSheetIndex(0);
+
   }
 
 }

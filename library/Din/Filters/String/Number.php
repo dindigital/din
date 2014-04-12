@@ -14,6 +14,7 @@ class Number
   public static function only_numbers ( $str )
   {
     return preg_replace("/[^0-9]/", '', $str);
+
   }
 
   /**
@@ -24,7 +25,7 @@ class Number
   public static function not_numbers ( $str )
   {
     return preg_replace("/[0-9\-]/", '', $str);
+
   }
 
 }
-

@@ -31,19 +31,21 @@ class InputValidator
   {
     $this->_input = $input;
     $this->_exception = new \Din\Exception\JsonExceptionContainer();
+
   }
 
   protected function instanciateFilter ( $namespace, $classname, $arguments )
   {
     $ref = new ReflectionClass($namespace . $classname);
     $this->_validator = $ref->newInstanceArgs($arguments);
+
   }
 
   public function __call ( $name, $arguments )
   {
     $classname = ucfirst($name);
     $namespace = __NAMESPACE__ . '\Validators\\';
-    
+
     $this->instanciateFilter($namespace, $classname, $arguments);
 
     if ( !$this->_validator instanceof ValidatorInterface )
@@ -51,22 +53,27 @@ class InputValidator
 
     $this->_validator->setInput($this->_input);
     $this->_validator->setException($this->_exception);
-    
+
     return $this;
+
   }
 
   public function validate ( $input, $label )
   {
     return $this->_validator->validate($input, $label);
+
   }
-  
+
   public function throwException ()
   {
     $this->_exception->throwException();
+
   }
-  
-  public function addException ($msg) {
+
+  public function addException ( $msg )
+  {
     $this->_exception->addException($msg);
+
   }
 
 }

@@ -8,13 +8,15 @@ use Din\DataAccessLayer\Select;
 
 class DbRecord extends AbstractValidator
 {
-    
+
   protected $_dao;
   protected $_tablename;
-    
-  public function __construct ( DAO $dao, $tablename ) {
+
+  public function __construct ( DAO $dao, $tablename )
+  {
     $this->_dao = $dao;
     $this->_tablename = $tablename;
+
   }
 
   public function validate ( $prop, $label )
@@ -31,6 +33,7 @@ class DbRecord extends AbstractValidator
 
     if ( !$count )
       $this->addException("{$label} não encontrado");
+
   }
 
 }

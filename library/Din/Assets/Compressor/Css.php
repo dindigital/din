@@ -24,6 +24,7 @@ class Css extends Assets implements iAsset
         $this->compress($group);
       }
     }
+
   }
 
 }

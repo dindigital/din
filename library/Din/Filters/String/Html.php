@@ -10,7 +10,7 @@ class Html
     $scaped_string = htmlspecialchars($string);
 
     return $scaped_string;
+
   }
 
 }
-

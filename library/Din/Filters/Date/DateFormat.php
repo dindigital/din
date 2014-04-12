@@ -10,6 +10,7 @@ class DateFormat
   public static function validate ( $date )
   {
     return v::date()->validate($date);
+
   }
 
   public static function filter_date ( $date, $format = 'd/m/Y' )
@@ -19,6 +20,7 @@ class DateFormat
     $date = date($format, strtotime($date));
 
     return $date;
+
   }
 
   public static function filter_month ( $date )
@@ -43,6 +45,7 @@ class DateFormat
     );
 
     return $arryMonth[$month];
+
   }
 
   public static function filter_week ( $date )
@@ -62,6 +65,7 @@ class DateFormat
     );
 
     return $arryWeek[$week];
+
   }
 
   public static function filter_dateExtensive ( $date )
@@ -73,6 +77,7 @@ class DateFormat
     $year = date('Y', strtotime($date));
 
     return "{$day} de {$month} de {$year}";
+
   }
 
   public static function filter_dateTimeExtensive ( $datetime )
@@ -81,6 +86,7 @@ class DateFormat
     $time = date('H:i', strtotime($datetime));
 
     return "{$date} às {$time}";
+
   }
 
 }

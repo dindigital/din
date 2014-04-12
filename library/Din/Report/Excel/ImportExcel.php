@@ -20,18 +20,21 @@ class ImportExcel
     $this->_phpexcel = new PHPExcel;
     $this->setCoordinateX();
     $this->setCoordinateY();
+
   }
 
   public function setCoordinateX ( $start = 0, $end = -1 )
   {
     $this->_coordinates['x0'] = intval($start);
     $this->_coordinates['x1'] = intval($end);
+
   }
 
   public function setCoordinateY ( $start = 0, $end = -1 )
   {
     $this->_coordinates['y0'] = intval($start);
     $this->_coordinates['y1'] = intval($end);
+
   }
 
   public function setFile ( $file )
@@ -40,12 +43,14 @@ class ImportExcel
       throw new Exception("Arquivo não encontrado: " . $file);
 
     $this->_file = $file;
+
   }
 
   protected function validate ()
   {
     if ( is_null($this->_file) )
       throw new Exception("O arquivo não foi declarado, utilize o método setFile");
+
   }
 
   public function import ()
@@ -79,11 +84,13 @@ class ImportExcel
         $this->_data[$row - 1][$col] = $value;
       }
     }
+
   }
 
   public function getData ()
   {
     return $this->_data;
+
   }
 
 }

@@ -8,13 +8,15 @@ use Exception;
 
 class Upload extends AbstractValidator
 {
-    
+
   protected $_extensions;
   protected $_mimes;
-    
-  public function __construct ( $extensions = array(), $mimes = array() ) {
+
+  public function __construct ( $extensions = array(), $mimes = array() )
+  {
     $this->_extensions = $extensions;
     $this->_mimes = $mimes;
+
   }
 
   public function validate ( $prop, $label )
@@ -59,6 +61,7 @@ class Upload extends AbstractValidator
     }
 
     return true;
+
   }
 
 }

@@ -29,7 +29,7 @@ class EmailSeparated
     $emails = implode(',', $arrayEmail);
 
     return $emails;
+
   }
 
 }
-

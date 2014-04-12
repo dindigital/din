@@ -33,6 +33,7 @@ class Ckeditor
   public function __construct ( $field_name )
   {
     $this->setName($field_name);
+
   }
 
   /**
@@ -42,6 +43,7 @@ class Ckeditor
   public function setName ( $field_name )
   {
     $this->_field_name = $field_name;
+
   }
 
   /**
@@ -51,6 +53,7 @@ class Ckeditor
   public function setClass ( $class )
   {
     $this->_class = $class;
+
   }
 
   /**
@@ -72,6 +75,7 @@ class Ckeditor
     $r .= '</script>' . PHP_EOL;
 
     return $r;
+
   }
 
 }

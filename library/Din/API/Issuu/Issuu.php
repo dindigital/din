@@ -23,6 +23,7 @@ class Issuu
   {
     $this->_api_key = $api_key;
     $this->_api_secret = $api_secret;
+
   }
 
   public function document_url_upload ( $url, $name, $title )
@@ -44,6 +45,7 @@ class Issuu
     $return['name'] = $document->name;
 
     return $return;
+
   }
 
   public function document_embed_add ( $document_id, $width, $height )
@@ -63,6 +65,7 @@ class Issuu
     $return['dataConfigId'] = $document_embed->dataConfigId;
 
     return $return;
+
   }
 
   public function document_embed_get_html_code ( $embed_id )
@@ -73,6 +76,7 @@ class Issuu
     $response_html = $this->call(false);
 
     return $response_html;
+
   }
 
   public function document_delete ( $name )
@@ -81,6 +85,7 @@ class Issuu
     $this->_fields['names'] = $name;
 
     return $this->call();
+
   }
 
   protected function setSignature ()
@@ -95,6 +100,7 @@ class Issuu
     }
 
     $this->_fields['signature'] = md5($this->_api_secret . $serialized);
+
   }
 
   protected function call ( $return_json = true )
@@ -131,6 +137,7 @@ class Issuu
     }
 
     return $response_text;
+
   }
 
 }

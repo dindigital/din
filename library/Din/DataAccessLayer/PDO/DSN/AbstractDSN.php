@@ -13,6 +13,7 @@ abstract class AbstractDSN
     $r = str_replace('{$host}', $host, $r);
 
     return $r;
+
   }
 
 }

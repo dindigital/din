@@ -38,6 +38,7 @@ class Paginator
 
     $_atual_pag = $_atual_pag == 0 ? @$_GET['pag'] : $_atual_pag;
     $this->_atual_pag = intval($_atual_pag) == 0 ? 1 : intval($_atual_pag);
+
   }
 
   public function getOffset ( $total = null )
@@ -50,6 +51,7 @@ class Paginator
     $offset = $this->_atual_pag * $this->_itens_por_pag - $this->_itens_por_pag;
 
     return $offset;
+
   }
 
   /**
@@ -192,6 +194,7 @@ class Paginator
 
       return $_order;
     }
+
   }
 
   /**
@@ -201,11 +204,13 @@ class Paginator
   public function getTotal ()
   {
     return $this->_total;
+
   }
 
   public function getItensPerPage ()
   {
     return $this->_itens_por_pag;
+
   }
 
   /**
@@ -221,6 +226,7 @@ class Paginator
     }
 
     return $r;
+
   }
 
 }

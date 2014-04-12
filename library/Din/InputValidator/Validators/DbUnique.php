@@ -8,17 +8,19 @@ use Din\DataAccessLayer\Select;
 
 class DbUnique extends AbstractValidator
 {
-    
+
   protected $_dao;
   protected $_tablename;
   protected $_id_field;
   protected $_id;
-    
-  public function __construct ( DAO $dao, $tablename, $id_field = null, $id = null ) {
+
+  public function __construct ( DAO $dao, $tablename, $id_field = null, $id = null )
+  {
     $this->_dao = $dao;
     $this->_tablename = $tablename;
     $this->_id_field = $id_field;
     $this->_id = $id;
+
   }
 
   public function validate ( $prop, $label )
@@ -39,6 +41,7 @@ class DbUnique extends AbstractValidator
 
     if ( $count )
       $this->addException("Já existe um registro com este {$label}: {$value}");
+
   }
 
 }

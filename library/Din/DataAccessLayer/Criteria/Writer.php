@@ -26,17 +26,20 @@ class Writer
     }
 
     $this->replaces();
+
   }
 
   public function getSQL ()
   {
     return $this->_sql;
+
   }
 
   private function replaces ()
   {
     $this->_sql = str_replace('((', '(', $this->_sql);
     $this->_sql = str_replace('))', ')', $this->_sql);
+
   }
 
 }

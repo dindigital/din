@@ -13,26 +13,31 @@ class Header
 
     header("Location: {$url}");
     exit;
+
   }
 
   public static function getReferer ()
   {
     return @$_SERVER['HTTP_REFERER'];
+
   }
 
   public static function getUri ()
   {
     return $_SERVER ['REQUEST_URI'];
+
   }
 
   public static function set404 ()
   {
     header("HTTP/1.0 404 Not Found");
+
   }
 
   public static function set500 ()
   {
     header("HTTP/1.0 500 Internal Server Error");
+
   }
 
   public static function setNoCache ()
@@ -42,6 +47,7 @@ class Header
     header("Cache-Control: no-store, no-cache, must-revalidate");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
+
   }
 
 }

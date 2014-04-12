@@ -24,6 +24,7 @@ class DAO
   public function __construct ( PDODriver $PDO )
   {
     $this->_driver = $PDO;
+
   }
 
   /**
@@ -49,6 +50,7 @@ class DAO
     $this->_driver->execute($SQL, $arr_params);
 
     return $this->_driver->lastInsertId();
+
   }
 
   /**
@@ -74,6 +76,7 @@ class DAO
     $PDOStatement = $this->_driver->execute($SQL, $arr_params);
 
     return $PDOStatement->rowCount();
+
   }
 
   /**
@@ -96,6 +99,7 @@ class DAO
     $PDOStatement = $this->_driver->execute($SQL, $arr_params);
 
     return $PDOStatement->rowCount();
+
   }
 
   public function select_debug ( Select $select )
@@ -109,6 +113,7 @@ class DAO
 
     var_dump($SQL);
     exit;
+
   }
 
   /**
@@ -120,6 +125,7 @@ class DAO
   public function select ( Select $select )
   {
     return $this->_driver->select($select->getSQL(), $select->getWhereValues());
+
   }
 
   /**
@@ -133,6 +139,7 @@ class DAO
     $result = $this->_driver->select($select->getSQLCount(), $select->getWhereValues());
 
     return intval($result[0]['total']);
+
   }
 
   /**
@@ -154,6 +161,7 @@ class DAO
     $PDOStatement = $this->_driver->execute($SQL, $arr_params);
 
     return $fetch ? $PDOStatement->fetchAll(PDODriver::FETCH_ASSOC) : $PDOStatement->rowCount();
+
   }
 
 }
