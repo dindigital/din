@@ -18,8 +18,7 @@ class CompressorCreator extends Creator
 
   public function factoryMethod ( iAsset $asset )
   {
-    $this->create = new $asset();
-
+    $this->create = $asset;
     return($this->create->provideAsset($this->_assetsConfig, $this->_assetsGroup));
   }
 

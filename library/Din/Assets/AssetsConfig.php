@@ -5,7 +5,7 @@ namespace Din\Assets;
 use Din\File\Files;
 use Exception;
 
-class AssetsConfig
+class AssetsConfig implements AssetsConfigInterface, AssetsConfigFileInterface
 {
 
   protected $_assets;
