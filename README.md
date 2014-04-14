@@ -1,2 +1,4 @@
-din
+### Dindigital/Din
 ===
+
+Framework em desenvolvimento.
