@@ -9,5 +9,15 @@
   },
   "require": {
     "dindigital/data-access-layer": "dev-master"
-  }
+  },
+  "authors": [
+     {
+         "name": "Jair Cueva Junior",
+         "email": "junior@dindigital.com"
+     },
+     {
+         "name": "Mario Mello",
+         "email": "mario@dindigital.com"
+     }
+   ]
 }
