@@ -8,7 +8,7 @@
     }
   },
   "require": {
-    "dindigital/data-access-layer": "dev-master",
+    "dindigital/data-access-layer": "dev-master"
   },
   "authors": [
     {
