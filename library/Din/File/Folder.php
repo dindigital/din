@@ -2,7 +2,7 @@
 
 namespace Din\File;
 
-use \Exception;
+use Exception;
 
 class Folder
 {
