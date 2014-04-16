@@ -4,7 +4,7 @@ namespace Din\TableFilter\Filters;
 
 use Din\TableFilter\AbstractFilter;
 use Din\DataAccessLayer\DAO;
-use Admin\Helpers\Entity;
+use Din\Essential\Helpers\Entity;
 use Din\DataAccessLayer\Select;
 
 class Sequence extends AbstractFilter
