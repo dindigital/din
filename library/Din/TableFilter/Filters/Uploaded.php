@@ -3,7 +3,7 @@
 namespace Din\TableFilter\Filters;
 
 use Din\TableFilter\AbstractFilter;
-use Admin\Helpers\MoveFiles;
+use Din\File\MoveFiles;
 use Din\Filters\String\Uri;
 use Din\File\Folder;
 
