@@ -9,7 +9,6 @@
   },
   "require": {
     "dindigital/data-access-layer": "dev-master",
-    "dindigital/essential": "dev-master"
   },
   "authors": [
     {
