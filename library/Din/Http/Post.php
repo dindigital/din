@@ -57,7 +57,13 @@ class Post
 
   public static function text ( $fieldname )
   {
-    return (isset($_POST[$fieldname])) ? trim($_POST[$fieldname]) : '';
+    if ( array_key_exists($fieldname, $_POST) && $_POST[$fieldname] != '' ) {
+      $r = trim($_POST[$fieldname]);
+    } else {
+      $r = null;
+    }
+
+    return $r;
 
   }
 
