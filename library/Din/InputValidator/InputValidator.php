@@ -7,18 +7,22 @@ use Din\InputValidator\ValidatorInterface;
 use InvalidArgumentException;
 
 /**
+ * @method \Din\InputValidator\ValidatorInterface arrayExists($array)
+ * @method \Din\InputValidator\ValidatorInterface arrayKeyExists($array)
  * @method \Din\InputValidator\ValidatorInterface arrayNotEmpty()
- * @method \Din\InputValidator\ValidatorInterface arrayExists()
- * @method \Din\InputValidator\ValidatorInterface arrayKeyExists()
+ * @method \Din\InputValidator\ValidatorInterface date($format = 'd/m/Y')
+ * @method \Din\InputValidator\ValidatorInterface dbFk(DAO $dao, $foreign_tablename)
+ * @method \Din\InputValidator\ValidatorInterface dbRecord(DAO $dao, $tablename)
+ * @method \Din\InputValidator\ValidatorInterface dbUnique(DAO $dao, $tablename, $id_field = null, $id = null)
+ * @method \Din\InputValidator\ValidatorInterface minMax($min, $max)
+ * @method \Din\InputValidator\ValidatorInterface minMaxSum($min, $max)
+ * @method \Din\InputValidator\ValidatorInterface positive()
  * @method \Din\InputValidator\ValidatorInterface string()
  * @method \Din\InputValidator\ValidatorInterface stringEmail()
- * @method \Din\InputValidator\ValidatorInterface stringEqual()
- * @method \Din\InputValidator\ValidatorInterface stringLenght()
- * @method \Din\InputValidator\ValidatorInterface date()
- * @method \Din\InputValidator\ValidatorInterface upload()
- * @method \Din\InputValidator\ValidatorInterface dbFk()
- * @method \Din\InputValidator\ValidatorInterface dbRecord()
- * @method \Din\InputValidator\ValidatorInterface dbUnique()
+ * @method \Din\InputValidator\ValidatorInterface stringEqual($equal)
+ * @method \Din\InputValidator\ValidatorInterface stringLenght($min = 1, $max = null)
+ * @method \Din\InputValidator\ValidatorInterface upload($extensions = array(), $mimes = array())
+
  */
 class InputValidator
 {
