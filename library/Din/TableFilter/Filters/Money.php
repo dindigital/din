@@ -11,9 +11,11 @@ class Money extends AbstractFilter
   public function filter ( $field )
   {
     $v = $this->getValue($field);
-    $value = MoneyFilter::filter_sql($v);
+    if ( !is_null($v) ) {
+      $v = MoneyFilter::filter_sql($v);
+    }
 
-    $this->_table->{$field} = $value;
+    $this->_table->{$field} = $v;
 
   }
 
