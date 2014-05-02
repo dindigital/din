@@ -16,6 +16,7 @@ use InvalidArgumentException;
  * @method \Din\InputValidator\ValidatorInterface dbUnique(DAO $dao, $tablename, $id_field = null, $id = null)
  * @method \Din\InputValidator\ValidatorInterface minMax($min, $max)
  * @method \Din\InputValidator\ValidatorInterface minMaxSum($min, $max)
+ * @method \Din\InputValidator\ValidatorInterface phone()
  * @method \Din\InputValidator\ValidatorInterface positive()
  * @method \Din\InputValidator\ValidatorInterface string()
  * @method \Din\InputValidator\ValidatorInterface stringEmail()
@@ -77,6 +78,12 @@ class InputValidator
   public function addException ( $msg )
   {
     $this->_exception->addException($msg);
+
+  }
+
+  public function getInput ()
+  {
+    return $this->_input;
 
   }
 
