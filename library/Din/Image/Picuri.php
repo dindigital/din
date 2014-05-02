@@ -33,7 +33,7 @@ class Picuri
 
   public function __construct ( $file )
   {
-    $this->_image = new Image(PATH_REPLACE . $file, PATH_IMAGE, PATH_REPLACE . IMAGEM_PADRAO);
+    $this->_image = new Image(PATH_REPLACE . $file, PATH_IMAGE, PATH_REPLACE . DEFAULT_IMAGE);
 
   }
 
