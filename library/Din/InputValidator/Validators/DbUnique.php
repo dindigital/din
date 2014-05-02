@@ -13,13 +13,15 @@ class DbUnique extends AbstractValidator
   protected $_tablename;
   protected $_id_field;
   protected $_id;
+  protected $_fieldname;
 
-  public function __construct ( DAO $dao, $tablename, $id_field = null, $id = null )
+  public function __construct ( DAO $dao, $tablename, $id_field = null, $id = null, $fieldname = null )
   {
     $this->_dao = $dao;
     $this->_tablename = $tablename;
     $this->_id_field = $id_field;
     $this->_id = $id;
+    $this->_fieldname = $fieldname;
 
   }
 
@@ -27,8 +29,12 @@ class DbUnique extends AbstractValidator
   {
     $value = $this->getValue($prop);
 
+    if ( is_null($this->_fieldname) ) {
+      $this->_fieldname = $prop;
+    }
+
     $arrCriteria = array(
-        "{$prop} = ?" => $value
+        "{$this->_fieldname} = ?" => $value
     );
 
     if ( $this->_id_field ) {
