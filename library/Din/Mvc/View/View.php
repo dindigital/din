@@ -96,6 +96,14 @@ class View
 
   }
 
+  public function display_xml ()
+  {
+    header("Content-Type: text/xml");
+    echo '<?xml version="1.0" encoding="UTF-8"?>';
+    echo($this->getResult());
+
+  }
+
   public function display_html_result ( $html )
   {
     header("Content-Type: text/html");

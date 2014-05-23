@@ -72,6 +72,7 @@ abstract class Assets
       $this->updateName($name);
 
       $this->_am = null;
+      sleep(2);
     }
 
   }
@@ -100,6 +101,8 @@ abstract class Assets
 
   protected function updateName ( $name )
   {
+
+    echo($this->_name . ' -> ' . $name . PHP_EOL);
     $file_contents = file_get_contents($this->_file);
     $file = str_replace($this->_name, $name, $file_contents);
     file_put_contents($this->_file, $file);
