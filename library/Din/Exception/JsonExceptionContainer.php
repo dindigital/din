@@ -20,8 +20,14 @@ class JsonExceptionContainer implements MultiExceptionInterface
 
   public function throwException ()
   {
-    if ( count($this->_exceptions) )
+    if ( $this->hasException() )
       throw new JsonException(json_encode($this->_exceptions));
+
+  }
+
+  public function hasException ()
+  {
+    return count($this->_exceptions) > 0;
 
   }
 

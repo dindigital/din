@@ -31,7 +31,7 @@ class TableFilter
 
   protected $_filter;
 
-  public function __construct ( Table $table, array $input )
+  public function __construct ( Table $table, array $input = array() )
   {
     $this->_table = $table;
     $this->_input = $input;
@@ -65,6 +65,12 @@ class TableFilter
   public function filter ( $input )
   {
     return $this->_filter->filter($input);
+
+  }
+
+  public function filterValue ( $value, $prop )
+  {
+    return $this->_filter->filterValue($value, $prop);
 
   }
 

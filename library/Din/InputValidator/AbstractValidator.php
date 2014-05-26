@@ -46,4 +46,15 @@ abstract class AbstractValidator implements ValidatorInterface
   }
 
   abstract public function validate ( $prop, $label );
+
+  public function validateValue ( $value, $label )
+  {
+    $this->setInput(array(
+        'field' => $value
+    ));
+
+    return $this->validate('field', $label);
+
+  }
+
 }

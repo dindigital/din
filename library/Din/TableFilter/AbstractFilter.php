@@ -41,4 +41,15 @@ abstract class AbstractFilter implements FilterInterface
   }
 
   abstract public function filter ( $field );
+
+  public function filterValue ( $value, $prop )
+  {
+    $this->setInput(array(
+        $prop => $value
+    ));
+
+    $this->filter($prop);
+
+  }
+
 }

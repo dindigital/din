@@ -32,7 +32,7 @@ class InputValidator
   protected $_input;
   protected $_exception;
 
-  public function __construct ( array $input )
+  public function __construct ( array $input = array() )
   {
     $this->_input = $input;
     $this->_exception = new \Din\Exception\JsonExceptionContainer();
@@ -69,6 +69,12 @@ class InputValidator
 
   }
 
+  public function validateValue ( $value, $label )
+  {
+    return $this->_validator->validateValue($value, $label);
+
+  }
+
   public function throwException ()
   {
     $this->_exception->throwException();
@@ -84,6 +90,12 @@ class InputValidator
   public function getInput ()
   {
     return $this->_input;
+
+  }
+
+  public function hasException ()
+  {
+    return $this->_exception->hasException();
 
   }
 

@@ -12,4 +12,6 @@ interface FilterInterface
   public function setInput ( array $input );
 
   public function filter ( $field );
+
+  public function filterValue ( $value, $prop );
 }
