@@ -3,7 +3,6 @@
 namespace Din\TableFilter\Filters;
 
 use Din\TableFilter\AbstractFilter;
-use Din\Filters\String\Number;
 
 class Decimal extends AbstractFilter
 {
@@ -18,7 +17,8 @@ class Decimal extends AbstractFilter
 
   public function filter ( $field )
   {
-    $v = Number::only_numbers($this->getValue($field));
+    $v = $this->getValue($field);
+    $v = str_replace(',', '.', $v);
 
     $v = number_format($v, $this->_decimals, '.', '');
 
