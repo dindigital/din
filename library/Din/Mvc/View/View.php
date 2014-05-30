@@ -9,6 +9,8 @@ class View
 
   private $_files = array();
   private $_data;
+  private $_i; // utilizado para nao contaminar as variaveis utilizadas na  view
+  private $_arr_file; // utilizado para nao contaminar as variaveis utilizadas na  view
 
   public function addFile ( $file, $placeholder = null )
   {
@@ -60,14 +62,14 @@ class View
 
   private function readContents ()
   {
-    foreach ( $this->_files as $i => $arr_file ) {
+    foreach ( $this->_files as $this->_i => $this->_arr_file ) {
       $data = $this->_data;
 
       ob_start();
 
-      include $arr_file['file'];
+      include $this->_arr_file['file'];
 
-      $this->_files[$i]['content'] = ob_get_clean();
+      $this->_files[$this->_i]['content'] = ob_get_clean();
     }
 
   }
