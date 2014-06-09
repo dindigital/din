@@ -45,7 +45,7 @@ abstract class AbstractValidator implements ValidatorInterface
 
   }
 
-  abstract public function validate ( $prop, $label );
+  //abstract public function validate ( $prop, $label );
 
   public function validateValue ( $value, $label )
   {
