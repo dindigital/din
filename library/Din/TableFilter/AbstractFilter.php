@@ -40,7 +40,7 @@ abstract class AbstractFilter implements FilterInterface
 
   }
 
-  abstract public function filter ( $field );
+  //abstract public function filter ( $field );
 
   public function filterValue ( $value, $prop )
   {
