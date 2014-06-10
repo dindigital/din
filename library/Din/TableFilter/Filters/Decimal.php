@@ -19,6 +19,7 @@ class Decimal extends AbstractFilter
   {
     $v = $this->getValue($field);
     $v = str_replace(',', '.', $v);
+    $v = preg_replace('/([^0-9^\.])/', '', $v);
 
     $v = number_format($v, $this->_decimals, '.', '');
 
