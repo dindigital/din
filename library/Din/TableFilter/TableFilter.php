@@ -13,6 +13,7 @@ use Imagine\Exception\InvalidArgumentException;
  * @method \Din\TableFilter\FilterInterface defaultUri($title, $id = '', $prefix = '')
  * @method \Din\TableFilter\FilterInterface extractPhoneDDD($new_field = null)
  * @method \Din\TableFilter\FilterInterface extractPhoneNumber($new_field = null)
+ * @method \Din\TableFilter\FilterInterface friendly($from_field)
  * @method \Din\TableFilter\FilterInterface idParent()
  * @method \Din\TableFilter\FilterInterface intval($default_value = null)
  * @method \Din\TableFilter\FilterInterface json()
