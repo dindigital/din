@@ -9,10 +9,12 @@ class Friendly extends AbstractFilter
 {
 
   protected $_from_field;
+  protected $_slug;
 
-  public function __construct ( $from_field )
+  public function __construct ( $from_field, $slug = '-' )
   {
     $this->_from_field = $from_field;
+    $this->_slug = $slug;
 
   }
 
@@ -20,7 +22,7 @@ class Friendly extends AbstractFilter
   {
     $value = (string) $this->getValue($this->_from_field);
 
-    $this->_table->{$field} = Uri::format($value);
+    $this->_table->{$field} = Uri::format($value, $this->_slug);
 
   }
 
