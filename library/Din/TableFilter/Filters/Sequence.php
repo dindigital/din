@@ -32,9 +32,15 @@ class Sequence extends AbstractFilter
     } else {
       if ( isset($entity_sequence['dependence']) ) {
         $dependence_field = $entity_sequence['dependence'];
-        $dependence_value = $this->_table->{$dependence_field};
-
-        $arrCriteria[$dependence_field . ' = ?'] = $dependence_value;
+        if ( is_array($dependence_field) ) {
+          foreach ( $dependence_field as $dp ) {
+            $dependence_value = $this->_table->{$dp};
+            $arrCriteria[$dp . ' = ?'] = $dependence_value;
+          }
+        } else {
+          $dependence_value = $this->_table->{$dependence_field};
+          $arrCriteria[$dependence_field . ' = ?'] = $dependence_value;
+        }
       }
 
       $sequence = $this->getMaxSequence($arrCriteria) + 1;
