@@ -3,6 +3,9 @@
 namespace Din\Auth\AuthDataLayer;
 
 use Din\DataAccessLayer\PDO\PDODriver;
+use Din\DataAccessLayer\DAO;
+use Din\DataAccessLayer\Select\Select as Select2;
+use Din\DataAccessLayer\Criteria\Criteria;
 
 class AuthDataLayer implements iAuthDataLayer
 {
@@ -15,6 +18,7 @@ class AuthDataLayer implements iAuthDataLayer
   private $_pdo;
   private $_pkValue;
   private $_activatedValue;
+  private $_dao;
 
   public function __construct ( PDODriver $PDO, $tbl, $userField, $passField, $pkField, $activatedField )
   {
@@ -25,13 +29,20 @@ class AuthDataLayer implements iAuthDataLayer
     $this->_activatedField = $activatedField;
 
     $this->_pdo = $PDO;
+    $this->_dao = new DAO($PDO);
 
   }
 
   public function test_login ( $user, $pass )
   {
-    $SQL = "SELECT * FROM {$this->_tbl} WHERE {$this->_userField} = ? AND {$this->_passField} = ? ";
-    $result = $this->_pdo->select($SQL, array($user, $pass));
+    $select = new Select2($this->_tbl);
+    $select->addAllFields();
+    $select->where(new Criteria(array(
+        $this->_userField . ' = ?' => $user,
+        $this->_passField . ' = ?' => $pass
+    )));
+
+    $result = $this->_dao->select($select);
 
     if ( count($result) ) {
       $this->_pkValue = $result[0][$this->_pkField];
