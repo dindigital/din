@@ -71,6 +71,12 @@ class SendEmail
 
   }
 
+  public function isMail ()
+  {
+    $this->_sender->isMail();
+
+  }
+
   public function send ()
   {
     $this->_sender->Host = $this->_host;
