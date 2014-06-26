@@ -43,6 +43,12 @@ class Header
 
   }
 
+  public static function set401 ()
+  {
+    header("HTTP/1.1 401 Unauthorized");
+
+  }
+
   public static function set404 ()
   {
     header("HTTP/1.0 404 Not Found");
