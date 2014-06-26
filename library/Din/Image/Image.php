@@ -231,7 +231,9 @@ class Image
       $path .= basename($this->_path);
     }
 
-    $this->_resizeImage->save($path);
+    $opt = array('jpeg_quality' => 100, 'png_compression_level' => 9);
+
+    $this->_resizeImage->save($path, $opt);
 
     return $path;
 
