@@ -11,4 +11,16 @@ class Get
 
   }
 
+  /**
+   * Facilitador de acesso ao get de um campo array (exemplo: fotos[])
+   *
+   * @param string $fieldname
+   * @return array
+   */
+  public static function aray ( $fieldname )
+  {
+    return (isset($_GET[$fieldname])) ? $_GET[$fieldname] : array();
+
+  }
+
 }
