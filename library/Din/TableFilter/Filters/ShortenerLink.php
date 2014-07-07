@@ -3,6 +3,7 @@
 namespace Din\TableFilter\Filters;
 
 use Din\TableFilter\AbstractFilter;
+use Din\UrlShortener\Bitly\Bitly;
 
 class ShortenerLink extends AbstractFilter
 {
@@ -11,10 +12,13 @@ class ShortenerLink extends AbstractFilter
   {
     if ( URL && BITLY && $this->_table->uri ) {
       $url = URL . $this->_table->uri;
-      $bitly = new Bitly(BITLY);
-      $bitly->shorten($url);
-      if ( $bitly->check() ) {
-        $this->_table->short_link = $bitly;
+
+      try {
+        $bitly = new Bitly(BITLY);
+        $bitly->shorten($url);
+        $this->_table->short_link = (string) $bitly;
+      } catch (\Exception $e) {
+        //
       }
     }
 

@@ -26,7 +26,7 @@ class Bitly
     $output_text = $this->bitly_get_curl($url);
 
     $output_json = json_decode($output_text);
-    if ( json_last_error() )
+    if ( json_last_error() || !is_object($output_json) )
       throw new Exception('Falha ao converter JSON: ' . $output_text);
 
     if ( $output_json->status_code != 200 )
