@@ -13,4 +13,15 @@ class Html
 
   }
 
+  public static function scapeArray ( array &$array, array $indexes )
+  {
+    foreach ( $indexes as $k ) {
+      $array[$k] = self::scape($array[$k]);
+    }
+
+
+    return $array;
+
+  }
+
 }
