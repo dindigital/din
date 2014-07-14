@@ -12,12 +12,14 @@ class DefaultUri extends AbstractFilter
   protected $_title;
   protected $_id;
   protected $_prefix;
+  protected $_format_prefix;
 
-  public function __construct ( $title, $id = '', $prefix = '' )
+  public function __construct ( $title, $id = '', $prefix = '', $format_prefix = true )
   {
     $this->_title = $title;
     $this->_id = $id;
     $this->_prefix = $prefix;
+    $this->_format_prefix = $format_prefix;
 
   }
 
@@ -31,7 +33,11 @@ class DefaultUri extends AbstractFilter
     $uri = $uri == '' ? Uri::format($title) : Uri::format($uri);
     $uri = LimitChars::filter($uri, 80, '');
     if ( $this->_prefix != '' ) {
-      $this->_prefix = '/' . Uri::format($this->_prefix);
+      if ( $this->_format_prefix ) {
+        $this->_prefix = '/' . Uri::format($this->_prefix);
+      } else {
+        $this->_prefix = '/' . ($this->_prefix);
+      }
     }
 
     if ( $this->_id != '' ) {
