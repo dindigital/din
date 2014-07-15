@@ -12,6 +12,7 @@ class FileTypes
   private static $_types = array(
       'image' => array(
           'ext' => array(
+              'JPG',
               'jpg',
               'jpeg',
               'gif',
@@ -21,6 +22,7 @@ class FileTypes
       ),
       'banner' => array(
           'ext' => array(
+              'JPG',
               'jpg',
               'jpeg',
               'gif',
