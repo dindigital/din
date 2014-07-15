@@ -19,24 +19,26 @@ class PhotoMetadata extends AbstractFilter
      * LEITUR4 XMP
      */
     $xmp_raw = $this->get_xmp_raw($file);
+    if ( $xmp_raw ) {
 
-    $xml = new \DOMDocument;
-    $xml->loadXML($xmp_raw);
+      $xml = new \DOMDocument;
+      $xml->loadXML($xmp_raw);
 
-    $array = $this->xml_to_array($xml);
+      $array = $this->xml_to_array($xml);
 
-    $description_tag = @$array['x:xmpmeta']['rdf:RDF']['rdf:Description'];
-    $this->_table->rating = @$description_tag['@attributes']['Rating'];
-    $this->_table->author_title = @$description_tag['@attributes']['AuthorsPosition'];
-    $this->_table->author_email = @$description_tag['@attributes']['WebStatement'];
-    $this->_table->author = @$description_tag['dc:creator']['rdf:Seq']['rdf:li'];
-    $this->_table->copyright_notice = @$description_tag['dc:rights']['rdf:Alt']['rdf:li']['_value'];
-    $this->_table->document_title = @$description_tag['dc:title']['rdf:Alt']['rdf:li']['_value'];
-    $this->_table->description = @$description_tag['dc:description']['rdf:Alt']['rdf:li']['_value'];
-    $this->_table->keywords = @$description_tag['dc:subject']['rdf:Bag']['rdf:li'];
+      $description_tag = @$array['x:xmpmeta']['rdf:RDF']['rdf:Description'];
+      $this->_table->rating = @$description_tag['@attributes']['Rating'];
+      $this->_table->author_title = @$description_tag['@attributes']['AuthorsPosition'];
+      $this->_table->author_email = @$description_tag['@attributes']['WebStatement'];
+      $this->_table->author = @$description_tag['dc:creator']['rdf:Seq']['rdf:li'];
+      $this->_table->copyright_notice = @$description_tag['dc:rights']['rdf:Alt']['rdf:li']['_value'];
+      $this->_table->document_title = @$description_tag['dc:title']['rdf:Alt']['rdf:li']['_value'];
+      $this->_table->description = @$description_tag['dc:description']['rdf:Alt']['rdf:li']['_value'];
+      $this->_table->keywords = @$description_tag['dc:subject']['rdf:Bag']['rdf:li'];
 
-    if ( is_array($this->_table->keywords) ) {
-      $this->_table->keywords = implode(', ', $this->_table->keywords);
+      if ( is_array($this->_table->keywords) ) {
+        $this->_table->keywords = implode(', ', $this->_table->keywords);
+      }
     }
 
     /**
@@ -51,11 +53,11 @@ class PhotoMetadata extends AbstractFilter
     }
 
     if ( isset($exif['ImageDescription']) ) {
-      $this->_table->label = $exif['ImageDescription'];
+      $this->_table->label = trim($exif['ImageDescription']);
     }
 
     if ( isset($exif['Artist']) ) {
-      $this->_table->credit = $exif['Artist'];
+      $this->_table->credit = trim($exif['Artist']);
     }
 
   }
