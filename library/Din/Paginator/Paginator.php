@@ -213,6 +213,12 @@ class Paginator
 
   }
 
+  public function getTotalPags ()
+  {
+    return $this->_total_pags;
+
+  }
+
   /**
    *
    * @return int
