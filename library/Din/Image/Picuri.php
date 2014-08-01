@@ -105,6 +105,9 @@ class Picuri
       case 'tag_without_size':
         $this->getImageTagWithoutSize();
         break;
+      case 'lazy':
+        $this->getImageLazy();
+        break;
       case 'std':
         $this->getImageStd();
         break;
@@ -126,6 +129,12 @@ class Picuri
   private function getImageTagWithoutSize ()
   {
     $this->_imageReturn = '<img src="' . $this->_newImage . '" ' . $this->_attributos . ' />';
+
+  }
+
+  private function getImageLazy ()
+  {
+    $this->_imageReturn = '<img data-original="' . $this->_newImage . '" ' . $this->_attributos . ' />';
 
   }
 
