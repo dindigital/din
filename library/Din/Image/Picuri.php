@@ -134,7 +134,7 @@ class Picuri
 
   private function getImageLazy ()
   {
-    $this->_imageReturn = '<img data-original="' . $this->_newImage . '" ' . $this->_attributos . ' />';
+    $this->_imageReturn = '<img src="" data-original="' . $this->_newImage . '" ' . $this->_attributos . ' />';
 
   }
 
