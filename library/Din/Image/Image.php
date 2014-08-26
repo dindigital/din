@@ -183,19 +183,24 @@ class Image
 
   public function resize ()
   {
-    $this->_imagine = new Imagine();
-    $this->_resizeImage = $this->_imagine->open($this->_path);
+    try {
+      $this->_imagine = new Imagine();
+      $this->_resizeImage = $this->_imagine->open($this->_path);
 
-    if ( $this->_crop ) {
-      $image_crop = new ImageCrop($this->_resizeImage, new Box($this->_width, $this->_height));
-      $this->_resizeImage = $image_crop->crop($this->_cropType);
-    } else {
-      $mode = ImageInterface::THUMBNAIL_INSET;
-      $this->calcWidth();
-      $this->calcHeight();
+      if ( $this->_crop ) {
+        $image_crop = new ImageCrop($this->_resizeImage, new Box($this->_width, $this->_height));
+        $this->_resizeImage = $image_crop->crop($this->_cropType);
+      } else {
+        $mode = ImageInterface::THUMBNAIL_INSET;
+        $this->calcWidth();
+        $this->calcHeight();
 
-      $size = new Box($this->_width, $this->_height);
-      $this->_resizeImage = $this->_resizeImage->thumbnail($size, $mode);
+        $size = new Box($this->_width, $this->_height);
+        $this->_resizeImage = $this->_resizeImage->thumbnail($size, $mode);
+      }
+    } catch (\Imagine\Exception\RuntimeException $e) {
+      $this->_path = ($this->getFailPath());
+      return $this->resize();
     }
 
     return $this;
