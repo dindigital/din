@@ -15,10 +15,15 @@ class ShortenerLink extends AbstractFilter
 
       try {
         $bitly = new Bitly(BITLY);
+
+        if ( defined('BITLY_DOMAIN') && BITLY_DOMAIN ) {
+          $bitly->setDomain(BITLY_DOMAIN);
+        }
+
         $bitly->shorten($url);
         $this->_table->short_link = (string) $bitly;
       } catch (\Exception $e) {
-        //
+        //die($e->getMessage());
       }
     }
 
