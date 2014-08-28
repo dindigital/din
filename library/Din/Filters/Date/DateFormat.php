@@ -55,6 +55,7 @@ class DateFormat
     $week = date('w', strtotime($date));
 
     $arryWeek = array(
+        '0' => 'Domingo',
         '1' => 'Segunda-Feira',
         '2' => 'Terça-Feira',
         '3' => 'Quarta-Feira',
