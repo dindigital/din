@@ -17,6 +17,12 @@ class Bitly
 
   }
 
+  public function setDomain ( $domain )
+  {
+    $this->_domain = $domain;
+
+  }
+
   public function shorten ( $longUrl )
   {
     $result = array();
