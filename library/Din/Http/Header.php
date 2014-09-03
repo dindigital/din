@@ -71,4 +71,10 @@ class Header
 
   }
 
+  public static function getDomain ()
+  {
+    return $_SERVER['HTTP_HOST'];
+
+  }
+
 }
