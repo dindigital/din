@@ -98,6 +98,12 @@ class FileTypes
               'wmv',
           ),
           'desc' => 'Arquivos de Vídeo'
+      ),
+      'csv' => array(
+          'ext' => array(
+              'csv',
+          ),
+          'desc' => 'Arquivos CSV'
       )
   );
 
