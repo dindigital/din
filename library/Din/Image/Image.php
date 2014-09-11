@@ -161,9 +161,9 @@ class Image
   public function getSavePath ()
   {
     $ext = strtolower(pathinfo($this->_path, PATHINFO_EXTENSION));
-    $final_name = md5($this->_path . intval($this->_width) . intval($this->_height) . intval($this->_crop) . $this->_cropType) . '.' . $ext;
+//    $final_name = md5($this->_path . intval($this->_width) . intval($this->_height) . intval($this->_crop) . $this->_cropType) . '.' . $ext;
 
-//    $final_name = md5(filemtime($this->_path) . filesize($this->_path) . $this->_path . intval($this->_width) . intval($this->_height) . intval($this->_crop)) . $this->_cropType . '.' . $ext;
+    $final_name = md5(filemtime($this->_path) . filesize($this->_path) . $this->_path . intval($this->_width) . intval($this->_height) . intval($this->_crop)) . $this->_cropType . '.' . $ext;
 
     $path = $this->_save_path . $final_name;
 
