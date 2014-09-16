@@ -113,4 +113,12 @@ class View
 
   }
 
+  public function display_xml_result ( $xml )
+  {
+    header("Content-Type: text/xml");
+    echo '<?xml version="1.0" encoding="UTF-8"?>';
+    echo $xml;
+
+  }
+
 }
