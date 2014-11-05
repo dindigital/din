@@ -16,6 +16,8 @@ class IdParent extends AbstractFilter
       if ( $last == '0' ) {
         if ( isset($id_parent[count($id_parent) - 2]) ) {
           $this->_table->{$field} = $id_parent[count($id_parent) - 2];
+        } else {
+          $this->_table->{$field} = null;
         }
       } else {
         $this->_table->{$field} = end($id_parent);
