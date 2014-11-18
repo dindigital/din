@@ -20,7 +20,7 @@ class ArrayKeyExists extends AbstractValidator
     $value = $this->getValue($prop);
 
     if ( !array_key_exists($value, $this->_array) )
-      $this->addException("Item {$value} não encontrado nas chaves do array de opções em {$label}");
+      $this->addException("Opção inválida no campo {$label}");
 
   }
 
