@@ -14,7 +14,7 @@ class Money
    */
   public static function filter_sql ( $str )
   {
-    if ( !is_numeric($str) && strpos($str, '$') !== false && strpos($str, ',') !== false )
+    if ( !is_numeric($str) && strpos($str, ',') !== false )
       return preg_replace("/[^0-9]/", '', $str) / 100;
     else
       return doubleval($str);
