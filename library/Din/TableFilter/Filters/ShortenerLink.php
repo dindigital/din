@@ -23,7 +23,7 @@ class ShortenerLink extends AbstractFilter
         $bitly->shorten($url);
         $this->_table->short_link = (string) $bitly;
       } catch (\Exception $e) {
-        //die($e->getMessage());
+        die($e->getMessage());
       }
     }
 

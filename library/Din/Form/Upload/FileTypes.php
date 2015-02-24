@@ -58,6 +58,8 @@ class FileTypes
               'docx',
               'xls',
               'xlsx',
+              'ppt',
+              'pptx',
               'jpg',
               'jpeg',
               'png',
