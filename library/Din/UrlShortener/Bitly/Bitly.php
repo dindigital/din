@@ -29,7 +29,7 @@ class Bitly
     $url = "https://api-ssl.bit.ly/v3/shorten?access_token=" . $this->_bitly_key . "&longUrl=" . urlencode($longUrl);
     $url .= "&domain=" . $this->_domain;
 
-    die($url);
+    //die($url);
 
     $output_text = $this->bitly_get_curl($url);
 
