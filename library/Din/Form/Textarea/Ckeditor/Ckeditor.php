@@ -26,6 +26,8 @@ class Ckeditor
    */
   private $_class;
 
+  private $_finderPath;
+
   /**
    *
    * @param string $field_name
@@ -33,6 +35,7 @@ class Ckeditor
   public function __construct ( $field_name )
   {
     $this->setName($field_name);
+    $this->_finderPath = '/admin/js/ckfinder23/';
 
   }
 
@@ -56,6 +59,12 @@ class Ckeditor
 
   }
 
+  public function setFinderPath($path)
+  {
+    $this->_finderPath = $path;
+
+  }
+
   /**
    * retorna o html/javscript do elemento textarea trocado pelo ckeditor
    * @param string $value
@@ -71,7 +80,7 @@ class Ckeditor
     $r .= ' $( \'#' . $this->_field_name . '\' ).ckeditor();' . PHP_EOL;
     $r .= ' var editor = $( \'#' . $this->_field_name . '\' ).ckeditorGet();' . PHP_EOL;
     //$r .= ' if (CKEDITOR.instances["' . $this->_field_name . '"]) delete CKEDITOR.instances["' . $this->_field_name . '"];' . PHP_EOL;
-    $r .= ' CKFinder.setupCKEditor( editor, \'/admin/js/ckfinder23/\' ) ;' . PHP_EOL;
+    $r .= ' CKFinder.setupCKEditor( editor, \'' . $this->_finderPath . '\' ) ;' . PHP_EOL;
     $r .= '</script>' . PHP_EOL;
 
     return $r;
