@@ -47,7 +47,7 @@ class Upload extends AbstractValidator
     if ( count($this->_extensions) ) {
       $current_ext = pathinfo($name, PATHINFO_EXTENSION);
       if ( !in_array(strtolower($current_ext), $this->_extensions) )
-        return $this->addException('Extensão de arquivo deve ser ' . implode(', ', $extensions) . "no campo {$label}");
+        return $this->addException('Extensão de arquivo deve ser ' . implode(', ', $this->_extensions) . "no campo {$label}");
     }
 
     //Valida mime type
