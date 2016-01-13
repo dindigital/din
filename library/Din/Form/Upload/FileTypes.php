@@ -74,6 +74,7 @@ class FileTypes
               'zip',
               'rar',
               'ai',
+              'mp3',
           ),
           'desc' => 'Documentos'
       ),
