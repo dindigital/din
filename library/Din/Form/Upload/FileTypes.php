@@ -31,6 +31,17 @@ class FileTypes
           ),
           'desc' => 'Arquivos de Imagem / SWF'
       ),
+      'banner_video' => array(
+          'ext' => array(
+              'JPG',
+              'jpg',
+              'jpeg',
+              'gif',
+              'png',
+              'mp4'
+          ),
+          'desc' => 'Arquivos de Imagem / Vídeos'
+      ),
       'zip' => array(
           'ext' => array(
               'zip',
