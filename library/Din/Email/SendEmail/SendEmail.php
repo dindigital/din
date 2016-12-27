@@ -3,7 +3,7 @@
 namespace Din\Email\SendEmail;
 
 use Din\Email\Email;
-use \PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
 use Exception;
 
 class SendEmail
