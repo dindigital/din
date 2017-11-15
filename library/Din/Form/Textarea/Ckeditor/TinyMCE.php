@@ -2,8 +2,6 @@
 
 namespace Din\Form\Textarea\Ckeditor;
 
-use Din\Session\Session;
-
 class TinyMCE
 {
     /**
@@ -13,20 +11,12 @@ class TinyMCE
     private $_field_name;
 
     /**
-     * nome da classe do elemento
-     * @var type
-     */
-    private $_class;
-    private $_finderPath;
-
-    /**
      *
      * @param string $field_name
      */
     public function __construct($field_name)
     {
         $this->setName($field_name);
-        $this->_finderPath = '/admin/js/ckfinder23/';
     }
 
     /**
@@ -39,30 +29,13 @@ class TinyMCE
     }
 
     /**
-     *
-     * @param string $class
-     */
-    public function setClass($class)
-    {
-        $this->_class = $class;
-    }
-
-    public function setFinderPath($path)
-    {
-        $this->_finderPath = $path;
-    }
-
-    /**
      * retorna o html/javscript do elemento textarea trocado pelo ckeditor
      * @param string $value
      * @return string
      */
     public function getElement($value = '')
     {
-        $session = new Session('IsAuthorized');
-        $session->set(0, 1);
-
-        $r = '<textarea id="'.$this->_field_name.'" name="'.$this->_field_name.'" class="'.$this->_class.'">'.$value.'</textarea>'.PHP_EOL;
+        $r = '<textarea id="'.$this->_field_name.'" name="'.$this->_field_name.'">'.$value.'</textarea>'.PHP_EOL;
         $r .= '<script type="text/javascript">'.PHP_EOL;
         $r .= ' tinymce.init({'.PHP_EOL;
         $r .= '     selector: "#'.$this->_field_name.'",'.PHP_EOL;
