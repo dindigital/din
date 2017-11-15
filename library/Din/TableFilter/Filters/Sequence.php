@@ -35,7 +35,11 @@ class Sequence extends AbstractFilter
         if ( is_array($dependence_field) ) {
           foreach ( $dependence_field as $dp ) {
             $dependence_value = $this->_table->{$dp};
-            $arrCriteria[$dp . ' = ?'] = $dependence_value;
+            if ( is_null($dependence_value) ) {
+              $arrCriteria[$dp . ' IS NULL'] = null;
+            } else {
+              $arrCriteria[$dp . ' = ?'] = $dependence_value;
+            }
           }
         } else {
           $dependence_value = $this->_table->{$dependence_field};
