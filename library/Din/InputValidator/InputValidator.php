@@ -65,7 +65,7 @@ class InputValidator
 
   public function validate ( $input, $label )
   {
-    return $this->_validator->validate($input, $label);
+    return call_user_func_array(array($this->_validator, 'validate'), func_get_args());
 
   }
 
