@@ -15,7 +15,7 @@ class LabelCredit extends AbstractFilter
     if ( !in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), array('jpg', 'tiff')) )
       return;
 
-    $exif = exif_read_data($file);
+    $exif = @exif_read_data($file);
 
     if ( isset($exif['ImageDescription']) ) {
       $this->_table->label = $exif['ImageDescription'];
