@@ -46,7 +46,7 @@ class TinyMCE
         $r .= '     plugins : ['.PHP_EOL;
         $r .= '         "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",'.PHP_EOL;
         $r .= '         "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",'.PHP_EOL;
-        $r .= '         "save table contextmenu directionality emoticons template paste textcolor moxiemanager",'.PHP_EOL;
+        $r .= '         "save table contextmenu directionality emoticons template paste textcolor moxiemanager blockquote more",'.PHP_EOL;
         $r .= '     ],'.PHP_EOL;
         $r .= '     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",'.PHP_EOL;
         $r .= ' });'.PHP_EOL;
