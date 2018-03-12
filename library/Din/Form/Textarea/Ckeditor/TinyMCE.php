@@ -49,6 +49,7 @@ class TinyMCE
         $r .= '         "save table contextmenu directionality emoticons template paste textcolor moxiemanager blockquote more banner",'.PHP_EOL;
         $r .= '     ],'.PHP_EOL;
         $r .= '     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",'.PHP_EOL;
+        $r .= '     image_caption: true'.PHP_EOL;
         $r .= ' });'.PHP_EOL;
         $r .= '</script>'.PHP_EOL;
 
