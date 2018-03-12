@@ -15,6 +15,8 @@ class SendEmail
   private $_smtpSecure = '';
   private $_smtpUser = '';
   private $_smtpPass = '';
+  private $_smtpAutoTLS = true;
+
   private $_sender;
   private $_email;
 
@@ -59,6 +61,11 @@ class SendEmail
 
   }
 
+    public function setSmtpAutoTls ( $SMTPAutoTLS )
+    {
+        $this->_smtpAutoTLS = $SMTPAutoTLS;
+    }
+
   public function setUser ( $user )
   {
     $this->_smtpUser = $user;
@@ -85,6 +92,7 @@ class SendEmail
     $this->_sender->Username = $this->_smtpUser;
     $this->_sender->Password = $this->_smtpPass;
     $this->_sender->SMTPSecure = $this->_smtpSecure;
+    $this->_sender->SMTPAutoTLS = $this->_smtpAutoTLS;
     $this->_sender->Subject = $this->_email->getSubject();
     $this->_sender->Body = $this->_email->getBody();
     if ( !$this->_sender->send() ) {
