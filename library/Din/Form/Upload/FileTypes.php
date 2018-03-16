@@ -16,7 +16,8 @@ class FileTypes
               'jpg',
               'jpeg',
               'gif',
-              'png'
+              'png',
+              'svg',
           ),
           'desc' => 'Arquivos de Imagem'
       ),
