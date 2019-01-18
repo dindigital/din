@@ -66,7 +66,7 @@ class ExportExcel extends ExportSimpleExcel
             'size' => 13,
     ));
 
-    $range = range('A', 'Z');
+    $range = range(0, 100);
     for ( $i = 0; $i < count($row); $i++ ) {
       $this->_phpexcel->getActiveSheet()->getStyle($range[$i] . '1')->applyFromArray($styleArray);
       $this->_phpexcel->getActiveSheet()->getColumnDimension($range[$i])->setAutoSize(true);
