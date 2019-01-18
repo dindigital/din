@@ -66,7 +66,8 @@ class ExportExcel extends ExportSimpleExcel
             'size' => 13,
     ));
 
-    $range = range(0, 100);
+    //$range = range('A', 'Z');
+    $range = $this->myRange('AZ');
     for ( $i = 0; $i < count($row); $i++ ) {
       $this->_phpexcel->getActiveSheet()->getStyle($range[$i] . '1')->applyFromArray($styleArray);
       $this->_phpexcel->getActiveSheet()->getColumnDimension($range[$i])->setAutoSize(true);
@@ -75,5 +76,35 @@ class ExportExcel extends ExportSimpleExcel
     $this->_phpexcel->setActiveSheetIndex(0);
 
   }
+
+protected function myRange($end_column = '', $first_letters = '') {
+        $columns = array();
+        $length = strlen($end_column);
+        $letters = range('A', 'Z');
+
+        // Iterate over 26 letters.
+        foreach ($letters as $letter) {
+            // Paste the $first_letters before the next.
+            $column = $first_letters . $letter;
+            // Add the column to the final array.
+            $columns[] = $column;
+            // If it was the end column that was added, return the columns.
+            if ($column == $end_column)
+                return $columns;
+        }
+
+        // Add the column children.
+        foreach ($columns as $column) {
+            // Don't itterate if the $end_column was already set in a previous itteration.
+            // Stop iterating if you've reached the maximum character length.
+            if (!in_array($end_column, $columns) && strlen($column) < $length) {
+                $new_columns = $this->myRange($end_column, $column);
+                // Merge the new columns which were created with the final columns array.
+                $columns = array_merge($columns, $new_columns);
+            }
+        }
+
+        return $columns;
+    }
 
 }
