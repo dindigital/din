@@ -23,7 +23,7 @@ use Imagine\Exception\InvalidArgumentException;
  * @method \Din\TableFilter\FilterInterface null()
  * @method \Din\TableFilter\FilterInterface sequence(DAO $dao, Entity $entity)
  * @method \Din\TableFilter\FilterInterface shortenerLink()
- * @method \Din\TableFilter\FilterInterface string()
+ * @method \Din\TableFilter\FilterInterface stringFilter()
  * @method \Din\TableFilter\FilterInterface timestamp()
  * @method \Din\TableFilter\FilterInterface uploaded($path, $has_upload, MoveFiles $mf )
  */

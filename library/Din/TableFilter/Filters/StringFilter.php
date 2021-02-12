@@ -4,7 +4,7 @@ namespace Din\TableFilter\Filters;
 
 use Din\TableFilter\AbstractFilter;
 
-class String extends AbstractFilter
+class StringFilter extends AbstractFilter
 {
 
   public function filter ( $field )

@@ -18,7 +18,7 @@ use InvalidArgumentException;
  * @method \Din\InputValidator\ValidatorInterface minMaxSum($min, $max)
  * @method \Din\InputValidator\ValidatorInterface phone()
  * @method \Din\InputValidator\ValidatorInterface positive()
- * @method \Din\InputValidator\ValidatorInterface string()
+ * @method \Din\InputValidator\ValidatorInterface stringValidation()
  * @method \Din\InputValidator\ValidatorInterface stringEmail()
  * @method \Din\InputValidator\ValidatorInterface stringEqual($equal)
  * @method \Din\InputValidator\ValidatorInterface stringLenght($min = 1, $max = null)
